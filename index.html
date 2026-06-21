@@ -8,311 +8,408 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --navy:#0B1F3A;--navy2:#122847;--navy3:#1A3A5C;
-  --amber:#F5A623;--amber2:#D4891A;--amber3:rgba(245,166,35,0.12);
+  --navy:#0B1F3A;--navy2:#122847;--navy3:#1A3A5C;--navy4:#0D2540;
+  --amber:#F5A623;--amber2:#D4891A;--amber3:rgba(245,166,35,.1);
   --white:#fff;--off:#F8F9FC;--g50:#F2F4F7;--g100:#E4E7EC;
   --g300:#D0D5DD;--g500:#667085;--g700:#344054;--g900:#101828;
-  --red:#C0392B;--red2:rgba(192,57,43,0.12);
-  --green:#1E7B34;--green2:rgba(30,123,52,0.12);
-  --purple:#7C3AED;
+  --red:#C0392B;--red2:rgba(192,57,43,.1);--redl:#ff8a80;
+  --green:#16A34A;--green2:rgba(22,163,74,.1);--greenl:#81c784;
+  --purple:#7C3AED;--purplel:#C4B5FD;
   --fd:'Space Grotesk',sans-serif;--fb:'Inter',sans-serif;
   --r:8px;--rl:14px;--rx:20px;
-  --shadow:0 4px 24px rgba(0,0,0,0.12);
+  --sh:0 4px 24px rgba(0,0,0,.12);
 }
-html{scroll-behavior:smooth;font-size:16px}
+html{scroll-behavior:smooth}
 body{font-family:var(--fb);color:var(--g900);background:var(--white);overflow-x:hidden}
 a{text-decoration:none;color:inherit}
 button{cursor:pointer;font-family:var(--fb);border:none;outline:none}
 input,select,textarea{outline:none;font-family:var(--fb)}
 
-/* ── NAV ── */
+/* NAV */
 #nav{position:fixed;top:0;left:0;right:0;z-index:1000;transition:all .3s}
-#nav.scrolled{background:rgba(11,31,58,0.97);backdrop-filter:blur(16px);box-shadow:0 2px 24px rgba(0,0,0,0.3)}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:1280px;margin:0 auto;padding:0 24px}
+#nav.sc{background:rgba(11,31,58,.97);backdrop-filter:blur(16px);box-shadow:0 2px 24px rgba(0,0,0,.3)}
+.nav-i{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:1280px;margin:0 auto;padding:0 24px}
 .nav-brand{display:flex;align-items:center;gap:10px;cursor:pointer}
-.nav-brand svg{flex-shrink:0}
-.nav-wordmark{font-family:var(--fd);font-size:1.35rem;font-weight:700;color:var(--white);letter-spacing:-0.01em}
-.nav-wordmark span{color:var(--amber)}
-.nav-links{display:flex;gap:28px}
-.nav-links a{color:rgba(255,255,255,0.7);font-size:0.875rem;font-weight:500;transition:color .2s}
-.nav-links a:hover{color:var(--white)}
-.nav-cta{padding:9px 22px;border-radius:var(--r);background:var(--amber);color:var(--navy);font-weight:700;font-size:0.875rem;transition:all .2s;cursor:pointer}
-.nav-cta:hover{background:var(--amber2);transform:translateY(-1px)}
+.nav-mark{font-family:var(--fd);font-size:1.3rem;font-weight:700;color:var(--white)}
+.nav-mark span{color:var(--amber)}
+.nav-links{display:flex;gap:4px}
+.nav-links a{color:rgba(255,255,255,.65);font-size:.82rem;font-weight:500;padding:6px 12px;border-radius:6px;transition:all .2s;white-space:nowrap}
+.nav-links a:hover,.nav-links a.act{color:var(--white);background:rgba(255,255,255,.08)}
+.nav-cta{padding:8px 20px;border-radius:var(--r);background:var(--amber);color:var(--navy);font-weight:700;font-size:.85rem;transition:all .2s}
+.nav-cta:hover{background:var(--amber2)}
 
-/* ── HERO ── */
+/* HERO */
 #hero{min-height:100vh;background:var(--navy);display:flex;flex-direction:column;position:relative;overflow:hidden;padding-top:64px}
-.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 30%,rgba(245,166,35,0.07) 0%,transparent 60%),radial-gradient(ellipse 40% 40% at 10% 80%,rgba(124,58,237,0.06) 0%,transparent 50%)}
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);background-size:56px 56px}
-.hero-content{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;padding:60px 24px;position:relative;z-index:1}
-.hero-inner{max-width:820px}
-.hero-logo-wrap{margin:0 auto 28px;display:flex;justify-content:center}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(245,166,35,0.1);border:1px solid rgba(245,166,35,0.25);border-radius:100px;padding:6px 16px;margin-bottom:24px}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 30%,rgba(245,166,35,.07) 0%,transparent 60%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:56px 56px}
+.hero-c{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;padding:60px 24px;position:relative;z-index:1}
+.hero-inner{max-width:840px}
+.hero-logo{margin:0 auto 28px;display:flex;justify-content:center}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(245,166,35,.1);border:1px solid rgba(245,166,35,.25);border-radius:100px;padding:6px 16px;margin-bottom:22px}
 .hero-badge-dot{width:7px;height:7px;border-radius:50%;background:var(--amber);animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.6;transform:scale(0.85)}}
-.hero-badge span{font-size:0.78rem;font-weight:600;color:var(--amber);letter-spacing:0.05em;text-transform:uppercase}
-.hero-title{font-family:var(--fd);font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800;color:var(--white);line-height:1.1;margin-bottom:12px;letter-spacing:-0.02em}
-.hero-title em{color:var(--amber);font-style:normal;display:block}
-.hero-sub{font-size:1.0625rem;color:rgba(255,255,255,0.58);line-height:1.75;max-width:600px;margin:0 auto 36px}
-.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:56px}
-.btn-amber{padding:14px 30px;border-radius:var(--r);background:var(--amber);color:var(--navy);font-weight:700;font-size:0.9375rem;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
-.btn-amber:hover{background:var(--amber2);transform:translateY(-2px);box-shadow:0 6px 24px rgba(245,166,35,0.35)}
-.btn-ghost{padding:14px 30px;border-radius:var(--r);background:transparent;color:var(--white);font-weight:600;font-size:0.9375rem;border:1.5px solid rgba(255,255,255,0.25);transition:all .2s}
-.btn-ghost:hover{background:rgba(255,255,255,0.07);border-color:rgba(255,255,255,0.5)}
-.hero-stats{display:flex;gap:0;border-top:1px solid rgba(255,255,255,0.08);padding-top:36px}
-.hstat{flex:1;text-align:center;padding:0 12px;border-right:1px solid rgba(255,255,255,0.08)}
-.hstat:last-child{border-right:none}
-.hstat-num{font-family:var(--fd);font-size:1.9rem;font-weight:800;color:var(--amber)}
-.hstat-label{font-size:0.75rem;color:rgba(255,255,255,0.42);margin-top:4px;line-height:1.4}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.85)}}
+.hero-badge span{font-size:.75rem;font-weight:600;color:var(--amber);letter-spacing:.05em;text-transform:uppercase}
+.hero-h1{font-family:var(--fd);font-size:clamp(2rem,5vw,3.8rem);font-weight:800;color:var(--white);line-height:1.1;margin-bottom:10px;letter-spacing:-.02em}
+.hero-h1 em{color:var(--amber);font-style:normal;display:block}
+.hero-sub{font-size:1.0625rem;color:rgba(255,255,255,.55);line-height:1.75;max-width:640px;margin:0 auto 32px}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:52px}
+.btn-a{padding:13px 28px;border-radius:var(--r);background:var(--amber);color:var(--navy);font-weight:700;font-size:.9375rem;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+.btn-a:hover{background:var(--amber2);transform:translateY(-2px);box-shadow:0 6px 24px rgba(245,166,35,.35)}
+.btn-g{padding:13px 28px;border-radius:var(--r);background:transparent;color:var(--white);font-weight:600;font-size:.9375rem;border:1.5px solid rgba(255,255,255,.25);transition:all .2s}
+.btn-g:hover{background:rgba(255,255,255,.07)}
+.hero-stats{display:flex;border-top:1px solid rgba(255,255,255,.08);padding-top:32px}
+.hst{flex:1;text-align:center;padding:0 10px;border-right:1px solid rgba(255,255,255,.08)}
+.hst:last-child{border-right:none}
+.hst-n{font-family:var(--fd);font-size:1.9rem;font-weight:800;color:var(--amber)}
+.hst-l{font-size:.72rem;color:rgba(255,255,255,.4);margin-top:4px;line-height:1.4}
 
-/* ── SECTIONS ── */
-.section{padding:88px 0}
+/* LAYER TABS */
+.layer-nav{background:var(--navy2);border-bottom:1px solid rgba(255,255,255,.08);position:sticky;top:64px;z-index:900}
+.layer-nav-i{display:flex;max-width:1280px;margin:0 auto;padding:0 24px;overflow-x:auto;gap:4px}
+.layer-nav-i::-webkit-scrollbar{display:none}
+.ltab{padding:14px 16px;font-size:.8rem;font-weight:500;color:rgba(255,255,255,.5);cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s}
+.ltab:hover{color:rgba(255,255,255,.8)}
+.ltab.on{color:var(--amber);border-bottom-color:var(--amber)}
+.ltab-num{font-size:.68rem;font-weight:700;background:rgba(255,255,255,.08);border-radius:100px;padding:2px 7px;margin-right:5px}
+.ltab.on .ltab-num{background:rgba(245,166,35,.2);color:var(--amber)}
+
+/* SECTIONS */
+.section{padding:80px 0}
 .container{max-width:1280px;margin:0 auto;padding:0 24px}
-.sec-eyebrow{font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--amber);margin-bottom:10px}
-.sec-title{font-family:var(--fd);font-size:clamp(1.8rem,3vw,2.5rem);font-weight:700;line-height:1.15;letter-spacing:-0.02em;color:var(--navy)}
-.sec-title.light{color:var(--white)}
-.sec-sub{font-size:1rem;line-height:1.7;color:var(--g500);margin-top:10px}
-.sec-sub.light{color:rgba(255,255,255,0.55)}
-.text-center{text-align:center}
+.sec-eye{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:8px}
+.sec-title{font-family:var(--fd);font-size:clamp(1.7rem,3vw,2.4rem);font-weight:700;line-height:1.15;letter-spacing:-.02em;color:var(--navy)}
+.sec-title.lt{color:var(--white)}
+.sec-sub{font-size:1rem;line-height:1.7;color:var(--g500);margin-top:8px}
+.sec-sub.lt{color:rgba(255,255,255,.55)}
+.tc{text-align:center}
 
-/* ── PROBLEM ── */
-#problem{background:var(--off)}
-.problem-2col{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
-.vs-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
-.vs-card{background:var(--white);border-radius:var(--rl);padding:22px;border-top:3px solid var(--g300);box-shadow:0 1px 4px rgba(0,0,0,0.06)}
-.vs-card.ours{border-top-color:var(--amber)}
-.vs-card-label{font-size:0.7rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:14px;color:var(--g500)}
-.vs-card.ours .vs-card-label{color:var(--amber2)}
-.vs-item{display:flex;align-items:flex-start;gap:9px;margin-bottom:10px;font-size:0.855rem;color:var(--g700);line-height:1.5}
-.hidden-risks{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.hr-card{background:var(--white);border-radius:var(--rl);padding:18px;border-left:3px solid var(--red);cursor:pointer;transition:all .2s;box-shadow:0 1px 4px rgba(0,0,0,0.06)}
-.hr-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
-.hr-card.open{border-left-color:var(--amber);background:rgba(245,166,35,0.04)}
-.hr-title{font-size:0.855rem;font-weight:600;color:var(--g900);margin-bottom:4px}
-.hr-desc{font-size:0.78rem;color:var(--g500);line-height:1.5}
-.hr-expand{display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--g100);font-size:0.78rem;color:var(--g700);line-height:1.65}
-.hr-card.open .hr-expand{display:block}
+/* CARDS */
+.card{background:var(--white);border-radius:var(--rl);padding:20px;border:1px solid var(--g100);box-shadow:var(--sh)}
+.card-d{background:var(--navy4);border:1px solid rgba(255,255,255,.08);border-radius:var(--rl);padding:16px}
 
-/* ── METHODOLOGY ── */
-#method{background:var(--white)}
-.mtabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:44px}
-.mtab{padding:9px 22px;border-radius:100px;border:1.5px solid var(--g100);background:var(--white);font-size:0.855rem;font-weight:500;color:var(--g500);cursor:pointer;transition:all .2s}
-.mtab.on{background:var(--navy);border-color:var(--navy);color:var(--white)}
-.mtab:hover:not(.on){border-color:var(--navy);color:var(--navy)}
-.mpanel{display:none;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
-.mpanel.on{display:grid}
-.mpanel-num{font-family:var(--fd);font-size:3rem;font-weight:800;color:var(--amber);opacity:0.22;line-height:1;margin-bottom:6px}
-.mpanel-title{font-family:var(--fd);font-size:1.45rem;font-weight:700;color:var(--navy);margin-bottom:10px}
-.mpanel-body{font-size:0.9rem;line-height:1.75;color:var(--g500);margin-bottom:16px}
-.mpanel-proof{background:rgba(245,166,35,0.08);border-left:3px solid var(--amber);border-radius:0 var(--r) var(--r) 0;padding:12px 16px;font-size:0.78rem;color:var(--g700);line-height:1.6}
-.mpanel-proof strong{color:var(--navy)}
-.viz-box{background:var(--g50);border:1px solid var(--g100);border-radius:var(--rl);padding:22px}
-.formula-box{background:var(--navy);border-radius:var(--r);padding:18px 22px;margin-bottom:14px}
-.formula{font-family:'Courier New',monospace;font-size:0.82rem;color:var(--amber);line-height:1.9}
-.formula-note{font-size:0.7rem;color:rgba(255,255,255,0.4);margin-top:8px;line-height:1.5}
-.wbars{display:flex;flex-direction:column;gap:9px}
-.wrow{display:flex;align-items:center;gap:10px}
-.wlabel{width:148px;font-size:0.77rem;color:var(--g700);flex-shrink:0}
-.wtrack{flex:1;height:7px;background:var(--g100);border-radius:4px;overflow:hidden}
-.wfill{height:100%;border-radius:4px;background:var(--amber);transition:width .7s ease}
-.wpct{width:34px;text-align:right;font-size:0.77rem;font-weight:600;color:var(--navy)}
-.rpn-row{display:flex;justify-content:space-between;align-items:center;padding:9px 13px;border-radius:var(--r);margin-bottom:7px;font-size:0.8rem}
-.rpn-row.high{background:rgba(192,57,43,0.1);color:var(--red)}
-.rpn-row.med{background:rgba(245,166,35,0.1);color:var(--amber2)}
-.rpn-row.low{background:rgba(30,123,52,0.1);color:var(--green)}
-.diamond-vis{background:var(--navy);border-radius:var(--r);padding:18px;font-family:'Courier New',monospace;font-size:0.78rem;color:rgba(255,255,255,0.75);line-height:2.2;text-align:center}
+/* GRID UTILS */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 
-/* ── LIVE DEMO ── */
-#demo{background:var(--navy)}
-.demo-layout{display:grid;grid-template-columns:280px 1fr;gap:18px;align-items:start}
-.demo-stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
-.dstat{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:var(--rl);padding:14px;text-align:center}
-.dstat-num{font-family:var(--fd);font-size:1.55rem;font-weight:700;color:var(--amber)}
-.dstat-label{font-size:0.68rem;color:rgba(255,255,255,0.4);margin-top:3px}
-.sup-list-wrap{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:var(--rl);overflow:hidden;max-height:420px;overflow-y:auto}
-.sup-list-hdr{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:0.7rem;font-weight:600;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.05em}
-.sup-row{display:flex;align-items:center;gap:9px;padding:9px 14px;border-bottom:1px solid rgba(255,255,255,0.04);cursor:pointer;transition:background .15s}
-.sup-row:hover{background:rgba(255,255,255,0.05)}
-.sup-row.on{background:rgba(245,166,35,0.1);border-left:3px solid var(--amber)}
-.sup-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
-.sup-name{font-size:0.78rem;font-weight:500;color:var(--white);flex:1}
-.sup-rei{font-size:0.7rem;font-weight:700;padding:2px 7px;border-radius:4px}
+/* ══════════════════════════════════════════════════
+   LAYER 1 — RISK IDENTIFICATION
+   ══════════════════════════════════════════════════ */
+#layer1{background:var(--off)}
+.bucket-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:32px}
+.bucket{background:var(--white);border-radius:var(--rl);overflow:hidden;box-shadow:var(--sh)}
+.bucket-hdr{padding:14px 18px;font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--white)}
+.bucket-body{padding:14px 18px}
+.risk-cat{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;cursor:pointer;padding:8px 10px;border-radius:var(--r);transition:background .15s}
+.risk-cat:hover{background:var(--g50)}
+.risk-cat.sel{background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.2)}
+.rc-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:4px}
+.rc-info{flex:1}
+.rc-name{font-size:.875rem;font-weight:600;color:var(--g900);margin-bottom:2px}
+.rc-vel{font-size:.72rem;font-weight:600;padding:2px 8px;border-radius:100px;display:inline-block;margin-bottom:3px}
+.rc-vel.sudden{background:rgba(192,57,43,.1);color:var(--red)}
+.rc-vel.slow{background:rgba(245,166,35,.1);color:var(--amber2)}
+.rc-vel.struct{background:rgba(22,163,74,.1);color:var(--green)}
+.rc-desc{font-size:.78rem;color:var(--g500);line-height:1.5}
+.rc-hidden{font-size:.7rem;font-weight:600;color:var(--purple);margin-top:2px}
+.risk-detail-panel{background:var(--navy);border-radius:var(--rl);padding:24px;display:none}
+.risk-detail-panel.open{display:block}
+
+/* ══════════════════════════════════════════════════
+   LAYER 2 — RISK SCORING
+   ══════════════════════════════════════════════════ */
+#layer2{background:var(--white)}
+.scoring-layout{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+.score-form{display:flex;flex-direction:column;gap:20px}
+.sf-section{background:var(--g50);border-radius:var(--rl);padding:20px}
+.sf-title{font-size:.85rem;font-weight:700;color:var(--navy);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.sf-num{width:24px;height:24px;border-radius:50%;background:var(--navy);color:var(--white);font-size:.72rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.score-slider-row{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.score-slider-row label{font-size:.78rem;font-weight:500;color:var(--g700);display:flex;justify-content:space-between}
+.score-slider-row label span{font-weight:700;color:var(--navy)}
+input[type=range]{width:100%;-webkit-appearance:none;height:6px;border-radius:3px;background:var(--g100);cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--navy);cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.vel-btns{display:flex;gap:8px}
+.vel-btn{flex:1;padding:10px;border-radius:var(--r);border:1.5px solid var(--g100);font-size:.8rem;font-weight:500;color:var(--g500);cursor:pointer;transition:all .2s;background:var(--white)}
+.vel-btn.on.sudden{background:rgba(192,57,43,.1);border-color:var(--red);color:var(--red)}
+.vel-btn.on.slow{background:rgba(245,166,35,.1);border-color:var(--amber);color:var(--amber2)}
+.vel-btn.on.struct{background:rgba(22,163,74,.1);border-color:var(--green);color:var(--green)}
+.calc-score-btn{width:100%;padding:14px;background:var(--amber);color:var(--navy);border-radius:var(--r);font-size:1rem;font-weight:700;transition:all .2s}
+.calc-score-btn:hover{background:var(--amber2);transform:translateY(-1px)}
+.score-result{background:var(--navy);border-radius:var(--rl);padding:24px;display:none}
+.score-result.show{display:block}
+.risk-matrix{position:relative;width:100%;aspect-ratio:1;background:var(--g50);border-radius:var(--rl);overflow:hidden;margin-bottom:20px}
+.matrix-zone{position:absolute;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;opacity:.7}
+.score-number{font-family:var(--fd);font-size:4rem;font-weight:800;text-align:center;line-height:1}
+.score-label{text-align:center;font-size:.85rem;color:rgba(255,255,255,.5);margin-top:4px;margin-bottom:16px}
+.score-breakdown{display:flex;flex-direction:column;gap:8px}
+.sb-row{display:flex;align-items:center;gap:8px;font-size:.8rem}
+.sb-label{width:120px;color:rgba(255,255,255,.6);flex-shrink:0;font-size:.75rem}
+.sb-track{flex:1;height:6px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden}
+.sb-fill{height:100%;border-radius:3px;transition:width .6s ease}
+.sb-val{width:28px;text-align:right;font-weight:700;color:var(--amber);font-size:.78rem}
+.score-action{margin-top:16px;padding:14px;background:rgba(255,255,255,.05);border-radius:var(--r);font-size:.82rem;color:rgba(255,255,255,.75);line-height:1.6}
+.score-action strong{color:var(--amber);display:block;margin-bottom:4px}
+
+/* ══════════════════════════════════════════════════
+   LAYER 3 — REI DASHBOARD (LIVE DEMO)
+   ══════════════════════════════════════════════════ */
+#layer3{background:var(--navy)}
+.demo-layout{display:grid;grid-template-columns:260px 1fr;gap:16px;align-items:start}
+.demo-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.dst{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:var(--rl);padding:12px;text-align:center}
+.dst-n{font-family:var(--fd);font-size:1.5rem;font-weight:700;color:var(--amber)}
+.dst-l{font-size:.65rem;color:rgba(255,255,255,.38);margin-top:2px}
+.sup-list{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--rl);overflow:hidden;max-height:440px;overflow-y:auto}
+.sup-list::-webkit-scrollbar{width:3px}
+.sup-list::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:2px}
+.sl-hdr{padding:9px 14px;border-bottom:1px solid rgba(255,255,255,.07);font-size:.68rem;font-weight:600;color:rgba(255,255,255,.38);text-transform:uppercase;letter-spacing:.05em}
+.sl-filters{padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;gap:5px;flex-wrap:wrap}
+.sf-btn{padding:3px 10px;border-radius:100px;border:1px solid rgba(255,255,255,.12);background:transparent;font-size:.7rem;color:rgba(255,255,255,.5);cursor:pointer;transition:all .2s}
+.sf-btn.on,.sf-btn:hover{background:var(--amber);border-color:var(--amber);color:var(--navy);font-weight:600}
+.sup-row{display:flex;align-items:center;gap:8px;padding:8px 14px;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer;transition:background .15s}
+.sup-row:hover{background:rgba(255,255,255,.04)}
+.sup-row.on{background:rgba(245,166,35,.08);border-left:3px solid var(--amber)}
+.sup-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.sup-name{font-size:.76rem;font-weight:500;color:var(--white);flex:1;line-height:1.3}
+.sup-rei{font-size:.68rem;font-weight:700;padding:2px 7px;border-radius:4px}
 .demo-right{display:flex;flex-direction:column;gap:14px}
-.map-wrap{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:var(--rl);overflow:hidden}
-.map-hdr{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;justify-content:space-between;align-items:center}
-.map-title{font-size:0.855rem;font-weight:600;color:var(--white)}
-.map-sub{font-size:0.7rem;color:rgba(255,255,255,0.35)}
-.map-filters{padding:9px 14px;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;gap:7px;flex-wrap:wrap}
-.fbtn{padding:4px 12px;border-radius:100px;border:1px solid rgba(255,255,255,0.14);background:transparent;font-size:0.72rem;color:rgba(255,255,255,0.55);cursor:pointer;transition:all .2s}
-.fbtn.on,.fbtn:hover{background:var(--amber);border-color:var(--amber);color:var(--navy);font-weight:600}
-#mapCanvas{width:100%;height:300px;display:block;cursor:crosshair}
-.detail-wrap{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:var(--rl);overflow:hidden;display:none}
-.detail-wrap.open{display:block}
-.dtabs{display:flex;border-bottom:1px solid rgba(255,255,255,0.08)}
-.dtab{padding:9px 14px;font-size:0.77rem;font-weight:500;color:rgba(255,255,255,0.45);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap}
+.map-wrap{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:var(--rl);overflow:hidden}
+.map-hdr{padding:11px 16px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;justify-content:space-between;align-items:center}
+.map-title{font-size:.83rem;font-weight:600;color:var(--white)}
+.map-sub{font-size:.68rem;color:rgba(255,255,255,.32)}
+#mapCanvas{width:100%;height:280px;display:block;cursor:crosshair}
+.detail-panel{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:var(--rl);overflow:hidden;display:none}
+.detail-panel.open{display:block}
+.dtabs{display:flex;border-bottom:1px solid rgba(255,255,255,.08);overflow-x:auto}
+.dtabs::-webkit-scrollbar{display:none}
+.dtab{padding:9px 13px;font-size:.76rem;font-weight:500;color:rgba(255,255,255,.42);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;flex-shrink:0}
 .dtab.on{color:var(--amber);border-bottom-color:var(--amber)}
-.dtab-pane{display:none;padding:16px}
-.dtab-pane.on{display:block}
-.sup-detail-name{font-size:1.05rem;font-weight:700;color:var(--white);margin-bottom:2px}
-.sup-detail-meta{font-size:0.78rem;color:rgba(255,255,255,0.42);margin-bottom:14px}
-.metrics-row{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-bottom:14px}
-.metric{background:rgba(255,255,255,0.05);border-radius:var(--r);padding:10px;text-align:center}
-.metric-val{font-family:var(--fd);font-size:1.25rem;font-weight:700;color:var(--white)}
-.metric-label{font-size:0.65rem;color:rgba(255,255,255,0.38);margin-top:2px}
-.alert-bar{display:flex;align-items:center;gap:9px;background:rgba(192,57,43,0.14);border:1px solid rgba(192,57,43,0.28);border-radius:var(--r);padding:9px 12px;font-size:0.78rem;color:#ff8a80;margin-bottom:12px}
-.tts-vis{background:var(--navy);border-radius:var(--r);padding:14px;margin-bottom:12px}
-.tbar-label{font-size:0.68rem;color:rgba(255,255,255,0.38);margin-bottom:4px}
-.tbar{height:12px;background:rgba(255,255,255,0.07);border-radius:3px;overflow:hidden;margin-bottom:8px;position:relative}
+.dpane{display:none;padding:16px}
+.dpane.on{display:block}
+.sup-dname{font-size:1rem;font-weight:700;color:var(--white);margin-bottom:2px}
+.sup-dmeta{font-size:.76rem;color:rgba(255,255,255,.4);margin-bottom:12px}
+.metrics-g{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+.met{background:rgba(255,255,255,.05);border-radius:var(--r);padding:10px;text-align:center}
+.met-v{font-family:var(--fd);font-size:1.2rem;font-weight:700;color:var(--white)}
+.met-l{font-size:.63rem;color:rgba(255,255,255,.36);margin-top:2px}
+.alert-bar{display:flex;align-items:center;gap:8px;background:rgba(192,57,43,.12);border:1px solid rgba(192,57,43,.26);border-radius:var(--r);padding:8px 12px;font-size:.76rem;color:var(--redl);margin-bottom:10px}
+.tts-vis{background:var(--navy);border-radius:var(--r);padding:12px;margin-bottom:10px}
+.tbar-l{font-size:.66rem;color:rgba(255,255,255,.36);margin-bottom:3px}
+.tbar{height:10px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden;margin-bottom:7px}
 .tbar-fill{height:100%;border-radius:3px;transition:width .6s ease}
-.tts-formula{font-family:'Courier New',monospace;font-size:0.77rem;color:var(--amber);margin-top:8px;line-height:1.7}
-.conv-box{background:rgba(245,166,35,0.07);border:1px solid rgba(245,166,35,0.18);border-radius:var(--r);padding:12px;margin-bottom:12px}
-.conv-title{font-size:0.77rem;font-weight:600;color:var(--amber);margin-bottom:6px}
-.conv-formula{font-family:'Courier New',monospace;font-size:0.77rem;color:rgba(255,255,255,0.75);line-height:1.7}
-.decay-box{background:rgba(255,255,255,0.04);border-radius:var(--r);padding:12px}
-.decay-bar{height:7px;background:rgba(255,255,255,0.07);border-radius:4px;overflow:hidden;margin:7px 0}
-.decay-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,#1E7B34,#F5A623,#C0392B)}
-table.dfmea{width:100%;border-collapse:collapse;font-size:0.76rem}
-table.dfmea th{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.55);padding:7px 9px;text-align:left;font-weight:600;font-size:0.69rem;letter-spacing:0.03em}
-table.dfmea td{padding:7px 9px;border-bottom:1px solid rgba(255,255,255,0.05);color:rgba(255,255,255,0.78);vertical-align:top;line-height:1.45}
-.rpn-hi{color:#ff8a80;font-weight:700}
+.tts-f{font-family:'Courier New',monospace;font-size:.74rem;color:var(--amber);margin-top:6px;line-height:1.7}
+.conv-box{background:rgba(245,166,35,.06);border:1px solid rgba(245,166,35,.15);border-radius:var(--r);padding:11px;margin-bottom:10px}
+.conv-title{font-size:.75rem;font-weight:600;color:var(--amber);margin-bottom:5px}
+.conv-f{font-family:'Courier New',monospace;font-size:.74rem;color:rgba(255,255,255,.72);line-height:1.7}
+.decay-box{background:rgba(255,255,255,.04);border-radius:var(--r);padding:11px}
+.decay-bar{height:6px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden;margin:6px 0}
+.decay-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,#16A34A,#F5A623,#C0392B)}
+.rei-breakdown{margin-top:10px;padding:10px 12px;background:rgba(255,255,255,.04);border-radius:var(--r)}
+.rbd-title{font-size:.7rem;font-weight:600;color:rgba(255,255,255,.38);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px}
+.rbd-row{display:flex;align-items:center;gap:7px;margin-bottom:5px}
+.rbd-label{width:130px;font-size:.72rem;color:rgba(255,255,255,.5);flex-shrink:0}
+.rbd-track{flex:1;height:5px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden}
+.rbd-fill{height:100%;border-radius:3px;background:var(--amber)}
+.rbd-val{width:26px;text-align:right;font-size:.72rem;color:var(--amber);font-weight:700}
+table.dfmea{width:100%;border-collapse:collapse;font-size:.74rem}
+table.dfmea th{background:rgba(255,255,255,.07);color:rgba(255,255,255,.5);padding:6px 8px;text-align:left;font-size:.66rem;letter-spacing:.03em;font-weight:600}
+table.dfmea td{padding:6px 8px;border-bottom:1px solid rgba(255,255,255,.05);color:rgba(255,255,255,.75);vertical-align:top;line-height:1.4}
+.rpn-hi{color:var(--redl);font-weight:700}
 .rpn-md{color:var(--amber);font-weight:700}
-.rpn-lo{color:#81c784;font-weight:600}
-.mit-phase{border:1px solid rgba(255,255,255,0.07);border-radius:var(--r);overflow:hidden;margin-bottom:9px}
-.mit-hdr{padding:8px 12px;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.04em}
-.mit-hdr.r{background:rgba(192,57,43,0.14);color:#ff8a80}
-.mit-hdr.y{background:rgba(245,166,35,0.14);color:var(--amber)}
-.mit-hdr.g{background:rgba(30,123,52,0.14);color:#81c784}
-.mit-body{padding:10px 12px;font-size:0.8rem;color:rgba(255,255,255,0.7);line-height:1.6}
-.mit-action{font-weight:600;color:var(--white);margin-bottom:3px;font-size:0.82rem}
-.mit-owner{font-size:0.7rem;color:rgba(255,255,255,0.38);margin-top:4px}
-.ss-formula-box{background:var(--navy);border-radius:var(--r);padding:12px 14px;margin-bottom:9px}
-.ss-f{font-family:'Courier New',monospace;font-size:0.77rem;color:var(--amber);margin-bottom:4px}
-.ss-r{font-size:0.8rem;color:var(--white);font-weight:600}
-table.alts{width:100%;border-collapse:collapse;font-size:0.76rem}
-table.alts th{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.45);padding:7px 9px;text-align:left;font-size:0.68rem;font-weight:600;letter-spacing:0.03em}
-table.alts td{padding:7px 9px;border-bottom:1px solid rgba(255,255,255,0.05);color:rgba(255,255,255,0.8)}
-.score-bar{display:flex;align-items:center;gap:6px}
-.sbar-track{flex:1;height:5px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden}
-.sbar-fill{height:100%;border-radius:3px;background:var(--amber)}
-.reg-item{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;background:rgba(255,255,255,0.04);border-radius:var(--r);margin-bottom:7px}
-.reg-name{font-size:0.8rem;color:rgba(255,255,255,0.78);font-weight:500}
-.reg-sev{font-size:0.68rem;color:rgba(255,255,255,0.35);margin-top:2px}
-.reg-badge{padding:2px 8px;border-radius:4px;font-size:0.68rem;font-weight:700}
-.reg-badge.hit{background:rgba(192,57,43,0.2);color:#ff8a80}
-.reg-badge.clear{background:rgba(30,123,52,0.2);color:#81c784}
-.sup-list-wrap::-webkit-scrollbar{width:4px}
-.sup-list-wrap::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.14);border-radius:2px}
+.rpn-lo{color:var(--greenl);font-weight:600}
+.mit-phase{border:1px solid rgba(255,255,255,.07);border-radius:var(--r);overflow:hidden;margin-bottom:8px}
+.mit-hdr{padding:7px 12px;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.mit-hdr.r{background:rgba(192,57,43,.12);color:var(--redl)}
+.mit-hdr.y{background:rgba(245,166,35,.12);color:var(--amber)}
+.mit-hdr.g{background:rgba(22,163,74,.12);color:var(--greenl)}
+.mit-body{padding:9px 12px;font-size:.78rem;color:rgba(255,255,255,.68);line-height:1.6}
+.mit-action{font-weight:600;color:var(--white);margin-bottom:3px;font-size:.8rem}
+.mit-owner{font-size:.68rem;color:rgba(255,255,255,.36);margin-top:3px}
+.ss-box{background:var(--navy);border-radius:var(--r);padding:11px 13px;margin-bottom:8px}
+.ss-f{font-family:'Courier New',monospace;font-size:.74rem;color:var(--amber);margin-bottom:3px}
+.ss-r{font-size:.78rem;color:var(--white);font-weight:600}
+table.alts{width:100%;border-collapse:collapse;font-size:.74rem}
+table.alts th{background:rgba(255,255,255,.06);color:rgba(255,255,255,.42);padding:6px 8px;text-align:left;font-size:.66rem;font-weight:600;letter-spacing:.03em}
+table.alts td{padding:6px 8px;border-bottom:1px solid rgba(255,255,255,.05);color:rgba(255,255,255,.78)}
+.sbar{display:flex;align-items:center;gap:5px}
+.sbar-t{flex:1;height:4px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden}
+.sbar-f{height:100%;border-radius:2px;background:var(--amber)}
+.reg-item{display:flex;align-items:center;justify-content:space-between;padding:8px 11px;background:rgba(255,255,255,.04);border-radius:var(--r);margin-bottom:6px}
+.reg-name{font-size:.78rem;color:rgba(255,255,255,.75);font-weight:500}
+.reg-sev{font-size:.66rem;color:rgba(255,255,255,.32);margin-top:1px}
+.reg-badge{padding:2px 8px;border-radius:4px;font-size:.66rem;font-weight:700}
+.reg-badge.hit{background:rgba(192,57,43,.2);color:var(--redl)}
+.reg-badge.clear{background:rgba(22,163,74,.2);color:var(--greenl)}
 
-/* ── CALCULATOR ── */
-#calc{background:var(--off)}
-.calc-2col{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
-.calc-card{background:var(--white);border-radius:var(--rx);padding:28px;box-shadow:var(--shadow);border:1px solid var(--g100)}
-.calc-title{font-family:var(--fd);font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:20px}
-.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:11px}
-.fg label{font-size:0.77rem;font-weight:500;color:var(--g700)}
-.fg input,.fg select{padding:9px 12px;border:1.5px solid var(--g100);border-radius:var(--r);font-size:0.875rem;color:var(--g900);background:var(--white);-webkit-appearance:none;transition:border-color .2s}
-.fg input:focus,.fg select:focus{border-color:var(--navy);box-shadow:0 0 0 3px rgba(11,31,58,0.07)}
-.fg input::placeholder{color:var(--g300)}
+/* ══════════════════════════════════════════════════
+   LAYER 4 — MITIGATION CALCULATOR
+   ══════════════════════════════════════════════════ */
+#layer4{background:var(--off)}
+.mit-calc-layout{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:10px}
+.fg label{font-size:.76rem;font-weight:500;color:var(--g700)}
+.fg input,.fg select{padding:9px 12px;border:1.5px solid var(--g100);border-radius:var(--r);font-size:.875rem;color:var(--g900);background:var(--white);-webkit-appearance:none;transition:border-color .2s}
+.fg input:focus,.fg select:focus{border-color:var(--navy)}
 .fg-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.fg-sec{font-size:0.7rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--amber);margin:14px 0 9px;padding-top:14px;border-top:1px solid var(--g100)}
-.calc-btn{width:100%;padding:13px;background:var(--amber);color:var(--navy);border-radius:var(--r);font-size:0.9375rem;font-weight:700;transition:all .2s;margin-top:14px;font-family:var(--fd)}
-.calc-btn:hover{background:var(--amber2);transform:translateY(-1px);box-shadow:0 4px 18px rgba(245,166,35,0.4)}
-.results-wrap{display:none}
-.results-wrap.show{display:block}
-.score-hero{background:var(--navy);border-radius:var(--rl);padding:22px;text-align:center;margin-bottom:14px}
-.score-big{font-family:var(--fd);font-size:4rem;font-weight:800;line-height:1}
-.score-sub{font-size:0.8rem;color:rgba(255,255,255,0.45);margin-top:4px}
-.score-tier{display:inline-block;padding:4px 16px;border-radius:100px;font-size:0.82rem;font-weight:700;margin-top:10px}
-.t1{background:rgba(192,57,43,0.2);color:#ff8a80}
-.t2{background:rgba(245,166,35,0.2);color:var(--amber)}
-.t3{background:rgba(30,123,52,0.2);color:#81c784}
+.fg-sec{font-size:.69rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--amber);margin:12px 0 8px;padding-top:12px;border-top:1px solid var(--g100)}
+.mit-btn{width:100%;padding:13px;background:var(--amber);color:var(--navy);border-radius:var(--r);font-size:.9375rem;font-weight:700;transition:all .2s;margin-top:12px}
+.mit-btn:hover{background:var(--amber2);transform:translateY(-1px)}
+.mit-result{display:none}
+.mit-result.show{display:block}
+.score-hero{background:var(--navy);border-radius:var(--rl);padding:20px;text-align:center;margin-bottom:14px}
+.score-big{font-family:var(--fd);font-size:3.8rem;font-weight:800;line-height:1}
+.score-tier{display:inline-block;padding:4px 14px;border-radius:100px;font-size:.8rem;font-weight:700;margin-top:8px}
+.t1{background:rgba(192,57,43,.2);color:var(--redl)}
+.t2{background:rgba(245,166,35,.2);color:var(--amber)}
+.t3{background:rgba(22,163,74,.2);color:var(--greenl)}
 .res-metrics{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px}
-.rmet{background:var(--g50);border-radius:var(--r);padding:12px;text-align:center;border:1px solid var(--g100)}
-.rmet.alert{border-color:var(--red);background:rgba(192,57,43,0.06)}
-.rmet-val{font-family:var(--fd);font-size:1.2rem;font-weight:700;color:var(--navy)}
-.rmet.alert .rmet-val{color:var(--red)}
-.rmet-label{font-size:0.67rem;color:var(--g500);margin-top:2px}
-.res-sec{font-size:0.7rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--navy);margin:14px 0 9px;display:flex;align-items:center;gap:7px}
-.fm-row{display:flex;gap:9px;padding:8px 11px;background:var(--g50);border-radius:var(--r);border-left:3px solid var(--red);font-size:0.78rem;color:var(--g700);margin-bottom:6px;line-height:1.5}
-.res-cta{background:linear-gradient(135deg,var(--navy),var(--navy3));border-radius:var(--rl);padding:20px;text-align:center;margin-top:10px}
-.res-cta h4{font-family:var(--fd);font-size:1rem;color:var(--white);margin-bottom:6px}
-.res-cta p{font-size:0.78rem;color:rgba(255,255,255,0.5);margin-bottom:14px}
+.rm{background:var(--g50);border-radius:var(--r);padding:12px;text-align:center;border:1px solid var(--g100)}
+.rm.al{border-color:var(--red);background:rgba(192,57,43,.05)}
+.rm-v{font-family:var(--fd);font-size:1.2rem;font-weight:700;color:var(--navy)}
+.rm.al .rm-v{color:var(--red)}
+.rm-l{font-size:.65rem;color:var(--g500);margin-top:2px}
+.res-sec{font-size:.69rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--navy);margin:12px 0 8px}
+.fm-row{display:flex;gap:8px;padding:8px 10px;background:var(--g50);border-radius:var(--r);border-left:3px solid var(--red);font-size:.76rem;color:var(--g700);margin-bottom:5px;line-height:1.5}
 
-/* ── CONTACT ── */
-#contact{background:var(--navy)}
-.contact-2col{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
-.eng-step{display:flex;gap:14px;align-items:flex-start;margin-bottom:18px}
-.eng-num{width:30px;height:30px;border-radius:50%;background:rgba(245,166,35,0.14);border:1.5px solid rgba(245,166,35,0.3);display:flex;align-items:center;justify-content:center;font-size:0.77rem;font-weight:700;color:var(--amber);flex-shrink:0;margin-top:1px}
-.eng-title{font-size:0.9rem;font-weight:600;color:var(--white);margin-bottom:3px}
-.eng-desc{font-size:0.78rem;color:rgba(255,255,255,0.42)}
-.cf-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:var(--rx);padding:28px}
-.cf-title{font-family:var(--fd);font-size:1.1rem;font-weight:700;color:var(--white);margin-bottom:18px}
-.cfg{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
-.cfg label{font-size:0.77rem;font-weight:500;color:rgba(255,255,255,0.55)}
-.cfg input,.cfg select,.cfg textarea{padding:9px 12px;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.1);border-radius:var(--r);font-size:0.875rem;color:var(--white);transition:border-color .2s;-webkit-appearance:none}
-.cfg input:focus,.cfg select:focus,.cfg textarea:focus{border-color:var(--amber)}
-.cfg input::placeholder,.cfg textarea::placeholder{color:rgba(255,255,255,0.22)}
-.cfg textarea{resize:vertical;min-height:88px}
-.cfg select option{background:var(--navy)}
+/* ══════════════════════════════════════════════════
+   LAYER 5 — RESILIENCE BUILDER
+   ══════════════════════════════════════════════════ */
+#layer5{background:var(--white)}
+.res-layout{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+.res-form{background:var(--g50);border-radius:var(--rl);padding:24px}
+.res-form-title{font-family:var(--fd);font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:18px}
+.res-q{margin-bottom:16px}
+.res-q label{display:block;font-size:.82rem;font-weight:600;color:var(--g700);margin-bottom:8px}
+.res-q .hint{font-size:.72rem;color:var(--g500);margin-bottom:6px;display:block}
+.res-q select,.res-q input{width:100%;padding:9px 12px;border:1.5px solid var(--g100);border-radius:var(--r);font-size:.875rem;background:var(--white);color:var(--g900);-webkit-appearance:none}
+.res-calc-btn{width:100%;padding:13px;background:var(--navy);color:var(--white);border-radius:var(--r);font-size:.9375rem;font-weight:700;transition:all .2s;margin-top:4px}
+.res-calc-btn:hover{background:var(--navy3)}
+.res-result{display:none}
+.res-result.show{display:block}
+.radar-wrap{background:var(--navy);border-radius:var(--rl);padding:20px;margin-bottom:16px;text-align:center}
+.radar-canvas-wrap{position:relative;display:inline-block}
+#radarCanvas{display:block}
+.maturity-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;border-radius:100px;font-family:var(--fd);font-size:1rem;font-weight:700;margin:14px 0}
+.res-dim-list{display:flex;flex-direction:column;gap:10px}
+.rdim{background:var(--g50);border-radius:var(--r);padding:14px;border-left:4px solid var(--g300)}
+.rdim.good{border-left-color:var(--green)}
+.rdim.warn{border-left-color:var(--amber)}
+.rdim.poor{border-left-color:var(--red)}
+.rdim-name{font-size:.875rem;font-weight:600;color:var(--navy);margin-bottom:3px}
+.rdim-score{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.rdim-bar{flex:1;height:6px;background:var(--g100);border-radius:3px;overflow:hidden}
+.rdim-fill{height:100%;border-radius:3px;transition:width .8s ease}
+.rdim-pct{font-size:.78rem;font-weight:700;width:32px;text-align:right}
+.rdim-action{font-size:.78rem;color:var(--g500);line-height:1.5}
+
+/* ══════════════════════════════════════════════════
+   LAYER 6 — BLACK SWAN STRESS TEST
+   ══════════════════════════════════════════════════ */
+#layer6{background:var(--navy)}
+.stress-layout{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+.stress-form{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--rl);padding:24px}
+.stress-form-title{font-family:var(--fd);font-size:1.1rem;font-weight:700;color:var(--white);margin-bottom:6px}
+.stress-form-sub{font-size:.82rem;color:rgba(255,255,255,.45);margin-bottom:18px;line-height:1.5}
+.stress-sup-selector{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;max-height:240px;overflow-y:auto}
+.stress-sup-selector::-webkit-scrollbar{width:3px}
+.stress-sup-selector::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15)}
+.stress-sup-item{display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(255,255,255,.04);border-radius:var(--r);cursor:pointer;border:1.5px solid transparent;transition:all .2s}
+.stress-sup-item:hover{background:rgba(255,255,255,.07)}
+.stress-sup-item.sel{background:rgba(245,166,35,.08);border-color:rgba(245,166,35,.3)}
+.stress-sup-item input[type=checkbox]{width:16px;height:16px;accent-color:var(--amber);cursor:pointer}
+.stress-sup-name{font-size:.82rem;color:var(--white);font-weight:500;flex:1}
+.stress-sup-info{font-size:.7rem;color:rgba(255,255,255,.38)}
+.stress-run-btn{width:100%;padding:14px;background:var(--red);color:var(--white);border-radius:var(--r);font-size:1rem;font-weight:700;transition:all .2s}
+.stress-run-btn:hover{background:#a93226;transform:translateY(-1px)}
+.stress-result{display:none}
+.stress-result.show{display:block}
+.stress-impact{background:rgba(192,57,43,.1);border:1px solid rgba(192,57,43,.25);border-radius:var(--rl);padding:18px;margin-bottom:16px}
+.stress-impact-title{font-size:.82rem;font-weight:700;color:var(--redl);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px}
+.impact-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px}
+.ig{background:rgba(192,57,43,.12);border-radius:var(--r);padding:10px;text-align:center}
+.ig-n{font-family:var(--fd);font-size:1.4rem;font-weight:700;color:var(--redl)}
+.ig-l{font-size:.68rem;color:rgba(255,255,255,.38);margin-top:2px}
+.cascade-list{display:flex;flex-direction:column;gap:6px}
+.cascade-item{display:flex;align-items:center;gap:8px;padding:8px 10px;background:rgba(255,255,255,.04);border-radius:var(--r)}
+.ci-num{font-size:.72rem;font-weight:700;color:var(--redl);width:20px;text-align:center}
+.ci-info{flex:1}
+.ci-name{font-size:.8rem;color:var(--white);font-weight:500}
+.ci-impact{font-size:.72rem;color:rgba(255,255,255,.45)}
+.recovery-path{background:rgba(255,255,255,.04);border-radius:var(--rl);padding:18px}
+.recovery-title{font-size:.82rem;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px}
+.recovery-step{display:flex;gap:12px;margin-bottom:12px;align-items:flex-start}
+.rs-num{width:28px;height:28px;border-radius:50%;background:rgba(245,166,35,.15);border:1.5px solid rgba(245,166,35,.3);display:flex;align-items:center;justify-content:center;font-size:.76rem;font-weight:700;color:var(--amber);flex-shrink:0;margin-top:1px}
+.rs-title{font-size:.85rem;font-weight:600;color:var(--white);margin-bottom:2px}
+.rs-desc{font-size:.76rem;color:rgba(255,255,255,.45);line-height:1.5}
+
+/* CONTACT */
+#contact{background:var(--off)}
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.eng-step{display:flex;gap:14px;align-items:flex-start;margin-bottom:16px}
+.eng-num{width:28px;height:28px;border-radius:50%;background:rgba(245,166,35,.12);border:1.5px solid rgba(245,166,35,.28);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:var(--amber);flex-shrink:0;margin-top:2px}
+.eng-title{font-size:.88rem;font-weight:600;color:var(--navy);margin-bottom:2px}
+.eng-desc{font-size:.76rem;color:var(--g500)}
+.cf-card{background:var(--white);border-radius:var(--rx);padding:28px;box-shadow:var(--sh)}
+.cfg{display:flex;flex-direction:column;gap:5px;margin-bottom:11px}
+.cfg label{font-size:.76rem;font-weight:500;color:var(--g700)}
+.cfg input,.cfg select,.cfg textarea{padding:9px 12px;border:1.5px solid var(--g100);border-radius:var(--r);font-size:.875rem;color:var(--g900);background:var(--white);-webkit-appearance:none}
+.cfg textarea{resize:vertical;min-height:80px}
 .cfg-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.cf-btn{width:100%;padding:13px;background:var(--amber);color:var(--navy);border-radius:var(--r);font-size:0.9375rem;font-weight:700;transition:all .2s;margin-top:8px;font-family:var(--fd)}
-.cf-btn:hover{background:var(--amber2);transform:translateY(-1px)}
+.cf-btn{width:100%;padding:13px;background:var(--amber);color:var(--navy);border-radius:var(--r);font-size:.9375rem;font-weight:700;transition:all .2s;margin-top:8px}
+.cf-btn:hover{background:var(--amber2)}
 
-/* ── FOOTER ── */
-footer{background:#060E1C;padding:28px 0;border-top:1px solid rgba(255,255,255,0.05)}
-.footer-inner{display:flex;justify-content:space-between;align-items:center}
-.footer-brand{display:flex;align-items:center;gap:9px}
-.footer-wordmark{font-family:var(--fd);font-size:1.1rem;font-weight:700;color:var(--white)}
-.footer-wordmark span{color:var(--amber)}
-.footer-sub{font-size:0.72rem;color:rgba(255,255,255,0.25);margin-top:3px}
-.footer-right{font-size:0.72rem;color:rgba(255,255,255,0.25);text-align:right;line-height:1.6}
+/* FOOTER */
+footer{background:#060E1C;padding:24px 0;border-top:1px solid rgba(255,255,255,.05)}
+.footer-i{display:flex;justify-content:space-between;align-items:center}
+.footer-brand{font-family:var(--fd);font-size:1.1rem;font-weight:700;color:var(--white)}
+.footer-brand span{color:var(--amber)}
+.footer-r{font-size:.72rem;color:rgba(255,255,255,.25);text-align:right;line-height:1.6}
 
-/* ── RESPONSIVE ── */
+/* RESPONSIVE */
 @media(max-width:900px){
-  .problem-2col,.mpanel.on,.demo-layout,.calc-2col,.contact-2col{grid-template-columns:1fr}
-  .hidden-risks{grid-template-columns:1fr 1fr}
-  .metrics-row{grid-template-columns:1fr 1fr}
+  .g2,.bucket-grid,.scoring-layout,.demo-layout,.mit-calc-layout,.res-layout,.stress-layout,.contact-layout{grid-template-columns:1fr}
+  .g3{grid-template-columns:1fr 1fr}
+  .g4,.metrics-g,.impact-grid,.res-metrics{grid-template-columns:1fr 1fr}
   .nav-links{display:none}
   .hero-stats{flex-wrap:wrap}
-  .hstat{min-width:50%;border-right:none;border-bottom:1px solid rgba(255,255,255,0.08);padding:12px}
+  .hst{min-width:50%}
 }
 </style>
 </head>
 <body>
 
-<!-- SVG DEFS (logo mark) -->
+<!-- SVG LOGO -->
 <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
-  <symbol id="aagnaa-mark" viewBox="0 0 48 48">
-    <!-- Outer diamond eye -->
-    <path d="M24 4 L44 24 L24 44 L4 24 Z" fill="none" stroke="#F5A623" stroke-width="1.5"/>
-    <!-- Inner circle iris -->
+  <symbol id="logo" viewBox="0 0 48 48">
+    <path d="M24 3 L45 24 L24 45 L3 24 Z" fill="none" stroke="#F5A623" stroke-width="1.5"/>
     <circle cx="24" cy="24" r="11" fill="none" stroke="#F5A623" stroke-width="1.5"/>
-    <!-- Inner circle fill -->
     <circle cx="24" cy="24" r="6" fill="#F5A623"/>
-    <!-- Pupil -->
     <circle cx="24" cy="24" r="2.5" fill="#0B1F3A"/>
-    <!-- Corner dots at diamond vertices -->
-    <circle cx="24" cy="4" r="2" fill="#F5A623" opacity="0.6"/>
-    <circle cx="44" cy="24" r="2" fill="#F5A623" opacity="0.6"/>
-    <circle cx="24" cy="44" r="2" fill="#F5A623" opacity="0.6"/>
-    <circle cx="4" cy="24" r="2" fill="#F5A623" opacity="0.6"/>
+    <circle cx="24" cy="3" r="2" fill="#F5A623" opacity=".6"/>
+    <circle cx="45" cy="24" r="2" fill="#F5A623" opacity=".6"/>
+    <circle cx="24" cy="45" r="2" fill="#F5A623" opacity=".6"/>
+    <circle cx="3" cy="24" r="2" fill="#F5A623" opacity=".6"/>
   </symbol>
 </svg>
 
 <!-- NAV -->
 <nav id="nav">
-  <div class="nav-inner">
+  <div class="nav-i">
     <div class="nav-brand" onclick="scrollTo(0,0)">
-      <svg width="36" height="36" viewBox="0 0 48 48"><use href="#aagnaa-mark"/></svg>
-      <div class="nav-wordmark">Aagn<span>aa</span></div>
+      <svg width="34" height="34" viewBox="0 0 48 48"><use href="#logo"/></svg>
+      <div class="nav-mark">Aagn<span>aa</span></div>
     </div>
     <div class="nav-links">
-      <a href="#problem">The Problem</a>
-      <a href="#method">Methodology</a>
-      <a href="#demo">Live Demo</a>
-      <a href="#calc">Calculator</a>
+      <a href="#layer1">Identify</a>
+      <a href="#layer2">Score</a>
+      <a href="#layer3">Dashboard</a>
+      <a href="#layer4">Mitigate</a>
+      <a href="#layer5">Resilience</a>
+      <a href="#layer6">Stress Test</a>
       <a href="#contact">Engage</a>
     </div>
-    <button class="nav-cta" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">See Platform</button>
+    <button class="nav-cta" onclick="document.getElementById('layer3').scrollIntoView({behavior:'smooth'})">See Platform</button>
   </div>
 </nav>
 
@@ -320,217 +417,280 @@ footer{background:#060E1C;padding:28px 0;border-top:1px solid rgba(255,255,255,0
 <section id="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
-  <div class="hero-content">
+  <div class="hero-c">
     <div class="hero-inner">
-      <div class="hero-logo-wrap">
-        <svg width="88" height="88" viewBox="0 0 48 48" style="filter:drop-shadow(0 0 28px rgba(245,166,35,0.45))">
-          <use href="#aagnaa-mark"/>
-        </svg>
+      <div class="hero-logo">
+        <svg width="80" height="80" viewBox="0 0 48 48" style="filter:drop-shadow(0 0 24px rgba(245,166,35,.45))"><use href="#logo"/></svg>
       </div>
       <div class="hero-badge"><div class="hero-badge-dot"></div><span>Supply Chain Risk Intelligence</span></div>
-      <h1 class="hero-title">The internal risk layer<em>Everstream cannot see.</em></h1>
-      <p class="hero-sub">Third-party tools flag country-level disruptions. Aagnaa identifies the structural vulnerabilities inside your supply chain — single-source dependencies, diamond node cascades, and survivability gaps that stop production lines before anyone notices.</p>
+      <h1 class="hero-h1">Identify Risk. Score It. Mitigate It.<em>Build Resilience.</em></h1>
+      <p class="hero-sub">Six integrated layers — from risk identification through black swan stress testing. Built on Simchi-Levi TTR/TTS methodology, Sheffi resilience frameworks, and IATF 16949 DFMEA adaptation. The only platform that goes from first principles to resilience strategy.</p>
       <div class="hero-btns">
-        <button class="btn-amber" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          See the Platform
+        <button class="btn-a" onclick="document.getElementById('layer1').scrollIntoView({behavior:'smooth'})">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          Identify Risks
         </button>
-        <button class="btn-ghost" onclick="document.getElementById('calc').scrollIntoView({behavior:'smooth'})">Try the Calculator</button>
+        <button class="btn-g" onclick="document.getElementById('layer3').scrollIntoView({behavior:'smooth'})">See Live Dashboard</button>
       </div>
       <div class="hero-stats">
-        <div class="hstat"><div class="hstat-num">73%</div><div class="hstat-label">of disruptions start at Tier 2 or below</div></div>
-        <div class="hstat"><div class="hstat-num">$150K</div><div class="hstat-label">per hour — automotive line stop cost</div></div>
-        <div class="hstat"><div class="hstat-num">0</div><div class="hstat-label">third-party tools see your BOM data</div></div>
-        <div class="hstat"><div class="hstat-num">REI</div><div class="hstat-label">your exposure score, not a generic rating</div></div>
+        <div class="hst"><div class="hst-n">6</div><div class="hst-l">Integrated methodology layers</div></div>
+        <div class="hst"><div class="hst-n">30</div><div class="hst-l">Live supplier risk profiles</div></div>
+        <div class="hst"><div class="hst-n">P×I×V</div><div class="hst-l">Three-dimensional risk scoring</div></div>
+        <div class="hst"><div class="hst-n">REI</div><div class="hst-l">Your exposure score not theirs</div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- THE PROBLEM -->
-<section id="problem" class="section">
+<!-- LAYER NAV -->
+<div class="layer-nav">
+  <div class="layer-nav-i">
+    <div class="ltab on" onclick="scrollTo(layer1,this)"><span class="ltab-num">1</span>Identify Risks</div>
+    <div class="ltab" onclick="scrollTo(layer2,this)"><span class="ltab-num">2</span>Score Risk</div>
+    <div class="ltab" onclick="scrollTo(layer3,this)"><span class="ltab-num">3</span>REI Dashboard</div>
+    <div class="ltab" onclick="scrollTo(layer4,this)"><span class="ltab-num">4</span>Mitigate</div>
+    <div class="ltab" onclick="scrollTo(layer5,this)"><span class="ltab-num">5</span>Build Resilience</div>
+    <div class="ltab" onclick="scrollTo(layer6,this)"><span class="ltab-num">6</span>Black Swan Test</div>
+  </div>
+</div>
+
+<!-- LAYER 1: RISK IDENTIFICATION -->
+<section id="layer1" class="section">
   <div class="container">
-    <div class="problem-2col">
-      <div>
-        <div class="sec-eyebrow">The Gap No One Is Filling</div>
-        <h2 class="sec-title">Everstream finds the signal.<br/>Aagnaa closes the gap.</h2>
-        <p class="sec-sub">Third-party risk platforms aggregate public data. They are excellent early warning systems. But they have one fundamental limitation — they work entirely with public information and cannot see inside your supply chain.</p>
-        <div class="vs-grid">
-          <div class="vs-card">
-            <div class="vs-card-label">What Everstream gives you</div>
-            <div class="vs-item"><span style="color:var(--g300);font-size:1.1em">&#9711;</span> Chennai port disrupted — severity 7/10</div>
-            <div class="vs-item"><span style="color:var(--g300);font-size:1.1em">&#9711;</span> China country risk: HIGH</div>
-            <div class="vs-item"><span style="color:var(--g300);font-size:1.1em">&#9711;</span> Supplier X financial stress flag</div>
+    <div class="tc" style="margin-bottom:40px">
+      <div class="sec-eye">Layer 1 — Risk Identification</div>
+      <h2 class="sec-title">The Complete Risk Taxonomy</h2>
+      <p class="sec-sub" style="max-width:600px;margin:0 auto">Before scoring or mitigating, you must systematically identify every risk. Click any category to understand what it is, why it matters, how to detect it, and its velocity.</p>
+    </div>
+    <div class="bucket-grid" id="bucketGrid"></div>
+    <div class="risk-detail-panel" id="riskDetail"></div>
+  </div>
+</section>
+
+<!-- LAYER 2: RISK SCORING -->
+<section id="layer2" class="section">
+  <div class="container">
+    <div style="margin-bottom:36px">
+      <div class="sec-eye">Layer 2 — Risk Scoring</div>
+      <h2 class="sec-title">Score Any Risk — P × I × V</h2>
+      <p class="sec-sub">Structured scoring removes subjectivity. Every dimension has anchored definitions. The result is a defensible, consistent priority score for any risk you identify.</p>
+    </div>
+    <div class="scoring-layout">
+      <div class="score-form">
+        <div class="sf-section">
+          <div class="sf-title"><div class="sf-num">P</div>Probability — How likely is this risk? (1-5)</div>
+          <div class="score-slider-row">
+            <label>Score <span id="pVal">3</span></label>
+            <input type="range" id="pSlider" min="1" max="5" value="3" oninput="updateScoreSlider('p',this.value)"/>
           </div>
-          <div class="vs-card ours">
-            <div class="vs-card-label">What Aagnaa adds</div>
-            <div class="vs-item"><span style="color:var(--amber)">&#10003;</span> 3 of your P1 suppliers ship through Chennai</div>
-            <div class="vs-item"><span style="color:var(--amber)">&#10003;</span> You have 14 days TTS — they need 90 to recover</div>
-            <div class="vs-item"><span style="color:var(--amber)">&#10003;</span> Your 3-phase response plan, starting today</div>
-          </div>
+          <div id="pAnchor" style="font-size:.78rem;color:var(--g500);padding:8px 10px;background:var(--g50);border-radius:var(--r)"></div>
         </div>
+        <div class="sf-section">
+          <div class="sf-title"><div class="sf-num">I</div>Impact — How bad if it happens? (1-5)</div>
+          <div class="score-slider-row"><label>Production Days Lost <span id="i1Val">3</span></label><input type="range" id="i1" min="1" max="5" value="3" oninput="updateScoreSlider('i1',this.value)"/></div>
+          <div class="score-slider-row"><label>Revenue Exposure <span id="i2Val">3</span></label><input type="range" id="i2" min="1" max="5" value="3" oninput="updateScoreSlider('i2',this.value)"/></div>
+          <div class="score-slider-row"><label>Recoverability <span id="i3Val">3</span></label><input type="range" id="i3" min="1" max="5" value="3" oninput="updateScoreSlider('i3',this.value)"/></div>
+          <div class="score-slider-row"><label>Customer / Safety Impact <span id="i4Val">3</span></label><input type="range" id="i4" min="1" max="5" value="3" oninput="updateScoreSlider('i4',this.value)"/></div>
+          <div style="font-size:.75rem;color:var(--g500);margin-top:8px">Combined Impact = highest single dimension score</div>
+        </div>
+        <div class="sf-section">
+          <div class="sf-title"><div class="sf-num">V</div>Velocity — How fast does it materialize?</div>
+          <div class="vel-btns">
+            <button class="vel-btn on sudden" id="vSudden" onclick="setVel('sudden')">&#9889; Sudden<br/><small>Hours-Days</small></button>
+            <button class="vel-btn slow" id="vSlow" onclick="setVel('slow')">&#9650; Slow Burn<br/><small>Weeks-Months</small></button>
+            <button class="vel-btn struct" id="vStruct" onclick="setVel('struct')">&#9711; Structural<br/><small>Months-Years</small></button>
+          </div>
+          <div id="velDesc" style="margin-top:10px;font-size:.78rem;color:var(--g500);padding:8px 10px;background:var(--g50);border-radius:var(--r)"></div>
+        </div>
+        <button class="calc-score-btn" onclick="calcRiskScore()">Calculate Risk Score</button>
       </div>
       <div>
-        <div class="sec-eyebrow" style="color:var(--red);margin-bottom:14px">Hidden Risks No Tool Sees — Click to Expand</div>
-        <div class="hidden-risks" id="hiddenRisks"></div>
+        <div style="background:var(--g50);border-radius:var(--rl);padding:20px;margin-bottom:16px">
+          <div style="font-size:.82rem;font-weight:700;color:var(--navy);margin-bottom:14px">Risk Matrix — P × I</div>
+          <div class="risk-matrix" id="riskMatrix">
+            <div class="matrix-zone" style="left:0;top:50%;width:50%;height:50%;background:rgba(22,163,74,.08);color:#16A34A">Low Risk</div>
+            <div class="matrix-zone" style="right:0;top:50%;width:50%;height:50%;background:rgba(245,166,35,.1);color:#D4891A">Medium Risk</div>
+            <div class="matrix-zone" style="left:0;top:0;width:50%;height:50%;background:rgba(245,166,35,.1);color:#D4891A">Medium Risk</div>
+            <div class="matrix-zone" style="right:0;top:0;width:50%;height:50%;background:rgba(192,57,43,.1);color:#C0392B">High Risk</div>
+            <div style="position:absolute;bottom:4px;left:6px;font-size:.66rem;color:var(--g500)">Low Probability</div>
+            <div style="position:absolute;bottom:4px;right:6px;font-size:.66rem;color:var(--g500)">High Probability</div>
+            <div style="position:absolute;top:6px;left:6px;font-size:.66rem;color:var(--g500)">High Impact</div>
+            <div style="position:absolute;bottom:18px;left:6px;font-size:.66rem;color:var(--g500)">Low Impact</div>
+            <div id="matrixDot" style="position:absolute;width:14px;height:14px;border-radius:50%;background:var(--navy);border:2px solid var(--white);transform:translate(-50%,50%);transition:all .4s ease;display:none"></div>
+          </div>
+          <div id="velocityNote" style="font-size:.78rem;padding:8px 10px;border-radius:var(--r);margin-top:8px;display:none"></div>
+        </div>
+        <div class="score-result" id="scoreResult"></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- METHODOLOGY -->
-<section id="method" class="section">
+<!-- LAYER 3: REI DASHBOARD -->
+<section id="layer3" class="section">
   <div class="container">
-    <div class="text-center" style="margin-bottom:44px">
-      <div class="sec-eyebrow">The Methodology</div>
-      <h2 class="sec-title">Four layers. Every calculation explained.</h2>
-      <p class="sec-sub" style="max-width:560px;margin:0 auto">Every number in Aagnaa is derived from peer-reviewed MIT research, real disruption post-mortems, and IATF 16949 engineering standards. Nothing is a black box.</p>
-    </div>
-    <div class="mtabs">
-      <button class="mtab on" onclick="showMethod(0,this)">1. TTS Calculator</button>
-      <button class="mtab" onclick="showMethod(1,this)">2. REI Scoring</button>
-      <button class="mtab" onclick="showMethod(2,this)">3. DFMEA Adaptation</button>
-      <button class="mtab" onclick="showMethod(3,this)">4. Diamond Node</button>
-    </div>
-    <div id="methodPanels"></div>
-  </div>
-</section>
-
-<!-- LIVE DEMO -->
-<section id="demo" class="section">
-  <div class="container">
-    <div class="text-center" style="margin-bottom:32px">
-      <div class="sec-eyebrow">Live Platform</div>
-      <h2 class="sec-title light">30 suppliers. Click any one.</h2>
-      <p class="sec-sub light">Complete risk profile — REI score, DFMEA table, TTS/TTR survivability gap, substitution router, regulatory exposure, resilience decay score.</p>
+    <div class="tc" style="margin-bottom:28px">
+      <div class="sec-eye">Layer 3 — REI Dashboard</div>
+      <h2 class="sec-title lt">30 Suppliers. Click Any One.</h2>
+      <p class="sec-sub lt" style="max-width:580px;margin:0 auto">Full risk profile — REI score, DFMEA table, TTS/TTR survivability gap, substitution router, regulatory exposure, resilience decay.</p>
     </div>
     <div class="demo-layout">
-      <!-- Sidebar -->
       <div>
-        <div class="demo-stats-grid" id="demoStats"></div>
-        <div class="sup-list-wrap">
-          <div class="sup-list-hdr">Supplier Register — 30 Suppliers</div>
+        <div class="demo-stats" id="demoStats"></div>
+        <div class="sup-list">
+          <div class="sl-hdr">Supplier Register — 30 Suppliers</div>
+          <div class="sl-filters" id="slFilters"></div>
           <div id="supList"></div>
         </div>
       </div>
-      <!-- Regulatory Propagation Panel -->
-      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;overflow:hidden;margin-top:0" id="regPanel">
-        <div style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:0.7rem;font-weight:600;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.05em">Regulatory Trigger Engine</div>
-        <div style="padding:12px 14px">
-          <div style="font-size:0.75rem;color:rgba(255,255,255,0.5);margin-bottom:8px">Select a new regulation to see full supply base impact</div>
-          <select id="regSelect" style="width:100%;padding:8px 10px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:var(--white);font-size:0.78rem;margin-bottom:10px;-webkit-appearance:none">
-            <option value="">Select regulation...</option>
-          </select>
-          <div id="regImpact"></div>
-        </div>
-      </div>
-      <!-- Main -->
       <div class="demo-right">
         <div class="map-wrap">
           <div class="map-hdr">
             <div class="map-title">Aagnaa — Global Supply Network Risk Map</div>
-            <div class="map-sub">Click any supplier dot to open risk profile</div>
+            <div class="map-sub">Click any supplier dot</div>
           </div>
-          <div class="map-filters" id="mapFilters"></div>
           <canvas id="mapCanvas"></canvas>
         </div>
-        <div class="detail-wrap" id="detailWrap">
+        <div class="detail-panel" id="detailPanel">
           <div class="dtabs">
             <div class="dtab on" onclick="showDTab(0,this)">Risk Profile</div>
-            <div class="dtab" onclick="showDTab(1,this)">DFMEA Table</div>
-            <div class="dtab" onclick="showDTab(2,this)">Mitigation Plan</div>
-            <div class="dtab" onclick="showDTab(3,this)">Substitution Router</div>
+            <div class="dtab" onclick="showDTab(1,this)">DFMEA</div>
+            <div class="dtab" onclick="showDTab(2,this)">Mitigation</div>
+            <div class="dtab" onclick="showDTab(3,this)">Alternates</div>
             <div class="dtab" onclick="showDTab(4,this)">Regulatory</div>
           </div>
-          <div class="dtab-pane on" id="dp0"></div>
-          <div class="dtab-pane" id="dp1"></div>
-          <div class="dtab-pane" id="dp2"></div>
-          <div class="dtab-pane" id="dp3"></div>
-          <div class="dtab-pane" id="dp4"></div>
+          <div class="dpane on" id="dp0"></div>
+          <div class="dpane" id="dp1"></div>
+          <div class="dpane" id="dp2"></div>
+          <div class="dpane" id="dp3"></div>
+          <div class="dpane" id="dp4"></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CALCULATOR -->
-<section id="calc" class="section">
+<!-- LAYER 4: MITIGATION CALCULATOR -->
+<section id="layer4" class="section">
   <div class="container">
-    <div class="text-center" style="margin-bottom:36px">
-      <div class="sec-eyebrow">Risk Calculator</div>
-      <h2 class="sec-title">Enter your supplier. Get your exposure.</h2>
-      <p class="sec-sub" style="max-width:500px;margin:0 auto">All calculations run in your browser. No data is stored or transmitted. Every formula is shown step by step.</p>
+    <div style="margin-bottom:36px">
+      <div class="sec-eye">Layer 4 — Mitigation Calculator</div>
+      <h2 class="sec-title">Enter Your Supplier. Get Your Mitigation Plan.</h2>
+      <p class="sec-sub">Full REI calculation with convergence multiplier, DFMEA failure modes, safety stock formula, and a phased mitigation plan. All calculations shown step by step.</p>
     </div>
-    <div class="calc-2col">
-      <div class="calc-card">
-        <div class="calc-title">Supplier Assessment Tool</div>
-        <div class="fg"><label>Supplier Name</label><input id="cn" placeholder="e.g. Shanghai Mold Tech"/></div>
+    <div class="mit-calc-layout">
+      <div class="card">
+        <div style="font-family:var(--fd);font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:18px">Supplier Assessment</div>
+        <div class="fg"><label>Supplier Name</label><input id="mn" placeholder="e.g. Shanghai Mold Tech"/></div>
         <div class="fg-row">
           <div class="fg"><label>Country</label>
-            <select id="cc">
-              <option value="">Select country...</option>
-              <option value="USA" data-r="1.5">USA</option>
-              <option value="Canada" data-r="1.5">Canada</option>
-              <option value="Germany" data-r="2.0">Germany</option>
-              <option value="Netherlands" data-r="2.0">Netherlands</option>
-              <option value="Japan" data-r="2.0">Japan</option>
-              <option value="South Korea" data-r="2.5">South Korea</option>
-              <option value="Estonia" data-r="3.0">Estonia</option>
-              <option value="Chile" data-r="3.5">Chile</option>
-              <option value="Vietnam" data-r="4.0">Vietnam</option>
-              <option value="India" data-r="4.5">India</option>
-              <option value="Mexico" data-r="6.5">Mexico</option>
-              <option value="China" data-r="7.5">China</option>
-              <option value="Taiwan" data-r="8.5">Taiwan</option>
-              <option value="Dem. Rep. Congo" data-r="9.0">Dem. Rep. Congo</option>
+            <select id="mc">
+              <option value="">Select...</option>
+              <option value="USA" data-r="1.5">USA</option><option value="Canada" data-r="1.5">Canada</option>
+              <option value="Germany" data-r="2.0">Germany</option><option value="Netherlands" data-r="2.0">Netherlands</option>
+              <option value="Japan" data-r="2.0">Japan</option><option value="South Korea" data-r="2.5">South Korea</option>
+              <option value="Estonia" data-r="3.0">Estonia</option><option value="Chile" data-r="3.5">Chile</option>
+              <option value="Vietnam" data-r="4.0">Vietnam</option><option value="India" data-r="4.5">India</option>
+              <option value="Mexico" data-r="6.5">Mexico</option><option value="China" data-r="7.5">China</option>
+              <option value="Taiwan" data-r="8.5">Taiwan</option><option value="Dem. Rep. Congo" data-r="9.0">Dem. Rep. Congo</option>
             </select>
           </div>
           <div class="fg"><label>Source Type</label>
-            <select id="cs">
-              <option value="single">Single Source</option>
-              <option value="dual-unq">Dual — Alternate Not Qualified</option>
-              <option value="dual-q">Dual — Both PPAP Qualified</option>
-            </select>
+            <select id="ms"><option value="single">Single Source</option><option value="dual-unq">Dual — Unqualified</option><option value="dual-q">Dual — Both Qualified</option></select>
           </div>
         </div>
         <div class="fg-row">
-          <div class="fg"><label>Annual Spend on This Supplier ($)</label><input type="number" id="csp" placeholder="620000"/></div>
-          <div class="fg"><label>Total Supply Base Spend ($)</label><input type="number" id="ctsp" placeholder="5000000"/></div>
+          <div class="fg"><label>Annual Spend ($)</label><input type="number" id="msp" placeholder="620000"/></div>
+          <div class="fg"><label>Total Supply Base Spend ($)</label><input type="number" id="mtsp" placeholder="5000000"/></div>
         </div>
         <div class="fg-row">
-          <div class="fg"><label>BCP Status</label>
-            <select id="cb"><option value="no">No BCP</option><option value="yes">BCP Verified</option></select>
-          </div>
-          <div class="fg"><label>Sub-tier Disclosure</label>
-            <select id="cst"><option value="no">None</option><option value="partial">Partial</option><option value="yes">Full</option></select>
-          </div>
+          <div class="fg"><label>BCP Status</label><select id="mbcp"><option value="no">No BCP</option><option value="yes">Verified</option></select></div>
+          <div class="fg"><label>Sub-tier Disclosure</label><select id="mst"><option value="no">None</option><option value="partial">Partial</option><option value="yes">Full</option></select></div>
         </div>
         <div class="fg-sec">Inventory — TTS Calculation</div>
         <div class="fg-row">
-          <div class="fg"><label>On-Hand Inventory (units)</label><input type="number" id="coh" placeholder="1200"/></div>
-          <div class="fg"><label>In-Transit (units)</label><input type="number" id="cit" placeholder="200"/></div>
+          <div class="fg"><label>On-Hand (units)</label><input type="number" id="moh" placeholder="1200"/></div>
+          <div class="fg"><label>In-Transit (units)</label><input type="number" id="mit" placeholder="200"/></div>
         </div>
         <div class="fg-row">
-          <div class="fg"><label>Safety Stock (units)</label><input type="number" id="css" placeholder="300"/></div>
-          <div class="fg"><label>Daily Consumption (units/day)</label><input type="number" id="cd" placeholder="90"/></div>
+          <div class="fg"><label>Safety Stock (units)</label><input type="number" id="mss" placeholder="300"/></div>
+          <div class="fg"><label>Daily Consumption</label><input type="number" id="md" placeholder="90"/></div>
         </div>
-        <div class="fg-sec">Recovery Data</div>
+        <div class="fg-sec">Recovery</div>
         <div class="fg-row">
-          <div class="fg"><label>TTR from Supplier BCP (days)</label><input type="number" id="cttr" placeholder="90"/></div>
+          <div class="fg"><label>TTR from BCP (days)</label><input type="number" id="mttr" placeholder="90"/></div>
           <div class="fg"><label>Diamond Node?</label>
-            <select id="cdiam">
-              <option value="0">No</option>
-              <option value="2">Yes — 2 Tier 1s share this Tier 2</option>
-              <option value="3">Yes — 3 Tier 1s share this Tier 2</option>
-              <option value="4">Yes — 4+ Tier 1s share this Tier 2</option>
-            </select>
+            <select id="mdiam"><option value="0">No</option><option value="2">Yes — 2 Tier-1s share</option><option value="3">Yes — 3 Tier-1s share</option><option value="4">Yes — 4+ Tier-1s share</option></select>
           </div>
         </div>
-        <button class="calc-btn" onclick="doCalc()">Calculate Risk Exposure</button>
+        <button class="mit-btn" onclick="calcMitigation()">Calculate & Generate Plan</button>
       </div>
-      <div id="resultsWrap" class="results-wrap">
-        <div class="calc-card" id="resultsInner"></div>
+      <div id="mitResult" class="mit-result"></div>
+    </div>
+  </div>
+</section>
+
+<!-- LAYER 5: RESILIENCE BUILDER -->
+<section id="layer5" class="section">
+  <div class="container">
+    <div style="margin-bottom:36px">
+      <div class="sec-eye">Layer 5 — Resilience Builder</div>
+      <h2 class="sec-title">Measure Your Resilience Posture</h2>
+      <p class="sec-sub">Risk management handles known threats. Resilience handles everything else — including Black Swans. These five dimensions measure your organization's capacity to absorb and recover from any disruption.</p>
+    </div>
+    <div class="res-layout">
+      <div>
+        <div class="res-form">
+          <div class="res-form-title">Resilience Assessment</div>
+          <div class="res-q">
+            <label>% of P1 suppliers with TTS ≥ TTR (inventory white space)</label>
+            <span class="hint">How many of your most critical suppliers have enough inventory buffer to survive their recovery period?</span>
+            <select id="r1"><option value="10">Less than 25%</option><option value="35">25-50%</option><option value="60">50-75%</option><option value="85" selected>More than 75%</option></select>
+          </div>
+          <div class="res-q">
+            <label>% of P1 suppliers with PPAP-qualified alternate</label>
+            <span class="hint">True dual-source — not just a second supplier on a list, but one that has completed qualification for your specific part.</span>
+            <select id="r2"><option value="10">Less than 25%</option><option value="35">25-50%</option><option value="60">50-75%</option><option value="85">More than 75%</option></select>
+          </div>
+          <div class="res-q">
+            <label>% of P1/P2 suppliers with Tier-2 fully disclosed</label>
+            <span class="hint">Sub-tier visibility — do you know who your suppliers' suppliers are?</span>
+            <select id="r3"><option value="10">Less than 25%</option><option value="35">25-50%</option><option value="60">50-75%</option><option value="85">More than 75%</option></select>
+          </div>
+          <div class="res-q">
+            <label>% of supply base spend in countries with Country Risk &lt; 5</label>
+            <span class="hint">Geographic diversification — how concentrated is your spend in high-risk geographies?</span>
+            <select id="r4"><option value="10">Less than 25%</option><option value="35">25-50%</option><option value="60">50-75%</option><option value="85">More than 75%</option></select>
+          </div>
+          <div class="res-q">
+            <label>% of P1 suppliers with verified BCP and tested TTR</label>
+            <span class="hint">Response readiness — not just a BCP document, but one that has been validated and tested.</span>
+            <select id="r5"><option value="10">Less than 25%</option><option value="35">25-50%</option><option value="60">50-75%</option><option value="85">More than 75%</option></select>
+          </div>
+          <button class="res-calc-btn" onclick="calcResilience()">Assess Resilience Posture</button>
+        </div>
       </div>
+      <div class="res-result" id="resResult"></div>
+    </div>
+  </div>
+</section>
+
+<!-- LAYER 6: BLACK SWAN STRESS TEST -->
+<section id="layer6" class="section">
+  <div class="container">
+    <div class="tc" style="margin-bottom:32px">
+      <div class="sec-eye">Layer 6 — Black Swan Stress Test</div>
+      <h2 class="sec-title lt">What If Your Top Suppliers Failed Simultaneously?</h2>
+      <p class="sec-sub lt" style="max-width:600px;margin:0 auto">Black Swans cannot be predicted — but their impact can be modeled. Select up to 5 suppliers and run a simultaneous failure scenario. See the cascade, the financial impact, and the recovery path.</p>
+    </div>
+    <div class="stress-layout">
+      <div class="stress-form">
+        <div class="stress-form-title">Scenario Builder</div>
+        <div class="stress-form-sub">Select 2-5 suppliers to fail simultaneously. This models a systemic disruption — pandemic, regional conflict, major natural disaster — that hits multiple suppliers at once.</div>
+        <div class="stress-sup-selector" id="stressSupList"></div>
+        <button class="stress-run-btn" onclick="runStressTest()">&#9888; Run Stress Test</button>
+      </div>
+      <div class="stress-result" id="stressResult"></div>
     </div>
   </div>
 </section>
@@ -538,18 +698,18 @@ footer{background:#060E1C;padding:28px 0;border-top:1px solid rgba(255,255,255,0
 <!-- CONTACT -->
 <section id="contact" class="section">
   <div class="container">
-    <div class="contact-2col">
+    <div class="contact-layout">
       <div>
-        <div class="sec-eyebrow">Engage Aagnaa</div>
-        <h2 class="sec-title light" style="margin-bottom:14px">Turn your supply base into a resilience program.</h2>
-        <p class="sec-sub light" style="margin-bottom:28px">This calculator assessed one supplier. Most companies have 50 to 500. An Aagnaa engagement delivers a fully scored supply base, P1/P2/P3 tier assignments, diamond node mapping, regulatory exposure analysis, and a funded mitigation roadmap in 6 to 8 weeks.</p>
+        <div class="sec-eye">Engage Aagnaa</div>
+        <h2 class="sec-title" style="margin-bottom:12px">Turn Your Supply Base Into a Resilience Program.</h2>
+        <p class="sec-sub" style="margin-bottom:24px">This platform assessed one supplier. Most companies have 50 to 500. An Aagnaa engagement delivers a fully scored supply base, P1/P2/P3 tier assignments, diamond node mapping, regulatory exposure analysis, and a funded mitigation roadmap — in 6 to 8 weeks.</p>
         <div class="eng-step"><div class="eng-num">1</div><div><div class="eng-title">Assess — Weeks 1-2</div><div class="eng-desc">Supplier master, TTS calculations, REI scoring across full supply base</div></div></div>
         <div class="eng-step"><div class="eng-num">2</div><div><div class="eng-title">Tier and Map — Weeks 3-4</div><div class="eng-desc">P1/P2/P3 classification, diamond node identification, raw material mapping</div></div></div>
         <div class="eng-step"><div class="eng-num">3</div><div><div class="eng-title">Mitigate — Weeks 5-6</div><div class="eng-desc">Costed mitigation plans, owner assignments, 18-month resilience roadmap</div></div></div>
         <div class="eng-step"><div class="eng-num">4</div><div><div class="eng-title">Sustain — Ongoing</div><div class="eng-desc">Monthly P1 review, regulatory trigger monitoring, maturity tracking</div></div></div>
       </div>
       <div class="cf-card">
-        <div class="cf-title">Start Your Assessment</div>
+        <div style="font-family:var(--fd);font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:16px">Start Your Assessment</div>
         <div id="cfForm">
           <div class="cfg-row">
             <div class="cfg"><label>First Name</label><input id="cfn" placeholder="First name"/></div>
@@ -558,20 +718,16 @@ footer{background:#060E1C;padding:28px 0;border-top:1px solid rgba(255,255,255,0
           <div class="cfg"><label>Work Email</label><input type="email" id="cem" placeholder="you@company.com"/></div>
           <div class="cfg"><label>Company</label><input id="cco" placeholder="Company name"/></div>
           <div class="cfg-row">
-            <div class="cfg"><label>Industry</label>
-              <select id="cind"><option>Automotive</option><option>Aerospace & Defense</option><option>Industrial Manufacturing</option><option>Electronics / Semiconductor</option><option>Medical Devices</option><option>Energy / EVSE</option></select>
-            </div>
-            <div class="cfg"><label>Supply Base Size</label>
-              <select id="csz"><option>Under 50</option><option>50-200</option><option>200-500</option><option>500+</option></select>
-            </div>
+            <div class="cfg"><label>Industry</label><select id="cind"><option>Automotive</option><option>Aerospace & Defense</option><option>Electronics</option><option>Industrial Manufacturing</option><option>Medical Devices</option><option>Energy / EVSE</option></select></div>
+            <div class="cfg"><label>Supply Base Size</label><select id="csz"><option>Under 50</option><option>50-200</option><option>200-500</option><option>500+</option></select></div>
           </div>
           <div class="cfg"><label>Biggest Risk Concern</label><textarea id="cmsg" placeholder="e.g. Heavy China concentration, no sub-tier visibility..."></textarea></div>
           <button class="cf-btn" onclick="submitCF()">Request Assessment</button>
         </div>
         <div id="cfSuccess" style="display:none;text-align:center;padding:28px">
           <div style="font-size:2.8rem;margin-bottom:12px;color:var(--amber)">&#10003;</div>
-          <h4 style="color:var(--white);margin-bottom:8px;font-family:var(--fd)">Request received.</h4>
-          <p style="color:rgba(255,255,255,0.5);font-size:0.875rem">We will be in touch within 24 hours to discuss your supply chain risk profile.</p>
+          <h4 style="font-family:var(--fd);color:var(--navy);margin-bottom:8px">Request received.</h4>
+          <p style="font-size:.875rem;color:var(--g500)">We will be in touch within 24 hours.</p>
         </div>
       </div>
     </div>
@@ -580,15 +736,12 @@ footer{background:#060E1C;padding:28px 0;border-top:1px solid rgba(255,255,255,0
 
 <footer>
   <div class="container">
-    <div class="footer-inner">
+    <div class="footer-i">
       <div>
-        <div class="footer-brand">
-          <svg width="28" height="28" viewBox="0 0 48 48"><use href="#aagnaa-mark"/></svg>
-          <div class="footer-wordmark">Aagn<span>aa</span></div>
-        </div>
-        <div class="footer-sub">Confidence Through Clarity</div>
+        <div class="footer-brand">Aagn<span>aa</span></div>
+        <div style="font-size:.72rem;color:rgba(255,255,255,.25);margin-top:3px">Confidence Through Clarity</div>
       </div>
-      <div class="footer-right">
+      <div class="footer-r">
         <div>Tejaswi Sreerama, MSCM — University of Michigan Ross School of Business</div>
         <div>ISM Global Case Competition 2026 — 1st Place | tejaswismandadi.github.io/Aagnaa</div>
       </div>
@@ -598,19 +751,13 @@ footer{background:#060E1C;padding:28px 0;border-top:1px solid rgba(255,255,255,0
 
 <script>
 // ════════════════════════════════════════════════════════════════════
-// DATA
+// CORE DATA
 // ════════════════════════════════════════════════════════════════════
-const CR = {
-  "USA":1.5,"Canada":1.5,"Germany":2.0,"Netherlands":2.0,"Japan":2.0,
-  "South Korea":2.5,"Estonia":3.0,"Sweden":2.5,"Switzerland":2.0,
-  "Chile":3.5,"Vietnam":4.0,"India":4.5,"Thailand":4.0,"Indonesia":4.5,
-  "Brazil":5.5,"Mexico":6.5,"Turkey":6.0,"China":7.5,"Taiwan":8.5,
-  "Dem. Rep. Congo":9.0,"Myanmar":8.5,"Bolivia":6.5
-};
+const CR={USA:1.5,Canada:1.5,Germany:2.0,Netherlands:2.0,Japan:2.0,"South Korea":2.5,Estonia:3.0,Sweden:2.5,Chile:3.5,Vietnam:4.0,India:4.5,Thailand:4.0,Indonesia:4.5,Brazil:5.5,Mexico:6.5,Turkey:6.0,China:7.5,Taiwan:8.5,"Dem. Rep. Congo":9.0};
 
-const SUPPLIERS = [
+const SUPPLIERS=[
   {id:"S01",name:"Acme Aluminum Castings",country:"USA",commodity:"Aluminum Die Castings",hs:"7601",spend:850000,source:"Single Source",bcp:"Yes",subtier:"Yes",scenario:"Capacity",lat:42.33,lon:-83.04,ttr:45,oh:2800,it:400,ss:600,daily:180,tier:"P2",diamond:false,audit:45,programs:["Prog-A","Prog-B"]},
-  {id:"S02",name:"Shanghai Mold Tech",feeds:["SUP-04 Chennai Parts","SUP-08 Resin Global","SUP-27 Minth Exterior"],country:"China",commodity:"Injection Molded Plastics",hs:"3926",spend:620000,source:"Single Source",bcp:"No",subtier:"No",scenario:"Geopolitical",lat:31.23,lon:121.47,ttr:90,oh:1200,it:200,ss:300,daily:90,tier:"P1",diamond:true,audit:312,programs:["BEV","ADAS"],dfc:3},
+  {id:"S02",name:"Shanghai Mold Tech",country:"China",commodity:"Injection Molded Plastics",hs:"3926",spend:620000,source:"Single Source",bcp:"No",subtier:"No",scenario:"Geopolitical",lat:31.23,lon:121.47,ttr:90,oh:1200,it:200,ss:300,daily:90,tier:"P1",diamond:true,audit:312,programs:["BEV","ADAS"],dfc:3},
   {id:"S03",name:"AutoFlex GmbH",country:"Germany",commodity:"Precision Stampings",hs:"7326",spend:430000,source:"Dual Source",bcp:"Yes",subtier:"Yes",scenario:"Low Risk",lat:52.52,lon:13.40,ttr:28,oh:3200,it:800,ss:1000,daily:120,tier:"P3",diamond:false,audit:28,programs:["Prog-A"]},
   {id:"S04",name:"Chennai Parts Ltd",country:"India",commodity:"Wiring Harnesses",hs:"8544",spend:390000,source:"Single Source",bcp:"No",subtier:"No",scenario:"Financial",lat:13.08,lon:80.27,ttr:75,oh:800,it:150,ss:200,daily:65,tier:"P1",diamond:true,audit:198,programs:["Prog-A","BEV"],dfc:2},
   {id:"S05",name:"Magna Seating Systems",country:"Canada",commodity:"Seating Frames",hs:"9401",spend:510000,source:"Dual Source",bcp:"Yes",subtier:"Yes",scenario:"Low Risk",lat:43.65,lon:-79.38,ttr:32,oh:2400,it:600,ss:800,daily:100,tier:"P3",diamond:false,audit:15,programs:["Prog-C"]},
@@ -621,12 +768,12 @@ const SUPPLIERS = [
   {id:"S10",name:"Shenzhen PCB Solutions",country:"China",commodity:"Automotive PCB Assemblies",hs:"8534",spend:480000,source:"Single Source",bcp:"No",subtier:"No",scenario:"Geopolitical",lat:22.54,lon:114.05,ttr:110,oh:700,it:100,ss:200,daily:50,tier:"P1",diamond:true,audit:287,programs:["ADAS","EV Ctrl"],dfc:2},
   {id:"S11",name:"Nokian Rubber OY",country:"Finland",commodity:"Sealing Components",hs:"4016",spend:145000,source:"Dual Source",bcp:"Yes",subtier:"Yes",scenario:"Low Risk",lat:61.49,lon:23.76,ttr:25,oh:2200,it:400,ss:600,daily:90,tier:"P3",diamond:false,audit:44,programs:["Prog-A"]},
   {id:"S12",name:"Precision Forge Pune",country:"India",commodity:"Forged Steel Components",hs:"7326",spend:210000,source:"Single Source",bcp:"No",subtier:"Partial",scenario:"Financial",lat:18.52,lon:73.85,ttr:70,oh:900,it:150,ss:200,daily:70,tier:"P1",diamond:false,audit:203,programs:["Prog-C"]},
-  {id:"S13",name:"Yangtze Chemical Co.",feeds:["S02 Shanghai Mold Tech","S04 Chennai Parts Ltd","S08 Resin Global B.V."],country:"China",commodity:"Specialty Engineering Resin",hs:"3907",spend:310000,source:"Single Source",bcp:"No",subtier:"No",scenario:"Diamond Node",lat:30.57,lon:114.30,ttr:100,oh:500,it:80,ss:120,daily:45,tier:"P1",diamond:true,audit:334,programs:["Prog-A","BEV","Prog-C"],dfc:3},
-  {id:"S14",name:"GlobalWafer Taiwan",feeds:["S06 TSMC Advanced Logic","S10 Shenzhen PCB","S25 CBTL Gallium"],country:"Taiwan",commodity:"Silicon Wafers",hs:"3818",spend:780000,source:"Single Source",bcp:"No",subtier:"No",scenario:"Geopolitical",lat:25.08,lon:121.23,ttr:180,oh:600,it:80,ss:150,daily:50,tier:"P1",diamond:true,audit:445,programs:["ADAS","EV Ctrl","BEV"],dfc:3},
+  {id:"S13",name:"Yangtze Chemical Co.",country:"China",commodity:"Specialty Engineering Resin",hs:"3907",spend:310000,source:"Single Source",bcp:"No",subtier:"No",scenario:"Diamond Node",lat:30.57,lon:114.30,ttr:100,oh:500,it:80,ss:120,daily:45,tier:"P1",diamond:true,audit:334,programs:["Prog-A","BEV","Prog-C"],dfc:3},
+  {id:"S14",name:"GlobalWafer Taiwan",country:"Taiwan",commodity:"Silicon Wafers",hs:"3818",spend:780000,source:"Single Source",bcp:"No",subtier:"No",scenario:"Geopolitical",lat:25.08,lon:121.23,ttr:180,oh:600,it:80,ss:150,daily:50,tier:"P1",diamond:true,audit:445,programs:["ADAS","EV Ctrl","BEV"],dfc:3},
   {id:"S15",name:"Monterrey Stampings SA",country:"Mexico",commodity:"Body Panel Stampings",hs:"7326",spend:175000,source:"Single Source",bcp:"No",subtier:"Partial",scenario:"Geopolitical",lat:25.68,lon:-100.32,ttr:80,oh:700,it:100,ss:150,daily:55,tier:"P1",diamond:false,audit:178,programs:["Prog-B"]},
   {id:"S16",name:"Samsung SDI Battery",country:"South Korea",commodity:"Li-ion Battery Cells",hs:"8507",spend:1100000,source:"Dual Source",bcp:"Yes",subtier:"Partial",scenario:"Low Risk",lat:37.38,lon:127.12,ttr:45,oh:2000,it:400,ss:600,daily:100,tier:"P2",diamond:false,audit:41,programs:["BEV","EV Ctrl"]},
   {id:"S17",name:"Hanoi Plastics Vietnam",country:"Vietnam",commodity:"Interior Plastic Panels",hs:"3926",spend:145000,source:"Dual Source",bcp:"No",subtier:"No",scenario:"Capacity",lat:21.03,lon:105.85,ttr:45,oh:900,it:150,ss:200,daily:80,tier:"P2",diamond:false,audit:122,programs:["Prog-B"]},
-  {id:"S18",name:"China Northern REE",country:"China",commodity:"Rare Earth Oxides (NdFeB)",hs:"2846",spend:560000,source:"Single Source",bcp:"No",subtier:"No",scenario:"Raw Material",lat:40.81,lon:111.65,ttr:180,oh:400,it:60,ss:100,daily:35,tier:"P1",diamond:false,audit:289,programs:["BEV","EV Ctrl"]},
+  {id:"S18",name:"China Northern REE",country:"China",commodity:"Rare Earth Oxides",hs:"2846",spend:560000,source:"Single Source",bcp:"No",subtier:"No",scenario:"Raw Material",lat:40.81,lon:111.65,ttr:180,oh:400,it:60,ss:100,daily:35,tier:"P1",diamond:false,audit:289,programs:["BEV","EV Ctrl"]},
   {id:"S19",name:"Glencore Cobalt DRC",country:"Dem. Rep. Congo",commodity:"Cobalt Sulfate",hs:"2836",spend:670000,source:"Single Source",bcp:"No",subtier:"No",scenario:"Raw Material",lat:-10.68,lon:25.91,ttr:240,oh:350,it:50,ss:80,daily:28,tier:"P1",diamond:false,audit:412,programs:["BEV"]},
   {id:"S20",name:"SQM Lithium Chile",country:"Chile",commodity:"Lithium Carbonate",hs:"2836",spend:780000,source:"Single Source",bcp:"No",subtier:"No",scenario:"Raw Material",lat:-22.91,lon:-68.20,ttr:210,oh:320,it:40,ss:80,daily:25,tier:"P1",diamond:false,audit:367,programs:["BEV","EV Ctrl"]},
   {id:"S21",name:"Continental Electronics DE",country:"Germany",commodity:"ABS/ESC Control Modules",hs:"8537",spend:560000,source:"Dual Source",bcp:"Yes",subtier:"Yes",scenario:"Low Risk",lat:48.77,lon:11.42,ttr:35,oh:1800,it:400,ss:600,daily:90,tier:"P3",diamond:false,audit:22,programs:["ADAS","Prog-A"]},
@@ -641,689 +788,690 @@ const SUPPLIERS = [
   {id:"S30",name:"Wolfspeed SiC USA",country:"USA",commodity:"Silicon Carbide Wafers",hs:"3818",spend:680000,source:"Single Source",bcp:"Yes",subtier:"Yes",scenario:"Raw Material",lat:35.77,lon:-78.64,ttr:60,oh:800,it:120,ss:200,daily:55,tier:"P2",diamond:false,audit:75,programs:["BEV","EV Ctrl"]}
 ];
 
-const ALTS = {
-  "3926":[{name:"Viet Plastics Co.",country:"Vietnam",hm:94,td:-12,ld:14,sc:87},{name:"PT Indo Mold",country:"Indonesia",hm:91,td:-8,ld:21,sc:79},{name:"Monterrey Plastics MX",country:"Mexico",hm:88,td:3,ld:9,sc:74}],
-  "8542":[{name:"Samsung Foundry",country:"South Korea",hm:96,td:2,ld:45,sc:82},{name:"GlobalFoundries US",country:"USA",hm:94,td:0,ld:60,sc:78},{name:"STMicro Netherlands",country:"Netherlands",hm:89,td:1,ld:55,sc:71}],
-  "8544":[{name:"Aptiv Chennai",country:"India",hm:98,td:0,ld:30,sc:91},{name:"Lear Vietnam",country:"Vietnam",hm:95,td:-5,ld:45,sc:83},{name:"Sumitomo Electric JP",country:"Japan",hm:92,td:2,ld:60,sc:76}],
-  "8534":[{name:"TTM Technologies US",country:"USA",hm:90,td:0,ld:25,sc:85},{name:"Tripod Technology TW",country:"Taiwan",hm:97,td:8,ld:30,sc:78},{name:"Unimicron TW",country:"Taiwan",hm:95,td:8,ld:35,sc:74}],
-  "7326":[{name:"Gestamp US",country:"USA",hm:92,td:0,ld:20,sc:88},{name:"Martinrea Canada",country:"Canada",hm:89,td:0,ld:25,sc:83},{name:"Shiloh Industries US",country:"USA",hm:86,td:0,ld:30,sc:78}],
-  "2846":[{name:"MP Materials US",country:"USA",hm:85,td:0,ld:90,sc:72},{name:"Lynas Australia",country:"Australia",hm:88,td:5,ld:75,sc:76},{name:"Energy Fuels US",country:"USA",hm:82,td:0,ld:100,sc:68}],
-  "2836":[{name:"Albemarle US",country:"USA",hm:90,td:0,ld:60,sc:81},{name:"SQM Chile Alt",country:"Chile",hm:95,td:2,ld:45,sc:86},{name:"Livent Corp US",country:"USA",hm:88,td:0,ld:70,sc:78}],
-  "default":[{name:"Regional Alternate A",country:"Vietnam",hm:85,td:-8,ld:30,sc:76},{name:"Regional Alternate B",country:"India",hm:82,td:-5,ld:45,sc:71},{name:"Domestic Alternate",country:"USA",hm:78,td:0,ld:60,sc:68}]
-};
+const ALTS={"3926":[{n:"Viet Plastics Co.",c:"Vietnam",hm:94,td:-12,ld:14,sc:87},{n:"PT Indo Mold",c:"Indonesia",hm:91,td:-8,ld:21,sc:79},{n:"Monterrey Plastics",c:"Mexico",hm:88,td:3,ld:9,sc:74}],"8542":[{n:"Samsung Foundry",c:"South Korea",hm:96,td:2,ld:45,sc:82},{n:"GlobalFoundries US",c:"USA",hm:94,td:0,ld:60,sc:78},{n:"STMicro Netherlands",c:"Netherlands",hm:89,td:1,ld:55,sc:71}],"8544":[{n:"Aptiv Chennai",c:"India",hm:98,td:0,ld:30,sc:91},{n:"Lear Vietnam",c:"Vietnam",hm:95,td:-5,ld:45,sc:83},{n:"Sumitomo Electric",c:"Japan",hm:92,td:2,ld:60,sc:76}],"8534":[{n:"TTM Technologies US",c:"USA",hm:90,td:0,ld:25,sc:85},{n:"Tripod Technology TW",c:"Taiwan",hm:97,td:8,ld:30,sc:78},{n:"Unimicron TW",c:"Taiwan",hm:95,td:8,ld:35,sc:74}],"7326":[{n:"Gestamp US",c:"USA",hm:92,td:0,ld:20,sc:88},{n:"Martinrea Canada",c:"Canada",hm:89,td:0,ld:25,sc:83},{n:"Shiloh Industries",c:"USA",hm:86,td:0,ld:30,sc:78}],"2846":[{n:"MP Materials US",c:"USA",hm:85,td:0,ld:90,sc:72},{n:"Lynas Australia",c:"Australia",hm:88,td:5,ld:75,sc:76},{n:"Energy Fuels US",c:"USA",hm:82,td:0,ld:100,sc:68}],"2836":[{n:"Albemarle US",c:"USA",hm:90,td:0,ld:60,sc:81},{n:"SQM Chile Alt",c:"Chile",hm:95,td:2,ld:45,sc:86},{n:"Livent Corp US",c:"USA",hm:88,td:0,ld:70,sc:78}],"default":[{n:"Regional Alt A",c:"Vietnam",hm:85,td:-8,ld:30,sc:76},{n:"Regional Alt B",c:"India",hm:82,td:-5,ld:45,sc:71},{n:"Domestic Alt",c:"USA",hm:78,td:0,ld:60,sc:68}]};
 
-const REGS = [
-  {id:"UFLPA",name:"UFLPA — Uyghur Forced Labor Prevention Act",countries:["China"],hs:["8542","2846","3907","8534","8112","7616"],sev:9,desc:"Presumption of forced labor for goods from Xinjiang. CBP can block shipments."},
-  {id:"CBAM",name:"CBAM — EU Carbon Border Adjustment Mechanism",countries:["China","India","Mexico","Vietnam","Turkey"],hs:["7326","7601","7209","3926","8413"],sev:7,desc:"EU carbon tariff on imports from countries without carbon pricing. Phased 2026-2034."},
-  {id:"S301",name:"Section 301 Tariffs — China Goods",countries:["China"],hs:["8542","3926","8534","3907","2846","7616","8112"],sev:8,desc:"25%+ tariffs on $370B+ of Chinese goods. Subject to review and escalation."},
-  {id:"CHIPS",name:"CHIPS Act Export Controls — Advanced Semiconductors",countries:["China","Taiwan"],hs:["8542","3818","8534"],sev:9,desc:"US export controls on advanced chips and chip-making equipment to China."},
-  {id:"CMA",name:"Critical Minerals Act — DRC Cobalt",countries:["Dem. Rep. Congo"],hs:["2836"],sev:8,desc:"Supply chain due diligence requirements for cobalt from conflict-affected regions."},
-  {id:"IRA",name:"Inflation Reduction Act — Battery Content Rules",countries:["China","Taiwan","Dem. Rep. Congo"],hs:["8507","2836","3818","2846"],sev:8,desc:"EV tax credits require battery materials from US or FTA-partner countries by 2027."}
+const REGS=[
+  {id:"UFLPA",name:"UFLPA — Uyghur Forced Labor Prevention Act",countries:["China"],hs:["8542","2846","3907","8534","8112","7616"],sev:9,desc:"Presumption of forced labor for Xinjiang goods. CBP import holds."},
+  {id:"CBAM",name:"CBAM — EU Carbon Border Adjustment Mechanism",countries:["China","India","Mexico","Vietnam","Turkey"],hs:["7326","7601","7209","3926","8413"],sev:7,desc:"EU carbon tariff on imports from countries without carbon pricing. 2026-2034."},
+  {id:"S301",name:"Section 301 Tariffs — China",countries:["China"],hs:["8542","3926","8534","3907","2846","7616","8112"],sev:8,desc:"25%+ additional tariffs on $370B+ of Chinese goods."},
+  {id:"CHIPS",name:"CHIPS Act Export Controls",countries:["China","Taiwan"],hs:["8542","3818","8534"],sev:9,desc:"US export controls on advanced chips and equipment to China."},
+  {id:"CMA",name:"Critical Minerals Act — DRC Cobalt",countries:["Dem. Rep. Congo"],hs:["2836"],sev:8,desc:"Due diligence requirements for cobalt from conflict regions."},
+  {id:"IRA",name:"IRA — Battery Content Rules",countries:["China","Taiwan","Dem. Rep. Congo"],hs:["8507","2836","3818","2846"],sev:8,desc:"EV tax credits require battery minerals from US or FTA partners by 2027."}
 ];
 
-const FMODES = {
-  "single":    {m:"Supply Loss — No Qualified Alternate Available",s:9,o:5,d:8},
-  "china_geo": {m:"Geopolitical Disruption — Sanctions / Regulatory Lockdown",s:9,o:6,d:6},
-  "china_uflpa":{m:"UFLPA Forced Labor Hold — Goods Blocked at US Border",s:8,o:5,d:5},
-  "taiwan_geo":{m:"Cross-Strait Military Tension — Production Disruption",s:10,o:4,d:4},
-  "mexico_geo":{m:"Cartel Disruption — Corridor Blockage / FTO Designation",s:7,o:5,d:6},
-  "india_infra":{m:"Infrastructure Failure — Power Grid / Port Congestion",s:6,o:5,d:6},
-  "drc_conflict":{m:"Political Conflict — Mining Disruption / Security Breakdown",s:9,o:6,d:5},
-  "no_bcp":    {m:"Unplanned Extended Outage — No Recovery Plan, TTR Unknown",s:8,o:6,d:9},
-  "no_subtier":{m:"Hidden Sub-tier Disruption — Zero Early Warning",s:7,o:5,d:9},
-  "diamond":   {m:"Diamond Node Cascade — Single Tier 2 Fails Multiple Tier 1s",s:10,o:4,d:8},
-  "financial": {m:"Supplier Financial Distress — Insolvency / Receivership",s:9,o:4,d:6},
-  "capacity":  {m:"Capacity Constraint — High Utilization, No Surge Headroom",s:7,o:5,d:5},
-  "raw_mat":   {m:"Critical Mineral Shortage — Single Country Concentration",s:9,o:5,d:6}
+const FMODES={
+  single:{m:"Supply Loss — No Qualified Alternate Available",s:9,o:5,d:8},
+  china_geo:{m:"Geopolitical Disruption — Sanctions / Export Controls / Lockdown",s:9,o:6,d:6},
+  china_uflpa:{m:"UFLPA Forced Labor Hold — Goods Blocked at US Border",s:8,o:5,d:5},
+  taiwan_geo:{m:"Cross-Strait Military Tension — Production / Shipment Disruption",s:10,o:4,d:4},
+  mexico_geo:{m:"Cartel Disruption — Corridor Blockage / FTO Designation",s:7,o:5,d:6},
+  india_infra:{m:"Infrastructure Failure — Power Grid / Port Congestion",s:6,o:5,d:6},
+  drc_conflict:{m:"Political Conflict — Mining Disruption / Security Breakdown",s:9,o:6,d:5},
+  no_bcp:{m:"Unplanned Extended Outage — No Recovery Plan, TTR Unknown",s:8,o:6,d:9},
+  no_subtier:{m:"Hidden Sub-tier Disruption — Zero Early Warning Signal",s:7,o:5,d:9},
+  diamond:{m:"Diamond Node Cascade — Single Tier-2 Fails Multiple Tier-1s",s:10,o:4,d:8},
+  financial:{m:"Supplier Financial Distress — Insolvency / Receivership",s:9,o:4,d:6},
+  capacity:{m:"Capacity Constraint — High Utilization, No Surge Headroom",s:7,o:5,d:5},
+  raw_mat:{m:"Critical Mineral Shortage — Single Country Concentration",s:9,o:5,d:6}
+};
+
+const RISK_CATS=[
+  {bucket:"supply",name:"Operational",vel:"sudden",hidden:false,desc:"Plant fire, earthquake, flood, labor strike, equipment failure. Physical events that stop production suddenly.",detect:"Everstream, Resilinc, event monitoring, supplier site audits."},
+  {bucket:"supply",name:"Quality",vel:"slow",hidden:false,desc:"PPM drift, process capability decay, IATF certification lapses. Gradual degradation visible in your own quality data.",detect:"Your own supplier scorecards, PPM tracking, incoming inspection — data you already own."},
+  {bucket:"supply",name:"Financial (Public Signals)",vel:"slow",hidden:false,desc:"Credit rating changes, D&B PAYDEX decline, late payment reports, news of lost customers.",detect:"D&B, Creditsafe, news monitoring, financial analysis."},
+  {bucket:"supply",name:"Financial (Private — Hidden)",vel:"slow",hidden:true,desc:"True margins, actual debt load, real cash position. Most Tier-1 and almost all Tier-2 suppliers are private companies — this data is never filed publicly.",detect:"Direct supplier disclosure, contractual audit rights, business review meetings. No tool can substitute."},
+  {bucket:"supply",name:"Sub-tier Concentration (Hidden)",vel:"sudden",hidden:true,desc:"A Tier-2 or Tier-3 single source your Tier-1 relies on but never disclosed. One node failure cascades upward invisibly — you don't know it exists until production stops.",detect:"Sub-tier mapping exercises, supplier disclosure requirements, BOM trace to raw material origin."},
+  {bucket:"supply",name:"Diamond / Convergence Node (Hidden)",vel:"sudden",hidden:true,desc:"Multiple of your Tier-1 suppliers all draw from the same Tier-2 source. Your apparent redundancy at Tier-1 is illusory — one upstream failure collapses every branch simultaneously.",detect:"Supplier network DAG mapping, automated convergence-node detection across your Tier-1 base. This is Aagnaa's core differentiator."},
+  {bucket:"supply",name:"Relational / Organizational (Hidden)",vel:"slow",hidden:true,desc:"Key-person dependency, management turnover, PE acquisition changing supplier priorities, risk of deprioritization when you are a small customer during a capacity crunch.",detect:"Relationship intelligence, consistent supplier contact cadence, organizational health reviews."},
+  {bucket:"supply",name:"Capacity / Scalability (Hidden)",vel:"slow",hidden:true,desc:"A supplier operating at or near its capacity ceiling, unable to absorb your volume growth. Shared tooling, single-shift constraints invisible from outside the plant.",detect:"Capacity audits, direct supplier discussions — cannot be inferred remotely."},
+  {bucket:"demand",name:"Demand / Market Volatility",vel:"mixed",hidden:false,desc:"Forecast error, bullwhip effect amplifying small downstream demand swings into large upstream order swings, sudden volume changes from your customer's end markets.",detect:"Demand-sensing tools, internal S&OP data. Under-invested in most risk programs."},
+  {bucket:"env",name:"Geographic / Natural Hazard",vel:"sudden",hidden:false,desc:"Flood zone exposure, seismic risk, hurricane tracks, wildfire proximity, water stress affecting manufacturing operations.",detect:"Everstream, USGS, FEMA, Munich Re / Swiss Re loss data."},
+  {bucket:"env",name:"Geopolitical / Regulatory",vel:"struct",hidden:false,desc:"Export controls, tariffs (Section 301), sanctions, UFLPA, CBAM, country risk scores, trade route disruption.",detect:"CSIS, Atlantic Council, government sources, dedicated regulatory monitoring."},
+  {bucket:"env",name:"ESG / Sustainability",vel:"struct",hidden:false,desc:"Scope 3 emissions exposure, forced labor at sub-tiers, conflict minerals, deforestation linkage, modern slavery risk.",detect:"EcoVadis, Sedex / SMETA, regulatory audit."},
+  {bucket:"infra",name:"Logistics / Transport",vel:"sudden",hidden:false,desc:"Ocean freight capacity, port congestion, air freight constraints, carrier bankruptcy, Suez or Panama Canal events, customs delays.",detect:"Freightos, Flexport, event monitoring."},
+  {bucket:"infra",name:"Cybersecurity / Data (Hidden)",vel:"sudden",hidden:true,desc:"Supplier IT system breach stopping physical production — ransomware at a Tier-1, shared EDI vulnerability, IP theft inside the supplier network.",detect:"Cyber audits, SecurityScorecard-style ratings, supplier IT questionnaires."},
+  {bucket:"infra",name:"Internal Exposure (Hidden)",vel:"struct",hidden:true,desc:"Sole-source decisions made by YOUR OWN engineering team. No qualified alternate ever built. Safety stock levels that don't reflect actual recovery time. Proprietary specifications with no substitution path.",detect:"Internal BOM audit, sourcing governance review, comparison of safety stock against actual time-to-recover."}
+];
+
+const BUCKET_META={
+  supply:{label:"Supply-Side Risk",color:"#C0392B",desc:"Risks originating at your suppliers, at any tier. The largest and most complex bucket."},
+  demand:{label:"Demand-Side Risk",color:"#7C3AED",desc:"Risks originating from volatility or distortion in demand signals — often overlooked."},
+  env:{label:"Environmental Risk",color:"#D4891A",desc:"Risks from the external world your supply chain operates within."},
+  infra:{label:"Infrastructure Risk",color:"#0891B2",desc:"Risks in the systems and networks that move goods and information."}
 };
 
 // ════════════════════════════════════════════════════════════════════
 // CALCULATIONS
 // ════════════════════════════════════════════════════════════════════
-function getTier(s){
-  const adj = s.source==="Dual Source"?1.5:s.source==="Dual Source (Unqualified)"?1.1:1.0;
-  const rawTTS = (s.oh+s.it+s.ss)/Math.max(s.daily,1);
-  const tts = Math.round(rawTTS*adj*10)/10;
-  const cr = CR[s.country]||5;
-  const ttsScore = Math.min(100,(s.ttr/Math.max(tts,0.1))*25);
-  const spendScore = Math.min(100,(s.spend/6000000)*500);
-  const srcScore = s.source==="Single Source"?100:s.source==="Dual Source"?20:60;
-  const cScore = cr*10;
-  const opScore = s.subtier==="No"?80:s.subtier==="Partial"?40:10;
-  let rei = Math.round(ttsScore*0.25+spendScore*0.20+srcScore*0.15+cScore*0.10+opScore*0.05);
-  let cm = 1;
-  if(s.diamond && s.dfc){cm=1+(0.15*s.dfc);rei=Math.min(100,Math.round(rei*cm));}
-  const gap = s.ttr - tts;
-  const ssN = gap>0?Math.round(gap*s.daily):0;
-  return {tts,rei,cm,gap,ssN,cr,ttsScore,spendScore,srcScore,cScore,opScore};
+function getREI(s){
+  const adj=s.source==="Dual Source"?1.5:1.0;
+  const raw=(s.oh+s.it+s.ss)/Math.max(s.daily,1);
+  const tts=Math.round(raw*adj*10)/10;
+  const cr=CR[s.country]||5;
+  const ttsScore=Math.min(100,(s.ttr/Math.max(tts,.1))*25);
+  const spendScore=Math.min(100,(s.spend/6000000)*500);
+  const srcScore=s.source==="Single Source"?100:s.source==="Dual Source"?20:60;
+  const cScore=cr*10;
+  const opScore=s.subtier==="No"?80:s.subtier==="Partial"?40:10;
+  let rei=Math.round(ttsScore*.25+spendScore*.20+srcScore*.15+cScore*.10+opScore*.05);
+  let cm=1;
+  if(s.diamond&&s.dfc){cm=1+(.15*s.dfc);rei=Math.min(100,Math.round(rei*cm));}
+  const gap=s.ttr-tts;
+  const ssN=gap>0?Math.round(gap*s.daily):0;
+  return{tts,rei,cm,gap,ssN,cr,ttsScore,spendScore,srcScore,cScore,opScore};
 }
 
 function getFModes(s){
   const rows=[];
-  if(s.source==="Single Source") rows.push(FMODES.single);
+  if(s.source==="Single Source")rows.push(FMODES.single);
   if(s.country==="China"){rows.push(FMODES.china_geo);rows.push(FMODES.china_uflpa);}
-  if(s.country==="Taiwan") rows.push(FMODES.taiwan_geo);
-  if(s.country==="Mexico") rows.push(FMODES.mexico_geo);
-  if(s.country==="India") rows.push(FMODES.india_infra);
-  if(s.country==="Dem. Rep. Congo") rows.push(FMODES.drc_conflict);
-  if(s.bcp==="No") rows.push(FMODES.no_bcp);
-  if(s.subtier==="No") rows.push(FMODES.no_subtier);
-  if(s.diamond) rows.push(FMODES.diamond);
-  if(s.scenario==="Financial") rows.push(FMODES.financial);
-  if(s.scenario==="Capacity") rows.push(FMODES.capacity);
-  if(s.scenario==="Raw Material") rows.push(FMODES.raw_mat);
+  if(s.country==="Taiwan")rows.push(FMODES.taiwan_geo);
+  if(s.country==="Mexico")rows.push(FMODES.mexico_geo);
+  if(s.country==="India")rows.push(FMODES.india_infra);
+  if(s.country==="Dem. Rep. Congo")rows.push(FMODES.drc_conflict);
+  if(s.bcp==="No")rows.push(FMODES.no_bcp);
+  if(s.subtier==="No")rows.push(FMODES.no_subtier);
+  if(s.diamond)rows.push(FMODES.diamond);
+  if(s.scenario==="Financial")rows.push(FMODES.financial);
+  if(s.scenario==="Capacity")rows.push(FMODES.capacity);
+  if(s.scenario==="Raw Material")rows.push(FMODES.raw_mat);
   return rows.map(r=>({...r,rpn:r.s*r.o*r.d}));
 }
 
 function tierColor(s){
-  if(s.diamond) return "#9F7AEA";
-  if(s.tier==="P1") return "#C0392B";
-  if(s.tier==="P2") return "#F5A623";
-  return "#1E7B34";
+  if(s.diamond)return"#9F7AEA";
+  if(s.tier==="P1")return"#C0392B";
+  if(s.tier==="P2")return"#F5A623";
+  return"#16A34A";
 }
 
 // ════════════════════════════════════════════════════════════════════
-// NAV
+// NAV SCROLL
 // ════════════════════════════════════════════════════════════════════
 window.addEventListener("scroll",()=>{
-  document.getElementById("nav").classList.toggle("scrolled",scrollY>50);
+  document.getElementById("nav").classList.toggle("sc",scrollY>50);
+  const sections=["layer1","layer2","layer3","layer4","layer5","layer6"];
+  const tabs=document.querySelectorAll(".ltab");
+  let cur=0;
+  sections.forEach((id,i)=>{
+    const el=document.getElementById(id);
+    if(el&&el.getBoundingClientRect().top<200)cur=i;
+  });
+  tabs.forEach((t,i)=>t.classList.toggle("on",i===cur));
+});
+function scrollTo(id,btn){document.getElementById(id.id||id).scrollIntoView({behavior:"smooth"});}
+
+// ════════════════════════════════════════════════════════════════════
+// LAYER 1: RISK IDENTIFICATION
+// ════════════════════════════════════════════════════════════════════
+function buildBuckets(){
+  const grid=document.getElementById("bucketGrid");
+  const detail=document.getElementById("riskDetail");
+  const buckets=["supply","demand","env","infra"];
+  grid.innerHTML=buckets.map(b=>{
+    const m=BUCKET_META[b];
+    const cats=RISK_CATS.filter(c=>c.bucket===b);
+    return`<div class="bucket">
+      <div class="bucket-hdr" style="background:${m.color}">${m.label}</div>
+      <div class="bucket-body">
+        <p style="font-size:.78rem;color:var(--g500);margin-bottom:12px;line-height:1.5">${m.desc}</p>
+        ${cats.map((c,i)=>`<div class="risk-cat" id="rc-${b}-${i}" onclick="showRiskDetail('${b}',${i})">
+          <div class="rc-dot" style="background:${m.color}"></div>
+          <div class="rc-info">
+            <div class="rc-name">${c.name}</div>
+            <div class="rc-vel ${c.vel==="sudden"?"sudden":c.vel==="slow"?"slow":"struct"}">${c.vel==="sudden"?"⚡ Sudden":c.vel==="slow"?"▲ Slow Burn":c.vel==="struct"?"◯ Structural":"Mixed"}</div>
+            ${c.hidden?'<div class="rc-hidden">🔒 Hidden — not visible to third-party tools</div>':""}
+            <div class="rc-desc">${c.desc.slice(0,80)}...</div>
+          </div>
+        </div>`).join("")}
+      </div>
+    </div>`;
+  }).join("");
+}
+
+function showRiskDetail(bucket,idx){
+  document.querySelectorAll(".risk-cat").forEach(el=>el.classList.remove("sel"));
+  document.getElementById(`rc-${bucket}-${idx}`).classList.add("sel");
+  const c=RISK_CATS.filter(r=>r.bucket===bucket)[idx];
+  const m=BUCKET_META[bucket];
+  const detail=document.getElementById("riskDetail");
+  detail.classList.add("open");
+  detail.innerHTML=`
+    <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:16px">
+      <div style="flex:1">
+        <div style="font-size:.7rem;font-weight:700;color:${m.color};text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">${m.label}</div>
+        <h3 style="font-family:var(--fd);font-size:1.2rem;font-weight:700;color:var(--white);margin-bottom:6px">${c.name}</h3>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <span class="rc-vel ${c.vel==="sudden"?"sudden":c.vel==="slow"?"slow":"struct"}" style="font-size:.78rem">${c.vel==="sudden"?"⚡ Sudden velocity — hours to days":c.vel==="slow"?"▲ Slow burn — weeks to months":"◯ Structural — months to years"}</span>
+          ${c.hidden?'<span style="background:rgba(124,58,237,.15);color:#C4B5FD;border-radius:100px;padding:2px 10px;font-size:.72rem;font-weight:600">🔒 Hidden Risk</span>':""}
+        </div>
+      </div>
+    </div>
+    <div class="g2" style="gap:16px">
+      <div>
+        <div style="font-size:.72rem;font-weight:600;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px">What It Is</div>
+        <p style="font-size:.85rem;color:rgba(255,255,255,.75);line-height:1.7">${c.desc}</p>
+      </div>
+      <div>
+        <div style="font-size:.72rem;font-weight:600;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px">How to Detect It</div>
+        <p style="font-size:.85rem;color:rgba(255,255,255,.75);line-height:1.7">${c.detect}</p>
+      </div>
+    </div>
+    <div style="margin-top:14px;padding:12px 14px;background:rgba(255,255,255,.05);border-radius:var(--r);font-size:.8rem;color:rgba(255,255,255,.55);line-height:1.6">
+      <strong style="color:var(--amber)">Velocity insight:</strong> ${c.vel==="sudden"?"This is a sudden-onset risk. You cannot respond in the moment — all mitigation must be in place BEFORE the event. Safety stock, alternate qualification, and BCP must all be pre-built.":c.vel==="slow"?"This is a slow-burn risk with early-warning signals. Active monitoring of financial health, quality trends, and relationship signals can provide weeks of advance notice — IF monitoring infrastructure exists.":"This is a structural risk that develops over months to years. Policy decisions, sourcing strategy changes, and design flexibility investments are the right responses — not tactical buffers."}
+    </div>
+    <div style="margin-top:10px;text-align:right">
+      <button onclick="document.getElementById('layer2').scrollIntoView({behavior:'smooth'})" style="padding:8px 18px;background:var(--amber);color:var(--navy);border-radius:var(--r);font-size:.82rem;font-weight:700;cursor:pointer">Score This Risk →</button>
+    </div>`;
+  detail.scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+
+// ════════════════════════════════════════════════════════════════════
+// LAYER 2: RISK SCORING
+// ════════════════════════════════════════════════════════════════════
+const P_ANCHORS=["","Rare — No occurrence in 10+ years","Unlikely — Has occurred in industry, not here","Possible — Has occurred here in last 5 years","Likely — Multiple occurrences or active signals","Almost Certain — Currently occurring or imminent"];
+const VEL_DESCS={sudden:"Sudden onset: hours to days. Your last viable decision point is BEFORE the event. Pre-build all responses now — safety stock, alternate source lists, containment protocols.",slow:"Slow burn: weeks to months. Monitor early-warning signals actively — financial trends, PPM drift, news. Decision window exists but closes as the risk accelerates.",struct:"Structural: months to years. Strategic response window — sourcing redesign, geographic diversification, design flexibility investments."};
+let currentVel="sudden";
+
+function updateScoreSlider(id,val){
+  document.getElementById(id+"Val").textContent=val;
+  if(id==="p")document.getElementById("pAnchor").textContent=P_ANCHORS[val];
+}
+
+function setVel(v){
+  currentVel=v;
+  ["sudden","slow","struct"].forEach(x=>{
+    const btn=document.getElementById("v"+x.charAt(0).toUpperCase()+x.slice(1));
+    btn.className=`vel-btn ${x}${x===v?" on":""}`;
+  });
+  document.getElementById("velDesc").textContent=VEL_DESCS[v];
+}
+
+function calcRiskScore(){
+  const p=parseInt(document.getElementById("pSlider").value);
+  const i1=parseInt(document.getElementById("i1").value);
+  const i2=parseInt(document.getElementById("i2").value);
+  const i3=parseInt(document.getElementById("i3").value);
+  const i4=parseInt(document.getElementById("i4").value);
+  const impact=Math.max(i1,i2,i3,i4);
+  const score=p*impact;
+  const maxScore=25;
+  const pct=score/maxScore;
+  const isHighRisk=score>=15;
+  const isMed=score>=8&&score<15;
+  const riskColor=isHighRisk?"#C0392B":isMed?"#D4891A":"#16A34A";
+  const riskLabel=isHighRisk?"HIGH RISK":isMed?"MEDIUM RISK":"LOW RISK";
+  const tier=isHighRisk?"P1 — Critical Action Required":isMed?"P2 — Mitigation Recommended":"P3 — Monitor Only";
+  const tierClass=isHighRisk?"t1":isMed?"t2":"t3";
+
+  // Update matrix dot
+  const matrix=document.getElementById("riskMatrix");
+  const matW=matrix.offsetWidth,matH=matrix.offsetHeight;
+  const dotX=((p-1)/4)*matW;
+  const dotY=matH-((impact-1)/4)*matH;
+  const dot=document.getElementById("matrixDot");
+  dot.style.display="block";
+  dot.style.left=dotX+"px";
+  dot.style.bottom=(((impact-1)/4)*100)+"%";
+  dot.style.left=(((p-1)/4)*100)+"%";
+  dot.style.background=riskColor;
+
+  // Velocity note
+  const vNote=document.getElementById("velocityNote");
+  vNote.style.display="block";
+  vNote.style.background=currentVel==="sudden"?"rgba(192,57,43,.08)":currentVel==="slow"?"rgba(245,166,35,.08)":"rgba(22,163,74,.08)";
+  vNote.style.color=currentVel==="sudden"?"#C0392B":currentVel==="slow"?"#D4891A":"#16A34A";
+  vNote.textContent=currentVel==="sudden"?"⚡ Sudden velocity: pre-build all mitigations NOW — no response window during the event":currentVel==="slow"?"▲ Slow burn: monitor early-warning signals actively — you have a response window IF you are watching":"◯ Structural: strategic response — sourcing redesign and geographic diversification";
+
+  // Result panel
+  const actions=isHighRisk?["Build safety stock immediately — calculate units needed","Issue RFQ to alternate supplier — start PPAP","Verify or mandate BCP within 30 days","Monthly review — mandatory mitigation plan"]:isMed?["Assess TTS vs TTR gap — is buffer sufficient?","Evaluate dual-source options and timelines","Request sub-tier disclosure","Quarterly review and monitoring"]:["Maintain current monitoring cadence","Annual BCP verification","No immediate action required"];
+
+  document.getElementById("scoreResult").className="score-result show";
+  document.getElementById("scoreResult").innerHTML=`
+    <div style="background:var(--navy);border-radius:var(--rl);padding:20px;text-align:center;margin-bottom:16px">
+      <div style="font-family:var(--fd);font-size:.8rem;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Risk Score (P × I)</div>
+      <div class="score-number" style="color:${riskColor}">${score}</div>
+      <div class="score-label">${riskLabel} · ${tier}</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px">
+        <div style="background:rgba(255,255,255,.05);border-radius:var(--r);padding:10px">
+          <div style="font-family:var(--fd);font-size:1.2rem;font-weight:700;color:var(--white)">${p}</div>
+          <div style="font-size:.68rem;color:rgba(255,255,255,.38)">Probability (1-5)</div>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border-radius:var(--r);padding:10px">
+          <div style="font-family:var(--fd);font-size:1.2rem;font-weight:700;color:var(--white)">${impact}</div>
+          <div style="font-size:.68rem;color:rgba(255,255,255,.38)">Impact (highest dim)</div>
+        </div>
+      </div>
+    </div>
+    <div class="score-breakdown">
+      ${[["Probability",p,5,"#7C3AED"],["Production Days",i1,5,"#C0392B"],["Revenue",i2,5,"#D4891A"],["Recoverability",i3,5,"#0891B2"],["Customer/Safety",i4,5,"#16A34A"]].map(([l,v,mx,col])=>`
+        <div class="sb-row">
+          <div class="sb-label">${l}</div>
+          <div class="sb-track"><div class="sb-fill" style="width:${(v/mx)*100}%;background:${col}"></div></div>
+          <div class="sb-val">${v}/${mx}</div>
+        </div>`).join("")}
+    </div>
+    <div class="score-action">
+      <strong>Recommended Actions — ${tier}</strong>
+      ${actions.map(a=>`• ${a}`).join("<br/>")}
+    </div>`;
+}
+
+// Initialize sliders
+document.addEventListener("DOMContentLoaded",()=>{
+  updateScoreSlider("p",3);
+  setVel("sudden");
+  buildBuckets();
+  buildSupList();
+  buildFilters();
+  drawMap();
+  buildStressSupList();
+  initResilience();
+  fetchWorldBank();
 });
 
 // ════════════════════════════════════════════════════════════════════
-// HIDDEN RISKS
+// LAYER 3: REI DASHBOARD
 // ════════════════════════════════════════════════════════════════════
-const HIDDEN_RISKS = [
-  {t:"Diamond Dependency",d:"One Tier 2 feeds 3 of your Tier 1s. Looks diversified. Is not.",x:"The 2011 Tohoku earthquake, 2021 semiconductor shortage, and 2022 resin crisis all followed this pattern. Companies thought they were diversified at Tier 1. They were concentrated at Tier 2. Aagnaa maps sub-tier convergence and applies a convergence multiplier to all connected Tier 1 REI scores."},
-  {t:"Sole-Qualified Supplier",d:"Alternate exists on paper. Only one is PPAP-qualified. You are single-sourced.",x:"Two suppliers on the approved vendor list. Only one has completed PPAP for your part specification. Aagnaa distinguishes between dual-source-on-paper and dual-source-in-reality, scoring the actual qualification status."},
-  {t:"TTS vs TTR Gap",d:"Your inventory lasts 14 days. Recovery takes 90. Production stops first.",x:"Using Simchi-Levi TTR/TTS methodology, Aagnaa calculates how many days your line can run without this supplier (TTS) vs how long they need to recover (TTR). When TTS < TTR you are already in a crisis waiting to happen."},
-  {t:"Shadow Single-Source",d:"Two suppliers. One approved material spec. Neither can change it without an engineering change.",x:"Commodity team reports dual-sourced. But both suppliers use an identical approved specification from one resin producer globally. The alternate cannot substitute without a design change. Aagnaa flags this as a shadow single-source."},
-  {t:"Critical Mineral Risk",d:"85% of rare earths processed in China. Your BEV program depends on it.",x:"Your Tier 1 supplier looks low-risk. But their Tier 3 raw material is a rare earth oxide from China. Aagnaa maps to raw material level and flags US Critical Minerals List exposure — lithium, cobalt, rare earths, silicon wafers, gallium, germanium."},
-  {t:"Financial Interdependency",d:"Two suppliers. One parent company. One financial crisis, both fail simultaneously.",x:"Supplier A and Supplier B appear independent. Both are subsidiaries of the same PE-backed holding company with a leveraged buyout. If the parent faces insolvency, both suppliers stop shipping simultaneously. Aagnaa flags corporate ownership concentration."}
-];
+let activeFilter="all";
 
-document.getElementById("hiddenRisks").innerHTML = HIDDEN_RISKS.map((r,i)=>`
-  <div class="hr-card" onclick="this.classList.toggle('open')">
-    <div class="hr-title">${r.t}</div>
-    <div class="hr-desc">${r.d}</div>
-    <div class="hr-expand">${r.x}</div>
-  </div>`).join("");
-
-// ════════════════════════════════════════════════════════════════════
-// METHODOLOGY PANELS
-// ════════════════════════════════════════════════════════════════════
-const METHOD = [
-  {num:"01",title:"Time to Survive (TTS)",
-   body:"The first question Aagnaa answers is the one most companies have never calculated: if this supplier stopped shipping today, how many days could your production line keep running? TTS is built from your internal inventory data — on-hand stock, in-transit shipments, and safety stock — divided by your daily consumption rate, then adjusted by whether you have a qualified alternate.",
-   proof:"<strong>Academic foundation:</strong> TTR/TTS framework by Professor Yossi Sheffi and Professor David Simchi-Levi, MIT. Validated through the 2011 Tohoku earthquake analysis across 800+ affected companies. Published in Harvard Business Review, 2014.",
-   viz:`<div class="formula-box"><div class="formula">TTS = (On-Hand + In-Transit + Safety Stock)
-        &divide; Daily Consumption
-        &times; Adjustment Factor
-
-Adjustment Factor:
-  Alt PPAP-qualified   &rarr; &times;1.5
-  Alt exists, unqual.  &rarr; &times;1.1
-  Catalog part         &rarr; &times;1.3
-  Single source        &rarr; &times;1.0</div>
-<div class="formula-note">When TTS &lt; TTR: production stops before supplier recovers.
-Safety Stock Needed = (TTR - TTS) &times; Daily Consumption</div></div>
-<div class="wbars">
-  <div class="wrow"><span class="wlabel" style="color:#1E7B34;font-weight:600">TTS &gt; TTR</span><div class="wtrack"><div class="wfill" style="width:100%;background:#1E7B34"></div></div><span class="wpct" style="color:#1E7B34">Safe</span></div>
-  <div class="wrow"><span class="wlabel" style="color:var(--amber2);font-weight:600">TTS = TTR</span><div class="wtrack"><div class="wfill" style="width:55%;background:var(--amber)"></div></div><span class="wpct" style="color:var(--amber)">Tight</span></div>
-  <div class="wrow"><span class="wlabel" style="color:var(--red);font-weight:600">TTS &lt; TTR</span><div class="wtrack"><div class="wfill" style="width:22%;background:var(--red)"></div></div><span class="wpct" style="color:var(--red)">CRITICAL</span></div>
-</div>`},
-
-  {num:"02",title:"Risk Exposure Index (REI)",
-   body:"REI is Aagnaa's core score — a single number from 0 to 100 representing YOUR company's specific exposure to this supplier's failure. Not the supplier's generic risk rating. Your exposure, given your inventory position, spend concentration, source strategy, and their geography. A Convergence Multiplier is applied when a diamond node is detected.",
-   proof:"<strong>Calibrated against:</strong> 2011 Tohoku (sub-tier opacity), 2021 semiconductor shortage (concentration + single source), 2022 Ukraine (country risk + commodity), 2021 Texas Winter Storm (single-site + no BCP). Weights validated across 47 post-disruption case analyses.",
-   viz:`<div class="formula-box"><div class="formula">REI = (TTR/TTS Score  &times; 0.25)
-    + (Spend Score      &times; 0.20)
-    + (Single Source    &times; 0.15)
-    + (Country Risk     &times; 0.10)
-    + (Sub-tier Opacity &times; 0.05)
-
-Diamond Node Multiplier:
-  CM = 1 + (0.15 &times; Tier-1 count sharing Tier-2)
-  Adjusted REI = Base REI &times; CM (capped at 100)</div>
-<div class="formula-note">Auto P1 overrides: Single source + country &gt; 7 | Single source + no BCP | Diamond node detected | TTS &lt; 7 days</div></div>
-<div class="wbars">
-  <div class="wrow"><span class="wlabel">TTR/TTS Ratio</span><div class="wtrack"><div class="wfill" style="width:100%"></div></div><span class="wpct">25%</span></div>
-  <div class="wrow"><span class="wlabel">Spend Concentration</span><div class="wtrack"><div class="wfill" style="width:80%"></div></div><span class="wpct">20%</span></div>
-  <div class="wrow"><span class="wlabel">Single Source Flag</span><div class="wtrack"><div class="wfill" style="width:60%"></div></div><span class="wpct">15%</span></div>
-  <div class="wrow"><span class="wlabel">Country Risk Index</span><div class="wtrack"><div class="wfill" style="width:40%"></div></div><span class="wpct">10%</span></div>
-  <div class="wrow"><span class="wlabel">Sub-tier Opacity</span><div class="wtrack"><div class="wfill" style="width:20%"></div></div><span class="wpct">5%</span></div>
-</div>`},
-
-  {num:"03",title:"DFMEA Supply Chain Adaptation",
-   body:"Design Failure Mode and Effects Analysis is an engineering standard (IATF 16949 / SAE J1739) used to predict and prioritize failure risks in product designs. Aagnaa adapts the same systematic logic for supply chain risk — treating each supplier relationship as a design element that can fail. For each supplier, failure modes are auto-generated from their profile, then scored on Severity, Occurrence, and Detectability.",
-   proof:"<strong>Why DFMEA:</strong> It is already embedded in automotive manufacturing culture. Engineering and quality teams understand RPN thresholds. Using DFMEA language eliminates adoption friction, satisfies IATF 16949 supply chain risk documentation requirements, and enables engineering teams to participate in supplier risk governance.",
-   viz:`<div class="formula-box"><div class="formula">RPN = Severity (1-10)
-    &times; Occurrence (1-10)
-    &times; Detectability (1-10)
-
-Max RPN:  1,000
-Mandatory plan: RPN &gt; 200
-Recommended:    RPN 100-200
-Monitor only:   RPN &lt; 100</div></div>
-<div class="rpn-row high"><span>Single source + China + No BCP + No sub-tier</span><strong>RPN: 810</strong></div>
-<div class="rpn-row high"><span>Single source + Taiwan + No BCP + Diamond node</span><strong>RPN: 960</strong></div>
-<div class="rpn-row med"><span>Single source + India + Partial sub-tier + BCP</span><strong>RPN: 360</strong></div>
-<div class="rpn-row med"><span>Dual unqualified + Mexico + No BCP</span><strong>RPN: 280</strong></div>
-<div class="rpn-row low"><span>Dual qualified + Germany + BCP + Full sub-tier</span><strong>RPN: 60</strong></div>
-<div style="font-size:0.75rem;color:var(--g500);margin-top:10px">S = severity of disruption on production | O = likelihood given profile | D = how early you detect it coming</div>`},
-
-  {num:"04",title:"Diamond Node Detection & Convergence Multiplier",
-   body:"Standard supply chain management covers Tier 1. Aagnaa maps to Tier 3 and raw material level — because that is where the most dangerous and least visible risks live. Diamond node detection identifies when a single Tier 2 supplier feeds multiple Tier 1 suppliers simultaneously. What appears diversified at Tier 1 is actually concentrated at Tier 2.",
-   proof:"<strong>Real cases:</strong> The 2011 Tohoku earthquake (Renesas semiconductor feeds 500+ Tier 1s), the 2021 resin shortage (BASF Ludwigshafen feeds hundreds of Tier 1 plastic molders), and the 2022 neon gas shortage (2 Ukraine plants supply 50% of global chip production) all followed diamond structures nobody had mapped.",
-   viz:`<div class="formula-box"><div class="formula">Convergence Multiplier (CM):
-CM = 1 + (0.15 &times; number of Tier-1s sharing node)
-
-Example: Yangtze Chemical feeds 3 Tier-1s
-CM = 1 + (0.15 &times; 3) = 1.45
-
-All 3 Tier-1 REI scores &times; 1.45
-Automatic P1 Override on all connected Tier-1s</div>
-<div class="formula-note">A Tier-2 node shared by N Tier-1 suppliers creates an N-fold cascade risk that base REI alone cannot capture.</div></div>
-<div class="diamond-vis">
-  <div style="color:var(--amber);font-weight:700;font-size:0.85rem">YOUR COMPANY</div>
-  <div style="color:rgba(255,255,255,0.3);margin:4px 0">&#8600;&nbsp;&nbsp;&nbsp;&nbsp;&darr;&nbsp;&nbsp;&nbsp;&nbsp;&#8601;</div>
-  <div style="display:flex;justify-content:space-around;padding:0 20px">
-    <span style="color:#81c784">Molder A</span>
-    <span style="color:#81c784">Molder B</span>
-    <span style="color:#81c784">Molder C</span>
-  </div>
-  <div style="color:rgba(255,255,255,0.3);margin:4px 0">&#8601;&nbsp;&nbsp;&nbsp;&nbsp;&darr;&nbsp;&nbsp;&nbsp;&nbsp;&#8600;</div>
-  <div style="color:#ff8a80;font-weight:700">&#9888; Yangtze Chemical Co. (China)</div>
-  <div style="font-size:0.68rem;color:rgba(255,255,255,0.35);margin-top:2px">Single resin supplier — CM = 1.45 applied to all 3 Tier-1 REI scores</div>
-</div>`}
-];
-
-document.getElementById("methodPanels").innerHTML = METHOD.map((m,i)=>`
-  <div class="mpanel ${i===0?"on":""}" id="mp${i}">
-    <div>
-      <div class="mpanel-num">${m.num}</div>
-      <h3 class="mpanel-title">${m.title}</h3>
-      <p class="mpanel-body">${m.body}</p>
-      <div class="mpanel-proof">${m.proof}</div>
-    </div>
-    <div class="viz-box">${m.viz}</div>
-  </div>`).join("");
-
-function showMethod(i,btn){
-  document.querySelectorAll(".mpanel").forEach((p,j)=>p.classList.toggle("on",j===i));
-  document.querySelectorAll(".mtab").forEach((t,j)=>t.classList.toggle("on",j===i));
-}
-
-// ════════════════════════════════════════════════════════════════════
-// MAP
-// ════════════════════════════════════════════════════════════════════
-let activeFilter = "all";
-
-function latlonToXY(lat,lon,w,h){
-  const x=(lon+180)*(w/360);
-  const lr=lat*Math.PI/180;
-  const mn=Math.log(Math.tan(Math.PI/4+lr/2));
-  const y=(h/2)-(h*mn/(2*Math.PI));
-  return {x,y};
-}
-
-function drawContinent(ctx,pts,w,h){
-  ctx.beginPath();
-  ctx.moveTo(pts[0][0]*w/800,pts[0][1]*h/400);
-  pts.slice(1).forEach(([x,y])=>ctx.lineTo(x*w/800,y*h/400));
-  ctx.closePath();ctx.fill();ctx.stroke();
-}
-
-function drawMap(){
-  const canvas=document.getElementById("mapCanvas");
-  if(!canvas) return;
-  const w=canvas.parentElement.clientWidth||700;
-  const h=300;
-  canvas.width=w; canvas.height=h;
-  const ctx=canvas.getContext("2d");
-
-  ctx.fillStyle="#0D1B2E"; ctx.fillRect(0,0,w,h);
-  ctx.strokeStyle="rgba(255,255,255,0.03)"; ctx.lineWidth=1;
-  for(let i=0;i<=14;i++){ctx.beginPath();ctx.moveTo(i*w/14,0);ctx.lineTo(i*w/14,h);ctx.stroke();}
-  for(let i=0;i<=6;i++){ctx.beginPath();ctx.moveTo(0,i*h/6);ctx.lineTo(w,i*h/6);ctx.stroke();}
-
-  ctx.fillStyle="rgba(255,255,255,0.06)";
-  ctx.strokeStyle="rgba(255,255,255,0.08)"; ctx.lineWidth=0.5;
-  [
-    [[112,68],[205,62],[222,108],[196,148],[178,188],[154,218],[122,208],[94,172],[84,134],[98,92]],
-    [[162,218],[198,208],[216,255],[208,335],[180,372],[158,354],[144,308],[148,258]],
-    [[362,60],[418,56],[428,96],[410,122],[382,132],[362,114],[348,88]],
-    [[362,136],[418,126],[448,162],[458,230],[440,318],[412,346],[382,318],[362,262],[352,192]],
-    [[428,56],[588,52],[648,82],[668,122],[638,162],[588,172],[540,192],[482,172],[442,142],[422,102]],
-    [[588,278],[648,264],[668,298],[658,336],[628,348],[600,328],[586,304]],
-  ].forEach(pts=>drawContinent(ctx,pts,w,h));
-
-  const vis = activeFilter==="all" ? SUPPLIERS :
-    SUPPLIERS.filter(s=>{
-      if(activeFilter==="P1") return s.tier==="P1";
-      if(activeFilter==="P2") return s.tier==="P2";
-      if(activeFilter==="P3") return s.tier==="P3";
-      if(activeFilter==="diamond") return s.diamond;
-      return true;
-    });
-
-  SUPPLIERS.forEach(s=>{
-    const p=latlonToXY(s.lat,s.lon,w,h);
-    const col=tierColor(s);
-    const rad=s.tier==="P1"?8:6;
-    const isVis=vis.includes(s);
-    ctx.globalAlpha=isVis?1:0.1;
-    if(s.tier==="P1"&&isVis){
-      ctx.beginPath();ctx.arc(p.x,p.y,rad+5,0,Math.PI*2);
-      const hx=col.replace("#","");
-      const rr=parseInt(hx.slice(0,2),16),gg=parseInt(hx.slice(2,4),16),bb=parseInt(hx.slice(4,6),16);
-      ctx.fillStyle=`rgba(${rr},${gg},${bb},0.18)`;ctx.fill();
-    }
-    ctx.beginPath();ctx.arc(p.x,p.y,rad,0,Math.PI*2);
-    ctx.fillStyle=col;ctx.fill();
-    if(s.diamond&&isVis){ctx.strokeStyle="#C4B5FD";ctx.lineWidth=2;ctx.stroke();}
-    ctx.globalAlpha=1;
-  });
-
-  canvas.onclick=e=>{
-    const rect=canvas.getBoundingClientRect();
-    const mx=e.clientX-rect.left, my=e.clientY-rect.top;
-    let best=null, bestD=16;
-    SUPPLIERS.forEach(s=>{
-      const p=latlonToXY(s.lat,s.lon,w,h);
-      const d=Math.hypot(mx-p.x,my-p.y);
-      if(d<bestD){bestD=d;best=s;}
-    });
-    if(best) showSupplier(best);
-  };
-  canvas.onmousemove=e=>{
-    const rect=canvas.getBoundingClientRect();
-    const mx=e.clientX-rect.left, my=e.clientY-rect.top;
-    let found=false;
-    SUPPLIERS.forEach(s=>{
-      const p=latlonToXY(s.lat,s.lon,w,h);
-      if(Math.hypot(mx-p.x,my-p.y)<12) found=true;
-    });
-    canvas.style.cursor=found?"pointer":"default";
-  };
-}
-
-// ════════════════════════════════════════════════════════════════════
-// FILTERS + SUPPLIER LIST
-// ════════════════════════════════════════════════════════════════════
 function buildFilters(){
-  const filters=[["all","All (30)"],["P1","P1 Critical"],["P2","P2 Significant"],["P3","P3 Manageable"],["diamond","Diamond Nodes"]];
-  document.getElementById("mapFilters").innerHTML=filters.map(([v,l])=>
-    `<button class="fbtn ${v==="all"?"on":""}" onclick="setFilter('${v}',this)">${l}</button>`).join("");
-}
-
-function setFilter(f,btn){
-  activeFilter=f;
-  document.querySelectorAll(".fbtn").forEach(b=>b.classList.remove("on"));
-  btn.classList.add("on");
-  buildSupList(); drawMap();
+  const c=document.getElementById("slFilters");
+  [["all","All"],["P1","P1"],["P2","P2"],["P3","P3"],["diamond","◆ Nodes"]].forEach(([v,l])=>{
+    const btn=document.createElement("button");
+    btn.className="sf-btn"+(v==="all"?" on":"");
+    btn.textContent=l;
+    btn.onclick=()=>{activeFilter=v;document.querySelectorAll(".sf-btn").forEach(b=>b.classList.remove("on"));btn.classList.add("on");buildSupList();drawMap();};
+    c.appendChild(btn);
+  });
 }
 
 function buildSupList(){
   const p1=SUPPLIERS.filter(s=>s.tier==="P1").length;
   const p2=SUPPLIERS.filter(s=>s.tier==="P2").length;
   const dn=SUPPLIERS.filter(s=>s.diamond).length;
-  const avgREI=Math.round(SUPPLIERS.reduce((a,s)=>a+getTier(s).rei,0)/SUPPLIERS.length);
+  const avgREI=Math.round(SUPPLIERS.reduce((a,s)=>a+getREI(s).rei,0)/SUPPLIERS.length);
   document.getElementById("demoStats").innerHTML=`
-    <div class="dstat"><div class="dstat-num" style="color:#ff8a80">${p1}</div><div class="dstat-label">P1 Critical</div></div>
-    <div class="dstat"><div class="dstat-num" style="color:var(--amber)">${p2}</div><div class="dstat-label">P2 Significant</div></div>
-    <div class="dstat"><div class="dstat-num" style="color:#C4B5FD">${dn}</div><div class="dstat-label">Diamond Nodes</div></div>
-    <div class="dstat"><div class="dstat-num">${avgREI}</div><div class="dstat-label">Avg REI Score</div></div>`;
-
-  const list = activeFilter==="all" ? SUPPLIERS :
-    SUPPLIERS.filter(s=>{
-      if(activeFilter==="P1") return s.tier==="P1";
-      if(activeFilter==="P2") return s.tier==="P2";
-      if(activeFilter==="P3") return s.tier==="P3";
-      if(activeFilter==="diamond") return s.diamond;
-      return true;
-    });
-
+    <div class="dst"><div class="dst-n" style="color:var(--redl)">${p1}</div><div class="dst-l">P1 Critical</div></div>
+    <div class="dst"><div class="dst-n" style="color:var(--amber)">${p2}</div><div class="dst-l">P2 Significant</div></div>
+    <div class="dst"><div class="dst-n" style="color:var(--purplel)">${dn}</div><div class="dst-l">Diamond Nodes</div></div>
+    <div class="dst"><div class="dst-n">${avgREI}</div><div class="dst-l">Avg REI</div></div>`;
+  const list=activeFilter==="all"?SUPPLIERS:SUPPLIERS.filter(s=>activeFilter==="diamond"?s.diamond:s.tier===activeFilter);
   document.getElementById("supList").innerHTML=list.map(s=>{
-    const {rei}=getTier(s);
-    const col=tierColor(s);
-    const rb=s.tier==="P1"?"background:rgba(192,57,43,.2);color:#ff8a80":s.tier==="P2"?"background:rgba(245,166,35,.2);color:var(--amber)":"background:rgba(30,123,52,.2);color:#81c784";
-    return`<div class="sup-row" id="sr-${s.id}" onclick="showSupplier(SUPPLIERS.find(x=>x.id==='${s.id}'))">
+    const{rei}=getREI(s);const col=tierColor(s);
+    const rb=s.tier==="P1"?"background:rgba(192,57,43,.18);color:var(--redl)":s.tier==="P2"?"background:rgba(245,166,35,.18);color:var(--amber)":"background:rgba(22,163,74,.18);color:var(--greenl)";
+    return`<div class="sup-row" id="sr-${s.id}" onclick="showSup(SUPPLIERS.find(x=>x.id==='${s.id}'))">
       <div class="sup-dot" style="background:${col}${s.diamond?";box-shadow:0 0 0 2px #9F7AEA":""}"></div>
-      <span class="sup-name">${s.name}</span>
+      <div class="sup-name">${s.name}<br/><span style="font-size:.68rem;color:rgba(255,255,255,.35)">${s.country} · ${s.commodity.slice(0,20)}</span></div>
       <span class="sup-rei" style="${rb}">${rei}</span>
     </div>`;
   }).join("");
 }
 
-// ════════════════════════════════════════════════════════════════════
-// SUPPLIER DETAIL
-// ════════════════════════════════════════════════════════════════════
-function showDTab(i,btn){
-  document.querySelectorAll(".dtab").forEach((t,j)=>t.classList.toggle("on",j===i));
-  document.querySelectorAll(".dtab-pane").forEach((p,j)=>p.classList.toggle("on",j===i));
+// MAP
+function ll2xy(lat,lon,w,h){
+  const x=(lon+180)*(w/360);
+  const lr=lat*Math.PI/180;
+  const mn=Math.log(Math.tan(Math.PI/4+lr/2));
+  const y=(h/2)-(h*mn/(2*Math.PI));
+  return{x,y};
+}
+function drawCont(ctx,pts,w,h){
+  ctx.beginPath();ctx.moveTo(pts[0][0]*w/800,pts[0][1]*h/400);
+  pts.slice(1).forEach(([x,y])=>ctx.lineTo(x*w/800,y*h/400));
+  ctx.closePath();ctx.fill();ctx.stroke();
+}
+function drawMap(){
+  const canvas=document.getElementById("mapCanvas");
+  if(!canvas)return;
+  const w=canvas.parentElement.clientWidth||700,h=280;
+  canvas.width=w;canvas.height=h;
+  const ctx=canvas.getContext("2d");
+  ctx.fillStyle="#0D1B2E";ctx.fillRect(0,0,w,h);
+  ctx.strokeStyle="rgba(255,255,255,.03)";ctx.lineWidth=1;
+  for(let i=0;i<=14;i++){ctx.beginPath();ctx.moveTo(i*w/14,0);ctx.lineTo(i*w/14,h);ctx.stroke();}
+  for(let i=0;i<=6;i++){ctx.beginPath();ctx.moveTo(0,i*h/6);ctx.lineTo(w,i*h/6);ctx.stroke();}
+  ctx.fillStyle="rgba(255,255,255,.055)";ctx.strokeStyle="rgba(255,255,255,.07)";ctx.lineWidth=.5;
+  [[112,68,205,62,222,108,196,148,178,188,154,218,122,208,94,172,84,134,98,92],[162,218,198,208,216,255,208,335,180,372,158,354,144,308,148,258],[362,60,418,56,428,96,410,122,382,132,362,114,348,88],[362,136,418,126,448,162,458,230,440,318,412,346,382,318,362,262,352,192],[428,56,588,52,648,82,668,122,638,162,588,172,540,192,482,172,442,142,422,102],[588,278,648,264,668,298,658,336,628,348,600,328,586,304]].forEach(p=>{
+    const pts=[];for(let i=0;i<p.length;i+=2)pts.push([p[i],p[i+1]]);
+    drawCont(ctx,pts,w,h);
+  });
+  const vis=activeFilter==="all"?SUPPLIERS:SUPPLIERS.filter(s=>activeFilter==="diamond"?s.diamond:s.tier===activeFilter);
+  SUPPLIERS.forEach(s=>{
+    const pos=ll2xy(s.lat,s.lon,w,h);
+    const col=tierColor(s);const rad=s.tier==="P1"?8:6;
+    const isVis=vis.includes(s);
+    ctx.globalAlpha=isVis?1:.08;
+    if(s.tier==="P1"&&isVis){
+      ctx.beginPath();ctx.arc(pos.x,pos.y,rad+5,0,Math.PI*2);
+      const hx=col.replace("#","");
+      ctx.fillStyle=`rgba(${parseInt(hx.slice(0,2),16)},${parseInt(hx.slice(2,4),16)},${parseInt(hx.slice(4,6),16)},.16)`;ctx.fill();
+    }
+    ctx.beginPath();ctx.arc(pos.x,pos.y,rad,0,Math.PI*2);ctx.fillStyle=col;ctx.fill();
+    if(s.diamond&&isVis){ctx.strokeStyle="#9F7AEA";ctx.lineWidth=1.5;ctx.stroke();}
+    ctx.globalAlpha=1;
+  });
+  canvas.onclick=e=>{
+    const r=canvas.getBoundingClientRect();
+    const mx=e.clientX-r.left,my=e.clientY-r.top;
+    let best=null,bestD=16;
+    SUPPLIERS.forEach(s=>{const pos=ll2xy(s.lat,s.lon,w,h);const d=Math.hypot(mx-pos.x,my-pos.y);if(d<bestD){bestD=d;best=s;}});
+    if(best)showSup(best);
+  };
+  canvas.onmousemove=e=>{
+    const r=canvas.getBoundingClientRect();const mx=e.clientX-r.left,my=e.clientY-r.top;
+    let found=false;
+    SUPPLIERS.forEach(s=>{const pos=ll2xy(s.lat,s.lon,w,h);if(Math.hypot(mx-pos.x,my-pos.y)<12)found=true;});
+    canvas.style.cursor=found?"pointer":"crosshair";
+  };
 }
 
-function showSupplier(s){
+function showDTab(i,btn){
+  document.querySelectorAll(".dtab").forEach((t,j)=>t.classList.toggle("on",j===i));
+  document.querySelectorAll(".dpane").forEach((p,j)=>p.classList.toggle("on",j===i));
+}
+
+function showSup(s){
+  if(typeof s==="string")s=JSON.parse(s);
   document.querySelectorAll(".sup-row").forEach(r=>r.classList.remove("on"));
   const row=document.getElementById("sr-"+s.id);
   if(row){row.classList.add("on");row.scrollIntoView({block:"nearest"});}
-  document.getElementById("detailWrap").classList.add("open");
-  // Reset to first tab
+  document.getElementById("detailPanel").classList.add("open");
   document.querySelectorAll(".dtab").forEach((t,j)=>t.classList.toggle("on",j===0));
-  document.querySelectorAll(".dtab-pane").forEach((p,j)=>p.classList.toggle("on",j===0));
-
-  const c=getTier(s);
-  const fms=getFModes(s);
-  const tc=tierColor(s);
-  const tierLbl=s.tier==="P1"?"P1 — Critical":s.tier==="P2"?"P2 — Significant":"P3 — Manageable";
+  document.querySelectorAll(".dpane").forEach((p,j)=>p.classList.toggle("on",j===0));
+  const c=getREI(s);const fms=getFModes(s);const tc=tierColor(s);
   const maxBar=Math.max(s.ttr,c.tts,1);
 
-  // ── TAB 0: Risk Profile ──
+  // TAB 0: Risk Profile
   document.getElementById("dp0").innerHTML=`
-    <div class="sup-detail-name">${s.name} ${s.diamond?"&#9670;":""}</div>
-    <div class="sup-detail-meta">${s.country} &bull; ${s.commodity} (HS ${s.hs}) &bull; ${s.source} &bull; BCP: ${s.bcp} &bull; Sub-tier: ${s.subtier}</div>
-    ${c.gap>0?`<div class="alert-bar">&#9888; TTS (${c.tts}d) &lt; TTR (${s.ttr}d) &mdash; Production stops ${Math.round(c.gap)} days before supplier recovers. Build ${c.ssN} units safety stock immediately.</div>`:""}
-    <div class="metrics-row">
-      <div class="metric"><div class="metric-val" style="color:${tc}">${c.rei}</div><div class="metric-label">REI Score</div></div>
-      <div class="metric" style="${c.gap>0?"border:1px solid rgba(192,57,43,0.3)":""}"><div class="metric-val" style="color:${c.gap>0?"#ff8a80":"var(--white)"}">${c.tts}d</div><div class="metric-label">Time to Survive</div></div>
-      <div class="metric"><div class="metric-val">${s.ttr}d</div><div class="metric-label">Time to Recover</div></div>
-      <div class="metric"><div class="metric-val" style="font-size:0.9rem;color:${s.tier==="P1"?"#ff8a80":s.tier==="P2"?"var(--amber)":"#81c784"}">${s.tier}</div><div class="metric-label">Risk Tier</div></div>
+    <div class="sup-dname">${s.name}${s.diamond?" ◆":""}</div>
+    <div class="sup-dmeta">${s.country} · ${s.commodity} (HS ${s.hs}) · ${s.source} · BCP: ${s.bcp} · Sub-tier: ${s.subtier}</div>
+    ${c.gap>0?`<div class="alert-bar">⚠ TTS (${c.tts}d) &lt; TTR (${s.ttr}d) — Production stops ${Math.round(c.gap)} days before supplier recovers. Build ${c.ssN} units safety stock immediately.</div>`:""}
+    <div class="metrics-g">
+      <div class="met"><div class="met-v" style="color:${tc}">${c.rei}</div><div class="met-l">REI Score</div></div>
+      <div class="met" style="${c.gap>0?"border:1px solid rgba(192,57,43,.3)":""}"><div class="met-v" style="color:${c.gap>0?"var(--redl)":"var(--white)"}">${c.tts}d</div><div class="met-l">Time to Survive</div></div>
+      <div class="met"><div class="met-v">${s.ttr}d</div><div class="met-l">Time to Recover</div></div>
+      <div class="met"><div class="met-v" style="font-size:.85rem;color:${s.tier==="P1"?"var(--redl)":s.tier==="P2"?"var(--amber)":"var(--greenl)"}">${s.tier}</div><div class="met-l">Risk Tier</div></div>
     </div>
     <div class="tts-vis">
-      <div class="tbar-label">Time to Survive: ${c.tts} days (green) vs Time to Recover: ${s.ttr} days (amber)</div>
-      <div class="tbar"><div class="tbar-fill" style="width:${Math.min(100,(c.tts/maxBar)*100)}%;background:${c.gap>0?"var(--red)":"#1E7B34"};opacity:0.85"></div></div>
-      <div class="tbar"><div class="tbar-fill" style="width:${Math.min(100,(s.ttr/maxBar)*100)}%;background:rgba(245,166,35,0.65)"></div></div>
-      <div class="tts-formula">TTS = (${s.oh} on-hand + ${s.it} in-transit + ${s.ss} safety stock) &divide; ${s.daily} daily = ${Math.round((s.oh+s.it+s.ss)/s.daily)} raw days &times; ${s.source==="Dual Source"?1.5:1.0} adj = ${c.tts}d</div>
+      <div class="tbar-l">TTS: ${c.tts}d (green) vs TTR: ${s.ttr}d (amber)</div>
+      <div class="tbar"><div class="tbar-fill" style="width:${Math.min(100,(c.tts/maxBar)*100)}%;background:${c.gap>0?"var(--red)":"var(--green)"};opacity:.8"></div></div>
+      <div class="tbar"><div class="tbar-fill" style="width:${Math.min(100,(s.ttr/maxBar)*100)}%;background:rgba(245,166,35,.6)"></div></div>
+      <div class="tts-f">TTS = (${s.oh} + ${s.it} + ${s.ss}) ÷ ${s.daily} = ${Math.round((s.oh+s.it+s.ss)/s.daily)}d raw × ${s.source==="Dual Source"?1.5:1.0} adj = ${c.tts}d</div>
     </div>
-    ${s.diamond?`<div class="conv-box">
-      <div class="conv-title">&#9670; Diamond Node — Convergence Multiplier Applied</div>
-      <div class="conv-formula">CM = 1 + (0.15 &times; ${s.dfc||2} Tier-1s sharing this Tier-2) = ${c.cm.toFixed(2)}<br/>
-      Adjusted REI = Base REI &times; ${c.cm.toFixed(2)} = ${c.rei} (capped at 100)<br/>
-      Automatic P1 Override applied to all ${s.dfc||2} connected Tier-1 suppliers</div>
-    </div>`:""}
+    ${s.diamond?`<div class="conv-box"><div class="conv-title">◆ Diamond Node — Convergence Multiplier Applied</div><div class="conv-f">CM = 1 + (0.15 × ${s.dfc||2}) = ${c.cm.toFixed(2)}  →  Adjusted REI = Base × ${c.cm.toFixed(2)} = ${c.rei} (capped 100)<br/>Auto P1 Override on all ${s.dfc||2} connected Tier-1 suppliers</div></div>`:""}
     <div class="decay-box">
-      <div style="display:flex;justify-content:space-between;margin-bottom:6px">
-        <span style="font-size:0.78rem;color:rgba(255,255,255,0.7)">Last audit: <strong style="color:${s.audit>180?"#ff8a80":s.audit>90?"var(--amber)":"#81c784"}">${s.audit} days ago</strong></span>
-        <span style="font-size:0.7rem;color:rgba(255,255,255,0.38)">Decay penalty: ${s.audit>365?"-15":s.audit>180?"-10":s.audit>90?"-5":"-1"} REI pts</span>
+      <div style="display:flex;justify-content:space-between;font-size:.76rem;color:rgba(255,255,255,.65)">
+        <span>Last audit: <strong style="color:${s.audit>180?"var(--redl)":s.audit>90?"var(--amber)":"var(--greenl)"}">${s.audit} days ago</strong></span>
+        <span style="color:rgba(255,255,255,.35)">Decay: ${s.audit>365?"-15":s.audit>180?"-10":s.audit>90?"-5":"-1"} REI pts</span>
       </div>
       <div class="decay-bar"><div class="decay-fill" style="width:${Math.min(100,s.audit/4)}%"></div></div>
-      <div style="font-size:0.7rem;color:rgba(255,255,255,0.38);margin-top:4px">REI score decays automatically without audit activity. Refresh required to reset.</div>
+      <div style="font-size:.68rem;color:rgba(255,255,255,.35)">Score degrades automatically without audit. Refresh required to reset.</div>
     </div>
-    <div style="margin-top:12px;padding:10px 12px;background:rgba(255,255,255,0.04);border-radius:var(--r);font-size:0.78rem">
-      <div style="color:rgba(255,255,255,0.5);margin-bottom:6px;font-weight:600">REI Score Breakdown</div>
-      <div style="display:flex;flex-direction:column;gap:5px">
-        ${[["TTR/TTS Ratio",Math.round(c.ttsScore*0.25),"25%"],["Spend Concentration",Math.round(c.spendScore*0.20),"20%"],["Single Source Flag",Math.round(c.srcScore*0.15),"15%"],["Country Risk",Math.round(c.cScore*0.10),"10%"],["Sub-tier Opacity",Math.round(c.opScore*0.05),"5%"]].map(([l,v,w])=>`
-          <div style="display:flex;align-items:center;gap:8px;font-size:0.73rem">
-            <span style="width:140px;color:rgba(255,255,255,0.55)">${l} (${w})</span>
-            <div style="flex:1;height:5px;background:rgba(255,255,255,0.07);border-radius:3px;overflow:hidden"><div style="width:${v}%;height:100%;background:var(--amber);border-radius:3px"></div></div>
-            <span style="width:24px;text-align:right;color:var(--amber);font-weight:600">${v}</span>
-          </div>`).join("")}
-        ${s.diamond?`<div style="display:flex;align-items:center;gap:8px;font-size:0.73rem"><span style="width:140px;color:#C4B5FD">CM Multiplier (${c.cm.toFixed(2)}x)</span><span style="color:#C4B5FD;font-weight:600">Applied</span></div>`:""}
-      </div>
+    <div class="rei-breakdown">
+      <div class="rbd-title">REI Score Breakdown</div>
+      ${[["TTR/TTS (25%)",Math.round(c.ttsScore*.25)],["Spend (20%)",Math.round(c.spendScore*.20)],["Source (15%)",Math.round(c.srcScore*.15)],["Country (10%)",Math.round(c.cScore*.10)],["Opacity (5%)",Math.round(c.opScore*.05)]].map(([l,v])=>`
+        <div class="rbd-row"><div class="rbd-label">${l}</div><div class="rbd-track"><div class="rbd-fill" style="width:${v}%"></div></div><div class="rbd-val">${v}</div></div>`).join("")}
     </div>`;
 
-  // ── TAB 1: DFMEA ──
+  // TAB 1: DFMEA
   document.getElementById("dp1").innerHTML=`
-    <div style="font-size:0.77rem;color:rgba(255,255,255,0.45);margin-bottom:12px">DFMEA adapted from IATF 16949 / SAE J1739. RPN = Severity &times; Occurrence &times; Detectability. Mandatory plan required for RPN &gt; 200.</div>
+    <div style="font-size:.74rem;color:rgba(255,255,255,.42);margin-bottom:10px">DFMEA adapted from IATF 16949 / SAE J1739. RPN = S × O × D. Mandatory plan required for RPN &gt; 200.</div>
     <div style="overflow-x:auto"><table class="dfmea">
       <tr><th>Failure Mode</th><th style="text-align:center">S</th><th style="text-align:center">O</th><th style="text-align:center">D</th><th style="text-align:center">RPN</th><th>Action</th></tr>
       ${fms.map(f=>`<tr>
         <td>${f.m}</td>
-        <td style="text-align:center;color:#ff8a80;font-weight:600">${f.s}</td>
+        <td style="text-align:center;color:var(--redl);font-weight:600">${f.s}</td>
         <td style="text-align:center;color:var(--amber);font-weight:600">${f.o}</td>
-        <td style="text-align:center;color:#81c784;font-weight:600">${f.d}</td>
+        <td style="text-align:center;color:var(--greenl);font-weight:600">${f.d}</td>
         <td style="text-align:center" class="${f.rpn>200?"rpn-hi":f.rpn>100?"rpn-md":"rpn-lo"}">${f.rpn}</td>
-        <td style="font-size:0.7rem;color:rgba(255,255,255,0.42)">${f.rpn>200?"Mandatory plan":f.rpn>100?"Recommended":"Monitor"}</td>
+        <td style="font-size:.68rem;color:rgba(255,255,255,.38)">${f.rpn>200?"Mandatory plan":f.rpn>100?"Recommended":"Monitor"}</td>
       </tr>`).join("")}
-    </table></div>
-    <div style="margin-top:10px;padding:10px 12px;background:rgba(255,255,255,0.04);border-radius:var(--r);font-size:0.75rem;color:rgba(255,255,255,0.45)">
-      S = Severity of business impact (1=negligible, 10=line stop + program loss)<br/>
-      O = Occurrence likelihood given country risk, source type, history (1=unlikely, 10=near-certain)<br/>
-      D = Detectability — how early warning arrives (1=instant detection, 10=no warning at all)
-    </div>`;
+    </table></div>`;
 
-  // ── TAB 2: Mitigation ──
-  const mitDB = {
-    "China":{imm:"Build safety stock to bridge survivability gap",sht:"Issue RFQ to Vietnam or India alternate — initiate PPAP qualification",str:"Geographic diversification — qualify supplier outside China"},
-    "Taiwan":{imm:"Build 90-day safety stock buffer — Taiwan strait risk",sht:"Identify South Korea or USA alternative source",str:"Dual-source qualification at GlobalFoundries / Samsung"},
-    "Mexico":{imm:"Safety stock build — FTO corridor disruption risk",sht:"Evaluate US nearshore alternate",str:"Qualify domestic alternate to reduce corridor exposure"},
-    "India":{imm:"Safety stock build — infrastructure failure buffer",sht:"Direct BCP requirement in next contract renewal",str:"Qualify alternate in stable geography"},
-    "Dem. Rep. Congo":{imm:"Emergency cobalt safety stock — 20-week build",sht:"Initiate Chilean / Australian alternate qualification",str:"Long-term geographic diversification of cobalt sourcing"},
-    "default":{imm:c.ssN>0?`Build ${c.ssN} units safety stock to close ${Math.round(c.gap)}-day gap`:"Maintain current safety stock levels and monitor",sht:"Issue RFQ to alternate supplier — initiate PPAP",str:"Contractual protections + BCP mandate in next renewal"}
-  };
-  const mit=mitDB[s.country]||mitDB["default"];
+  // TAB 2: Mitigation
+  const mitDB={China:{imm:"Build safety stock to bridge survivability gap",sht:"Issue RFQ to Vietnam or India alternate — initiate PPAP qualification",str:"Geographic diversification — qualify supplier outside China"},Taiwan:{imm:"Build 90-day safety stock — Taiwan strait risk buffer",sht:"Identify South Korea or USA alternative source",str:"Dual-source qualification at GlobalFoundries or Samsung"},Mexico:{imm:"Safety stock build — FTO corridor disruption risk",sht:"Evaluate US nearshore alternate",str:"Qualify domestic alternate to reduce corridor exposure"},India:{imm:"Safety stock build — infrastructure failure buffer",sht:"Direct BCP requirement in next contract renewal",str:"Qualify alternate in stable geography"},"Dem. Rep. Congo":{imm:"Emergency cobalt safety stock — 20-week build",sht:"Initiate Chilean or Australian alternate qualification",str:"Long-term geographic diversification of cobalt sourcing"},default:{imm:c.ssN>0?`Build ${c.ssN} units safety stock to close ${Math.round(c.gap)}-day gap`:"Maintain current safety stock levels",sht:"Issue RFQ to alternate supplier — initiate PPAP",str:"Contractual protections + BCP mandate in next renewal"}};
+  const mit=mitDB[s.country]||mitDB.default;
   document.getElementById("dp2").innerHTML=`
-    ${c.ssN>0?`<div class="ss-formula-box">
-      <div class="ss-f">Safety Stock = (TTR - TTS) &times; Daily Rate = (${s.ttr} - ${c.tts}) &times; ${s.daily} = ${c.ssN} units</div>
-      <div class="ss-r">Build ${c.ssN} units immediately to close the ${Math.round(c.gap)}-day survivability gap</div>
-    </div>`:""}
-    <div class="mit-phase"><div class="mit-hdr r">&#128308; Immediate — 0 to 30 Days</div>
-      <div class="mit-body"><div class="mit-action">Category: Safety Stock</div>${mit.imm}<div class="mit-owner">Owner: Commodity Manager | Cost: Carrying cost of ${c.ssN} units</div></div>
-    </div>
-    <div class="mit-phase"><div class="mit-hdr y">&#128993; Short-Term — 1 to 6 Months</div>
-      <div class="mit-body"><div class="mit-action">Category: Dual Sourcing + Contractual Protection</div>${mit.sht}<div class="mit-owner">Owner: Commodity Manager + Engineering | PPAP: 8-24 weeks</div></div>
-    </div>
-    <div class="mit-phase"><div class="mit-hdr g">&#128994; Structural — 6 to 24 Months</div>
-      <div class="mit-body"><div class="mit-action">Category: Geographic Diversification</div>${mit.str}<div class="mit-owner">Owner: Director Risk Management + CPO | Full dual-source investment</div></div>
-    </div>
-    <div style="margin-top:10px;padding:10px 12px;background:rgba(245,166,35,0.07);border:1px solid rgba(245,166,35,0.15);border-radius:var(--r);font-size:0.77rem;color:rgba(255,255,255,0.6)">
-      <strong style="color:var(--amber)">Sheffi White Space Framework:</strong> Immediate action builds inventory white space. Short-term adds redundancy. Structural adds flexibility. Together they reduce ${s.name}'s REI from ${c.rei} to an estimated ${Math.max(18,c.rei-48)} post-mitigation.
-    </div>`;
+    ${c.ssN>0?`<div class="ss-box"><div class="ss-f">Safety Stock = (TTR - TTS) × Daily = (${s.ttr} - ${c.tts}) × ${s.daily} = ${c.ssN} units</div><div class="ss-r">Build ${c.ssN} units immediately to close ${Math.round(c.gap)}-day survivability gap</div></div>`:""}
+    <div class="mit-phase"><div class="mit-hdr r">🔴 Immediate — 0 to 30 Days</div><div class="mit-body"><div class="mit-action">Category: Safety Stock + Contractual Protection</div>${mit.imm}<div class="mit-owner">Owner: Commodity Manager | Cost: Carrying cost of ${c.ssN} units</div></div></div>
+    <div class="mit-phase"><div class="mit-hdr y">🟡 Short-Term — 1 to 6 Months</div><div class="mit-body"><div class="mit-action">Category: Dual Sourcing</div>${mit.sht}<div class="mit-owner">Owner: Commodity Manager + Engineering | PPAP: 8-24 weeks</div></div></div>
+    <div class="mit-phase"><div class="mit-hdr g">🟢 Structural — 6 to 24 Months</div><div class="mit-body"><div class="mit-action">Category: Geographic Diversification</div>${mit.str}<div class="mit-owner">Owner: Director Risk + CPO | Full dual-source investment</div></div></div>
+    <div style="margin-top:10px;padding:10px 12px;background:rgba(245,166,35,.06);border:1px solid rgba(245,166,35,.13);border-radius:var(--r);font-size:.76rem;color:rgba(255,255,255,.6)"><strong style="color:var(--amber)">Sheffi Framework:</strong> Immediate builds inventory white space. Short-term adds redundancy. Structural adds flexibility. Post-mitigation estimated REI: ${Math.max(15,c.rei-48)}.</div>`;
 
-  // ── TAB 3: Substitution Router ──
-  const alts=(ALTS[s.hs]||ALTS["default"]);
+  // TAB 3: Alternates
+  const alts=ALTS[s.hs]||ALTS.default;
   document.getElementById("dp3").innerHTML=`
-    <div style="font-size:0.77rem;color:rgba(255,255,255,0.45);margin-bottom:12px">Ranked alternate suppliers scored by HS code commodity match (40%), tariff exposure delta (30%), and lead time recovery window (30%). HS: ${s.hs} — ${s.commodity}.</div>
-    <div style="overflow-x:auto"><table class="alts">
-      <tr><th>Alternate Supplier</th><th>Country</th><th>HS Match</th><th>Tariff Delta</th><th>Lead Time +</th><th>Substitution Score</th></tr>
-      ${alts.map(a=>`<tr>
-        <td style="font-weight:500">${a.name}</td>
-        <td>${a.country}</td>
-        <td>${a.hm}%</td>
-        <td style="color:${a.td<=0?"#81c784":"#ff8a80"}">${a.td>0?"+":""}${a.td}%</td>
-        <td>+${a.ld} days</td>
-        <td><div class="score-bar"><div class="sbar-track"><div class="sbar-fill" style="width:${a.sc}%"></div></div><strong style="color:var(--amber);font-size:0.8rem;width:28px;text-align:right">${a.sc}</strong></div></td>
-      </tr>`).join("")}
-    </table></div>
-    <div style="margin-top:10px;font-size:0.73rem;color:rgba(255,255,255,0.38)">PPAP qualification required before any alternate can be activated. Estimated qualification time: 8-24 weeks depending on complexity.</div>`;
+    <div style="font-size:.74rem;color:rgba(255,255,255,.42);margin-bottom:10px">Substitution Router — ranked by HS code match (40%), tariff delta (30%), lead time (30%). HS: ${s.hs} — ${s.commodity}.</div>
+    <table class="alts"><tr><th>Alternate Supplier</th><th>Country</th><th>HS Match</th><th>Tariff Delta</th><th>Lead Time +</th><th>Score</th></tr>
+    ${alts.map(a=>`<tr><td style="font-weight:500">${a.n}</td><td>${a.c}</td><td>${a.hm}%</td><td style="color:${a.td<=0?"var(--greenl)":"var(--redl)"}">${a.td>0?"+":""}${a.td}%</td><td>+${a.ld}d</td><td><div class="sbar"><div class="sbar-t"><div class="sbar-f" style="width:${a.sc}%"></div></div><strong style="color:var(--amber);font-size:.78rem;width:26px;text-align:right">${a.sc}</strong></div></td></tr>`).join("")}
+    </table>
+    <div style="margin-top:8px;font-size:.7rem;color:rgba(255,255,255,.35)">PPAP qualification required before activation. Estimated time: 8-24 weeks.</div>`;
 
-  // ── TAB 4: Regulatory ──
+  // TAB 4: Regulatory
   const hits=REGS.filter(r=>r.countries.includes(s.country)||r.hs.includes(s.hs));
   document.getElementById("dp4").innerHTML=`
-    <div style="font-size:0.77rem;color:rgba(255,255,255,0.45);margin-bottom:12px">Regulatory exposure for ${s.name} (${s.country}, HS ${s.hs}).</div>
-    ${REGS.map(r=>{
-      const hit=r.countries.includes(s.country)||r.hs.includes(s.hs);
-      return`<div class="reg-item">
-        <div><div class="reg-name">${r.name}</div><div class="reg-sev">Severity: ${r.sev}/10 &bull; ${r.desc.slice(0,60)}...</div></div>
-        <span class="reg-badge ${hit?"hit":"clear"}">${hit?"EXPOSED":"Clear"}</span>
-      </div>`;
-    }).join("")}
-    ${hits.length>0?`<div style="margin-top:10px;padding:10px 12px;background:rgba(192,57,43,0.1);border:1px solid rgba(192,57,43,0.24);border-radius:var(--r);font-size:0.78rem;color:#ff8a80">
-      <strong>${hits.length} regulatory exposure(s) identified.</strong> Estimated compliance cost: ~$${(s.spend*0.12/1000).toFixed(0)}K annually. Legal review and BCP update recommended within 30 days.
-    </div>`:"<div style=\"margin-top:10px;padding:10px 12px;background:rgba(30,123,52,0.1);border:1px solid rgba(30,123,52,0.2);border-radius:var(--r);font-size:0.78rem;color:#81c784\">No active regulatory exposures identified for this supplier profile. Continue standard monitoring cadence.</div>"}`;
+    <div style="font-size:.74rem;color:rgba(255,255,255,.42);margin-bottom:10px">Regulatory exposure for ${s.name} (${s.country}, HS ${s.hs}).</div>
+    ${REGS.map(r=>{const hit=r.countries.includes(s.country)||r.hs.includes(s.hs);return`<div class="reg-item"><div><div class="reg-name">${r.name}</div><div class="reg-sev">Severity ${r.sev}/10 · ${r.desc.slice(0,55)}...</div></div><span class="reg-badge ${hit?"hit":"clear"}">${hit?"EXPOSED":"Clear"}</span></div>`;}).join("")}
+    ${hits.length>0?`<div style="margin-top:8px;padding:10px 12px;background:rgba(192,57,43,.09);border:1px solid rgba(192,57,43,.22);border-radius:var(--r);font-size:.76rem;color:var(--redl)"><strong>${hits.length} exposure(s).</strong> Est. compliance cost: ~$${(s.spend*.12/1000).toFixed(0)}K/yr. Legal review recommended within 30 days.</div>`:"<div style=\"margin-top:8px;padding:10px 12px;background:rgba(22,163,74,.08);border-radius:var(--r);font-size:.76rem;color:var(--greenl)\">No active regulatory exposures identified. Continue standard monitoring.</div>"}`;
 }
 
 // ════════════════════════════════════════════════════════════════════
-// CALCULATOR
+// LAYER 4: MITIGATION CALCULATOR
 // ════════════════════════════════════════════════════════════════════
-function doCalc(){
-  const name=document.getElementById("cn").value||"Your Supplier";
-  const ccEl=document.getElementById("cc");
+function calcMitigation(){
+  const name=document.getElementById("mn").value||"Your Supplier";
+  const ccEl=document.getElementById("mc");
   const country=ccEl.value;
   const cr=parseFloat(ccEl.options[ccEl.selectedIndex]?.dataset?.r||5);
-  const source=document.getElementById("cs").value;
-  const spend=parseFloat(document.getElementById("csp").value)||0;
-  const tspend=parseFloat(document.getElementById("ctsp").value)||5000000;
-  const bcp=document.getElementById("cb").value;
-  const subtier=document.getElementById("cst").value;
-  const oh=parseFloat(document.getElementById("coh").value)||0;
-  const it=parseFloat(document.getElementById("cit").value)||0;
-  const ss=parseFloat(document.getElementById("css").value)||0;
-  const daily=parseFloat(document.getElementById("cd").value)||1;
-  const ttr=parseFloat(document.getElementById("cttr").value)||90;
-  const dfc=parseInt(document.getElementById("cdiam").value)||0;
-
+  const source=document.getElementById("ms").value;
+  const spend=parseFloat(document.getElementById("msp").value)||0;
+  const tspend=parseFloat(document.getElementById("mtsp").value)||5000000;
+  const bcp=document.getElementById("mbcp").value;
+  const subtier=document.getElementById("mst").value;
+  const oh=parseFloat(document.getElementById("moh").value)||0;
+  const it=parseFloat(document.getElementById("mit").value)||0;
+  const ss=parseFloat(document.getElementById("mss").value)||0;
+  const daily=parseFloat(document.getElementById("md").value)||1;
+  const ttr=parseFloat(document.getElementById("mttr").value)||90;
+  const dfc=parseInt(document.getElementById("mdiam").value)||0;
   const adj=source==="dual-q"?1.5:source==="dual-unq"?1.1:1.0;
-  const rawTTS=(oh+it+ss)/daily;
-  const tts=Math.round(rawTTS*adj*10)/10;
-  const gap=ttr-tts;
-  const ssN=gap>0?Math.round(gap*daily):0;
-
-  const ttsScore=Math.min(100,(ttr/Math.max(tts,0.1))*25);
+  const raw=(oh+it+ss)/daily;const tts=Math.round(raw*adj*10)/10;
+  const gap=ttr-tts;const ssN=gap>0?Math.round(gap*daily):0;
+  const ttsScore=Math.min(100,(ttr/Math.max(tts,.1))*25);
   const spendScore=Math.min(100,(spend/tspend)*500);
   const srcScore=source==="single"?100:source==="dual-unq"?60:20;
-  const cScore=cr*10;
-  const opScore=subtier==="no"?80:subtier==="partial"?40:10;
-  let rei=Math.round(ttsScore*0.25+spendScore*0.20+srcScore*0.15+cScore*0.10+opScore*0.05);
-  let cm=1;
-  if(dfc>0){cm=1+(0.15*dfc);rei=Math.min(100,Math.round(rei*cm));}
-
+  const cScore=cr*10;const opScore=subtier==="no"?80:subtier==="partial"?40:10;
+  let rei=Math.round(ttsScore*.25+spendScore*.20+srcScore*.15+cScore*.10+opScore*.05);
+  let cm=1;if(dfc>0){cm=1+(.15*dfc);rei=Math.min(100,Math.round(rei*cm));}
   const isP1=rei>=70||(source==="single"&&(cr>7||bcp==="no"))||dfc>0;
   const tier=isP1?"P1 — Critical":rei>=40?"P2 — Significant":"P3 — Manageable";
   const tierClass=isP1?"t1":rei>=40?"t2":"t3";
-  const reiColor=isP1?"#ff8a80":rei>=40?"var(--amber)":"#81c784";
-
+  const reiColor=isP1?"var(--redl)":rei>=40?"var(--amber)":"var(--greenl)";
   const fms=[];
-  if(source==="single") fms.push("Supply Loss — No Qualified Alternate Available");
-  if(country==="China"){fms.push("Geopolitical Disruption — Regulatory Lockdown / Sanctions");fms.push("UFLPA Forced Labor Hold — Goods Blocked at US Border");}
-  if(country==="Taiwan") fms.push("Cross-Strait Military Tension — Production Disruption");
-  if(country==="Mexico") fms.push("Cartel Disruption — Corridor Blockage / FTO Designation Risk");
-  if(country==="India") fms.push("Infrastructure Failure — Power Grid / Port Congestion");
-  if(country==="Dem. Rep. Congo") fms.push("Political Conflict — Mining Disruption / Security Breakdown");
-  if(bcp==="no") fms.push("Unplanned Extended Outage — No Recovery Plan, TTR Unknown");
-  if(subtier==="no") fms.push("Hidden Sub-tier Disruption — Zero Early Warning");
-  if(dfc>0) fms.push(`Diamond Node Cascade — Tier-2 Failure Stops ${dfc} Tier-1 Suppliers Simultaneously`);
+  if(source==="single")fms.push("Supply Loss — No Qualified Alternate");
+  if(country==="China"){fms.push("Geopolitical Disruption — Sanctions / Export Controls");fms.push("UFLPA Forced Labor Hold");}
+  if(country==="Taiwan")fms.push("Cross-Strait Military Tension");
+  if(country==="Mexico")fms.push("Cartel Disruption — Corridor Blockage");
+  if(country==="India")fms.push("Infrastructure Failure — Power Grid / Port");
+  if(country==="Dem. Rep. Congo")fms.push("Political Conflict — Mining Disruption");
+  if(bcp==="no")fms.push("Unplanned Extended Outage — TTR Unknown");
+  if(subtier==="no")fms.push("Hidden Sub-tier Disruption — Zero Warning");
+  if(dfc>0)fms.push(`Diamond Node Cascade — Tier-2 Failure Stops ${dfc} Tier-1s`);
+  const mitDB={China:{imm:"Build safety stock to bridge gap",sht:"Issue RFQ to Vietnam/India — begin PPAP",str:"Geographic diversification outside China"},Taiwan:{imm:"Build 90-day safety stock buffer",sht:"Identify South Korea / USA source",str:"Dual-source at alternate fab"},Mexico:{imm:"Safety stock — FTO corridor risk",sht:"Evaluate US nearshore alternate",str:"Qualify domestic alternate"},default:{imm:ssN>0?`Build ${ssN} units safety stock`:"Maintain current safety stock",sht:"Issue RFQ — initiate PPAP qualification",str:"Contractual protections + BCP mandate"}};
+  const mit=mitDB[country]||mitDB.default;
+  const el=document.getElementById("mitResult");
+  el.className="mit-result show";
+  el.innerHTML=`<div class="score-hero">
+    <div style="font-size:.75rem;font-weight:700;color:rgba(255,255,255,.38);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">Risk Exposure Index</div>
+    <div class="score-big" style="color:${reiColor}">${rei}</div>
+    <div class="score-tier ${tierClass}">${tier}</div>
+    ${dfc>0?`<div style="font-size:.7rem;color:rgba(255,255,255,.35);margin-top:6px">CM ${cm.toFixed(2)} applied (${dfc} Tier-1s sharing Tier-2)</div>`:""}
+  </div>
+  <div class="res-metrics">
+    <div class="rm ${gap>0?"al":""}"><div class="rm-v">${tts}d</div><div class="rm-l">Time to Survive</div></div>
+    <div class="rm"><div class="rm-v">${ttr}d</div><div class="rm-l">Time to Recover</div></div>
+    <div class="rm ${gap>0?"al":""}"><div class="rm-v">${gap>0?Math.round(gap)+"d":"Safe"}</div><div class="rm-l">Survivability Gap</div></div>
+  </div>
+  ${gap>0?`<div style="background:var(--red2);border:1px solid rgba(192,57,43,.25);border-radius:var(--r);padding:9px 12px;margin-bottom:12px;font-size:.8rem;color:var(--red);font-weight:600">Production line stops ${Math.round(gap)} days before ${name} recovers. Build ${ssN} units safety stock immediately.</div>`:""}
+  ${ssN>0?`<div style="background:var(--navy);border-radius:var(--r);padding:10px 12px;margin-bottom:12px"><div style="font-family:'Courier New',monospace;font-size:.74rem;color:var(--amber)">SS = (TTR - TTS) × Daily = (${ttr} - ${tts}) × ${daily} = ${ssN} units</div><div style="font-size:.78rem;color:var(--white);font-weight:600;margin-top:3px">Build ${ssN} units to close the survivability gap</div></div>`:""}
+  <div class="res-sec">Failure Modes (${fms.length})</div>
+  ${fms.map(f=>`<div class="fm-row">⚠ ${f}</div>`).join("")}
+  <div class="res-sec">3-Phase Mitigation Plan</div>
+  <div class="mit-phase"><div class="mit-hdr r">🔴 Immediate — 0-30 Days</div><div class="mit-body"><div class="mit-action">Safety Stock</div>${mit.imm}</div></div>
+  <div class="mit-phase"><div class="mit-hdr y">🟡 Short-Term — 1-6 Months</div><div class="mit-body"><div class="mit-action">Dual Sourcing</div>${mit.sht}</div></div>
+  <div class="mit-phase"><div class="mit-hdr g">🟢 Structural — 6-24 Months</div><div class="mit-body"><div class="mit-action">Geographic Diversification</div>${mit.str}</div></div>`;
+  el.scrollIntoView({behavior:"smooth",block:"start"});
+}
 
-  const mitDB2={
-    "China":{imm:"Build safety stock to bridge survivability gap",sht:"Issue RFQ to Vietnam / India alternate — begin PPAP",str:"Geographic diversification outside China"},
-    "Taiwan":{imm:"Build 90-day safety stock — Taiwan strait risk buffer",sht:"Identify South Korea / USA alternative source",str:"Dual-source qualification at alternate fab"},
-    "Mexico":{imm:"Safety stock build — FTO corridor disruption risk",sht:"Evaluate US nearshore alternate",str:"Qualify domestic alternate to reduce corridor exposure"},
-    "default":{imm:ssN>0?`Build ${ssN} units safety stock`:"Maintain current safety stock levels",sht:"Issue RFQ to alternate — initiate PPAP qualification",str:"Contractual protections + BCP mandate in next renewal"}
-  };
-  const mit=mitDB2[country]||mitDB2["default"];
+// ════════════════════════════════════════════════════════════════════
+// LAYER 5: RESILIENCE BUILDER
+// ════════════════════════════════════════════════════════════════════
+function initResilience(){}
 
-  document.getElementById("resultsWrap").classList.add("show");
-  document.getElementById("resultsInner").innerHTML=`
-    <div class="score-hero">
-      <div class="score-big" style="color:${reiColor}">${rei}</div>
-      <div class="score-sub">Risk Exposure Index (REI Score)</div>
-      <div class="score-tier ${tierClass}">${tier}</div>
-      ${dfc>0?`<div style="font-size:0.7rem;color:rgba(255,255,255,0.38);margin-top:7px">Convergence multiplier ${cm.toFixed(2)} applied (${dfc} Tier-1s sharing Tier-2)</div>`:""}
+function calcResilience(){
+  const scores=[parseInt(document.getElementById("r1").value),parseInt(document.getElementById("r2").value),parseInt(document.getElementById("r3").value),parseInt(document.getElementById("r4").value),parseInt(document.getElementById("r5").value)];
+  const avg=Math.round(scores.reduce((a,b)=>a+b,0)/5);
+  const maturity=avg>=75?"Level 4 — Resilient":avg>=55?"Level 3 — Prepared":avg>=35?"Level 2 — Aware":"Level 1 — Reactive";
+  const matColor=avg>=75?"var(--greenl)":avg>=55?"var(--amber)":avg>=35?"#FB923C":"var(--redl)";
+  const dims=[
+    {n:"Inventory White Space",s:scores[0],good:"TTS ≥ TTR across most P1 suppliers",action:scores[0]<60?"Immediate: Calculate safety stock needed for each P1 supplier with TTS < TTR. Build stock before implementing other mitigations.":"Continue monitoring TTS/TTR ratios quarterly."},
+    {n:"Source Redundancy",s:scores[1],good:"PPAP-qualified alternates for P1 suppliers",action:scores[1]<60?"Short-term: Issue RFQs to alternate suppliers for all single-source P1s. Initiate PPAP qualification. 8-24 weeks typically.":"Maintain alternate qualification status. Review annually."},
+    {n:"Sub-tier Visibility",s:scores[2],good:"Tier-2 disclosure for P1/P2 suppliers",action:scores[2]<60?"Structural: Send sub-tier disclosure requests to all P1/P2 suppliers. Make disclosure a contract condition at next renewal.":"Run diamond node detection analysis on disclosed sub-tier data."},
+    {n:"Geographic Diversification",s:scores[3],good:"Spend concentrated in low-risk geographies",action:scores[3]<60?"Structural: Identify which commodity categories are most concentrated in high-risk geographies. Develop qualification plans for alternate geographies.":"Continue monitoring. Apply geographic filters to new sourcing decisions."},
+    {n:"Response Readiness",s:scores[4],good:"BCPs verified and TTRs tested",action:scores[4]<60?"Immediate: Request BCP updates from all P1 suppliers. Verify stated TTRs against actual recovery capability.":"Conduct annual BCP testing exercises with P1 suppliers."}
+  ];
+
+  // Draw radar
+  const el=document.getElementById("resResult");
+  el.className="res-result show";
+  el.innerHTML=`
+    <div class="radar-wrap">
+      <div style="font-size:.75rem;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px">Resilience Profile</div>
+      <canvas id="radarCanvas" width="280" height="280"></canvas>
+      <div class="maturity-badge" style="background:${avg>=75?"rgba(22,163,74,.15)":avg>=55?"rgba(245,166,35,.15)":"rgba(192,57,43,.15)"};color:${matColor};border:1px solid ${matColor}">${maturity}</div>
+      <div style="font-size:.8rem;color:rgba(255,255,255,.5)">Overall Resilience Score: <strong style="color:${matColor}">${avg}/100</strong></div>
     </div>
-    <div class="res-metrics">
-      <div class="rmet ${gap>0?"alert":""}"><div class="rmet-val">${tts}d</div><div class="rmet-label">Time to Survive</div></div>
-      <div class="rmet"><div class="rmet-val">${ttr}d</div><div class="rmet-label">Time to Recover</div></div>
-      <div class="rmet ${gap>0?"alert":""}"><div class="rmet-val">${gap>0?Math.round(gap)+"d":"Safe"}</div><div class="rmet-label">Survivability Gap</div></div>
-    </div>
-    ${gap>0?`<div style="background:rgba(192,57,43,0.08);border:1px solid rgba(192,57,43,0.25);border-radius:var(--r);padding:10px 12px;margin-bottom:12px;font-size:0.8rem;color:var(--red);font-weight:600">Production line stops ${Math.round(gap)} days before ${name} recovers. Build ${ssN} units safety stock immediately.</div>`:""}
-    ${ssN>0?`<div class="ss-formula-box"><div class="ss-f">Safety Stock = (TTR - TTS) &times; Daily = (${ttr} - ${tts}) &times; ${daily} = ${ssN} units</div><div class="ss-r">Build ${ssN} units to close the survivability gap</div></div>`:""}
-    <div class="res-sec">Failure Modes (${fms.length} identified)</div>
-    ${fms.map(f=>`<div class="fm-row">&#9888; ${f}</div>`).join("")}
-    <div class="res-sec">3-Phase Mitigation Plan</div>
-    <div class="mit-phase"><div class="mit-hdr r">&#128308; Immediate — 0 to 30 Days</div><div class="mit-body"><div class="mit-action">Safety Stock</div>${mit.imm}</div></div>
-    <div class="mit-phase"><div class="mit-hdr y">&#128993; Short-Term — 1 to 6 Months</div><div class="mit-body"><div class="mit-action">Dual Sourcing</div>${mit.sht}</div></div>
-    <div class="mit-phase"><div class="mit-hdr g">&#128994; Structural — 6 to 24 Months</div><div class="mit-body"><div class="mit-action">Geographic Diversification</div>${mit.str}</div></div>
-    <div class="res-cta">
-      <h4>This is 1 supplier.</h4>
-      <p>An Aagnaa engagement scores your full supply base — P1/P2/P3 tiers, diamond node mapping, regulatory exposure, and a funded mitigation roadmap — in 6 to 8 weeks.</p>
-      <button class="btn-amber" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get Full Assessment</button>
+    <div class="res-dim-list">
+      ${dims.map(d=>{
+        const cls=d.s>=70?"good":d.s>=40?"warn":"poor";
+        return`<div class="rdim ${cls}">
+          <div class="rdim-name">${d.n}</div>
+          <div class="rdim-score"><div class="rdim-bar"><div class="rdim-fill" style="width:${d.s}%;background:${d.s>=70?"var(--green)":d.s>=40?"var(--amber)":"var(--red)"}"></div></div><div class="rdim-pct" style="color:${d.s>=70?"var(--green)":d.s>=40?"var(--amber)":"var(--red)"}">${d.s}%</div></div>
+          <div class="rdim-action">${d.action}</div>
+        </div>`;
+      }).join("")}
     </div>`;
-  document.getElementById("resultsWrap").scrollIntoView({behavior:"smooth",block:"start"});
+
+  // Draw radar chart
+  setTimeout(()=>{
+    const canvas=document.getElementById("radarCanvas");
+    if(!canvas)return;
+    const ctx=canvas.getContext("2d");
+    const cx=140,cy=140,r=100;
+    const n=5;
+    ctx.clearRect(0,0,280,280);
+    // Grid
+    [.2,.4,.6,.8,1].forEach(f=>{
+      ctx.beginPath();
+      for(let i=0;i<n;i++){const a=i*(2*Math.PI/n)-Math.PI/2;const x=cx+r*f*Math.cos(a);const y=cy+r*f*Math.sin(a);i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);}
+      ctx.closePath();ctx.strokeStyle="rgba(255,255,255,.08)";ctx.stroke();
+    });
+    // Spokes
+    for(let i=0;i<n;i++){const a=i*(2*Math.PI/n)-Math.PI/2;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+r*Math.cos(a),cy+r*Math.sin(a));ctx.strokeStyle="rgba(255,255,255,.1)";ctx.stroke();}
+    // Data
+    ctx.beginPath();
+    scores.forEach((s,i)=>{const a=i*(2*Math.PI/n)-Math.PI/2;const x=cx+(r*s/100)*Math.cos(a);const y=cy+(r*s/100)*Math.sin(a);i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});
+    ctx.closePath();ctx.fillStyle="rgba(245,166,35,.2)";ctx.fill();ctx.strokeStyle="var(--amber)";ctx.lineWidth=2;ctx.stroke();
+    // Labels
+    const labels=["Inventory","Source Redundancy","Sub-tier Visibility","Geography","Response Ready"];
+    ctx.font="10px Arial";ctx.fillStyle="rgba(255,255,255,.6)";ctx.textAlign="center";
+    labels.forEach((l,i)=>{const a=i*(2*Math.PI/n)-Math.PI/2;const x=cx+(r+18)*Math.cos(a);const y=cy+(r+18)*Math.sin(a);ctx.fillText(l,x,y+4);});
+  },100);
+}
+
+// ════════════════════════════════════════════════════════════════════
+// LAYER 6: BLACK SWAN STRESS TEST
+// ════════════════════════════════════════════════════════════════════
+let selectedStress=new Set();
+
+function buildStressSupList(){
+  const c=document.getElementById("stressSupList");
+  c.innerHTML=SUPPLIERS.filter(s=>s.tier==="P1"||s.tier==="P2").slice(0,20).map(s=>{
+    const{rei}=getREI(s);
+    return`<div class="stress-sup-item" id="sti-${s.id}" onclick="toggleStress('${s.id}',this)">
+      <input type="checkbox" id="stc-${s.id}">
+      <div style="flex:1">
+        <div class="stress-sup-name">${s.name}</div>
+        <div class="stress-sup-info">${s.country} · ${s.tier} · REI ${rei} · TTR ${s.ttr}d</div>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+function toggleStress(id,el){
+  if(selectedStress.has(id)){selectedStress.delete(id);el.classList.remove("sel");el.querySelector("input").checked=false;}
+  else if(selectedStress.size<5){selectedStress.add(id);el.classList.add("sel");el.querySelector("input").checked=true;}
+}
+
+function runStressTest(){
+  if(selectedStress.size<2){alert("Select at least 2 suppliers for a meaningful stress test.");return;}
+  const sups=SUPPLIERS.filter(s=>selectedStress.has(s.id));
+  const totalSpend=sups.reduce((a,s)=>a+s.spend,0);
+  const maxTTR=Math.max(...sups.map(s=>s.ttr));
+  const minTTS=Math.min(...sups.map(s=>getREI(s).tts));
+  const totalSSN=sups.reduce((a,s)=>{const c=getREI(s);return a+(c.ssN||0);},0);
+  const programs=[...new Set(sups.flatMap(s=>s.programs||[]))];
+  const cascades=sups.flatMap(s=>s.programs||[]).reduce((a,p)=>{a[p]=(a[p]||0)+1;return a;},{});
+  const critPrograms=Object.entries(cascades).filter(([,c])=>c>1).map(([p])=>p);
+  const lineDays=Math.max(0,Math.round(maxTTR-minTTS));
+  const el=document.getElementById("stressResult");
+  el.className="stress-result show";
+  el.innerHTML=`
+    <div class="stress-impact">
+      <div class="stress-impact-title">⚠ Simultaneous Failure Scenario — ${sups.length} Suppliers</div>
+      <div class="impact-grid">
+        <div class="ig"><div class="ig-n">${sups.length}</div><div class="ig-l">Suppliers Failed</div></div>
+        <div class="ig"><div class="ig-n">$${(totalSpend/1000000).toFixed(1)}M</div><div class="ig-l">Annual Spend at Risk</div></div>
+        <div class="ig"><div class="ig-n">${lineDays}d</div><div class="ig-l">Est. Line Stop Duration</div></div>
+      </div>
+      <div style="margin-bottom:10px;font-size:.78rem;color:rgba(255,255,255,.65)">
+        <strong style="color:var(--redl)">Programs at risk:</strong> ${programs.join(", ")}<br/>
+        ${critPrograms.length>0?`<strong style="color:var(--redl)">Multi-supplier programs:</strong> ${critPrograms.join(", ")} — hit by 2+ simultaneous failures`:""}
+      </div>
+      <div class="cascade-list">
+        ${sups.sort((a,b)=>getREI(b).rei-getREI(a).rei).map((s,i)=>{const c=getREI(s);return`<div class="cascade-item"><div class="ci-num">${i+1}</div><div class="ci-info"><div class="ci-name">${s.name}</div><div class="ci-impact">${s.country} · REI ${c.rei} · TTR ${s.ttr}d · $${(s.spend/1000).toFixed(0)}K spend · ${c.ssN>0?`${c.ssN} units safety stock gap`:"Adequate buffer"}</div></div></div>`;}).join("")}
+      </div>
+    </div>
+    <div class="recovery-path">
+      <div class="recovery-title">Recovery Path</div>
+      <div class="recovery-step"><div class="rs-num">1</div><div><div class="rs-title">Immediate (Days 1-7): Activate Emergency Protocols</div><div class="rs-desc">Convene cross-functional crisis team. Activate all pre-built safety stock. Identify all programs at risk. Notify customers with initial timeline. Total safety stock gap to bridge: ${totalSSN.toLocaleString()} units.</div></div></div>
+      <div class="recovery-step"><div class="rs-num">2</div><div><div class="rs-title">Short-Term (Weeks 1-4): Activate Alternates</div><div class="rs-desc">Issue emergency POs to any pre-qualified alternates. Expedite unqualified alternates through accelerated PPAP. Implement demand prioritization — allocate limited supply to highest-priority programs. Negotiate spot market procurement at premium.</div></div></div>
+      <div class="recovery-step"><div class="rs-num">3</div><div><div class="rs-title">Medium-Term (Months 1-3): Stabilize Supply</div><div class="rs-desc">Complete alternate qualifications. Restore production at reduced rate. Rebuild safety stock levels. Begin customer recovery plan execution. Total recovery window: up to ${maxTTR} days for longest-TTR supplier.</div></div></div>
+      <div class="recovery-step"><div class="rs-num">4</div><div><div class="rs-title">Structural (Months 3-12): Prevent Recurrence</div><div class="rs-desc">This scenario exposed ${sups.length} simultaneous single points of failure. Structural mitigation required: dual-source all failed suppliers, geographic diversification of concentrated categories, safety stock build to close all TTS/TTR gaps. Estimated investment: $${(totalSSN*0.05/1000).toFixed(0)}K+ in safety stock carrying cost.</div></div></div>
+      <div style="margin-top:12px;padding:12px 14px;background:rgba(245,166,35,.06);border:1px solid rgba(245,166,35,.13);border-radius:var(--r);font-size:.78rem;color:rgba(255,255,255,.65)"><strong style="color:var(--amber)">Resilience insight:</strong> Black Swans cannot be predicted — but their impact can be bounded. The suppliers that caused the most damage in this simulation are exactly the ones requiring structural mitigation in Layers 4 and 5.</div>
+    </div>`;
+  el.scrollIntoView({behavior:"smooth",block:"start"});
 }
 
 // ════════════════════════════════════════════════════════════════════
 // CONTACT
 // ════════════════════════════════════════════════════════════════════
 function submitCF(){
-  if(!document.getElementById("cfn").value||!document.getElementById("cem").value){
-    alert("Please fill in your name and email.");return;
-  }
+  if(!document.getElementById("cfn").value||!document.getElementById("cem").value){alert("Please enter name and email.");return;}
   document.getElementById("cfForm").style.display="none";
   document.getElementById("cfSuccess").style.display="block";
 }
 
 // ════════════════════════════════════════════════════════════════════
-// INIT
+// WORLD BANK API
 // ════════════════════════════════════════════════════════════════════
-function buildRegSelect(){
-  const sel=document.getElementById("regSelect");
-  if(!sel) return;
-  REGS.forEach(r=>{
-    const opt=document.createElement("option");
-    opt.value=r.id; opt.textContent=r.name;
-    sel.appendChild(opt);
-  });
-  sel.onchange=()=>{
-    const reg=REGS.find(r=>r.id===sel.value);
-    const imp=document.getElementById("regImpact");
-    if(!reg||!imp){imp&&(imp.innerHTML="");return;}
-    const hits=SUPPLIERS.filter(s=>reg.countries.includes(s.country)||reg.hs.includes(s.hs));
-    const totalSpend=hits.reduce((a,s)=>a+s.spend,0);
-    const programs=[...new Set(hits.flatMap(s=>s.programs||[]))];
-    if(hits.length===0){
-      imp.innerHTML=`<div style="font-size:0.75rem;color:#81c784;padding:8px 0">No suppliers in your register are exposed to this regulation.</div>`;
-      return;
-    }
-    const hitRows=hits.slice(0,8).map(s=>{
-      const {rei}=getTier(s);
-      const newREI=Math.min(100,rei+Math.round(reg.sev*1.2));
-      return`<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 8px;background:rgba(192,57,43,0.1);border-radius:6px;margin-bottom:5px;font-size:0.73rem">
-        <span style="color:rgba(255,255,255,0.75);font-weight:500">${s.name}</span>
-        <div style="text-align:right">
-          <div style="color:#ff8a80;font-weight:700">REI ${rei}&rarr;${newREI}</div>
-          <div style="font-size:0.65rem;color:rgba(255,255,255,0.35)">$${(s.spend/1000).toFixed(0)}K</div>
-        </div>
-      </div>`;
-    }).join("");
-    imp.innerHTML=`
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
-        <div style="background:rgba(192,57,43,0.12);border-radius:8px;padding:10px;text-align:center">
-          <div style="font-family:var(--fd);font-size:1.3rem;font-weight:700;color:#ff8a80">${hits.length}</div>
-          <div style="font-size:0.65rem;color:rgba(255,255,255,0.38)">Suppliers Exposed</div>
-        </div>
-        <div style="background:rgba(192,57,43,0.12);border-radius:8px;padding:10px;text-align:center">
-          <div style="font-family:var(--fd);font-size:1.3rem;font-weight:700;color:#ff8a80">$${(totalSpend/1000000).toFixed(1)}M</div>
-          <div style="font-size:0.65rem;color:rgba(255,255,255,0.38)">Spend at Risk</div>
-        </div>
-      </div>
-      <div style="font-size:0.68rem;color:rgba(255,255,255,0.38);margin-bottom:6px">Programs at risk: <strong style="color:var(--amber)">${programs.slice(0,4).join(", ")}</strong></div>
-      ${hitRows}
-      <div style="font-size:0.68rem;color:rgba(255,255,255,0.35);margin-top:6px;padding-top:6px;border-top:1px solid rgba(255,255,255,0.06)">Click any supplier above in the register to see full regulatory detail tab.</div>`;
-  };
-}
-
-function fetchWorldBankRisk(){
-  // Fetch World Bank Political Stability scores and update country risk
-  fetch("https://api.worldbank.org/v2/country/all/indicator/WGI.PV.EST?format=json&per_page=300&mrv=1&source=3")
+function fetchWorldBank(){
+  fetch("https://api.worldbank.org/v2/country/all/indicator/WGI.PV.EST?format=json&per_page=300&mrv=1")
     .then(r=>r.json())
-    .then(data=>{
-      if(!data||!data[1]) return;
-      const updates={};
-      data[1].forEach(item=>{
-        if(item.value!==null&&item.country?.value){
-          // WGI ranges -2.5 to 2.5; map to 1-10 risk (higher = more risk)
-          const risk = Math.max(1,Math.min(10,((-item.value+2.5)/5)*9+1));
-          updates[item.country.value]=Math.round(risk*10)/10;
-        }
-      });
-      // Update CR with live data where available
-      Object.keys(updates).forEach(k=>{
-        if(CR[k]!==undefined) CR[k]=updates[k];
-      });
-      buildSupList(); // Refresh with updated scores
-      console.log("World Bank country risk updated:", Object.keys(updates).length, "countries");
-    })
-    .catch(()=>console.log("World Bank API unavailable - using built-in country risk scores"));
+    .then(d=>{if(d&&d[1])d[1].forEach(item=>{if(item.value!==null&&item.country?.value){const risk=Math.max(1,Math.min(10,((-item.value+2.5)/5)*9+1));if(CR[item.country.value]!==undefined)CR[item.country.value]=Math.round(risk*10)/10;}});buildSupList();})
+    .catch(()=>{});
 }
-
-window.addEventListener("load",()=>{
-  buildFilters();
-  buildSupList();
-  drawMap();
-  buildRegSelect();
-  fetchWorldBankRisk();
-});
-window.addEventListener("resize",drawMap);
 </script>
 </body>
 </html>
