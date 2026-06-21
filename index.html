@@ -1458,9 +1458,35 @@ function runStressTest(){
 // CONTACT
 // ════════════════════════════════════════════════════════════════════
 function submitCF(){
-  if(!document.getElementById("cfn").value||!document.getElementById("cem").value){alert("Please enter name and email.");return;}
-  document.getElementById("cfForm").style.display="none";
-  document.getElementById("cfSuccess").style.display="block";
+  const fn=document.getElementById("cfn").value;
+  const em=document.getElementById("cem").value;
+  if(!fn||!em){alert("Please enter your name and email.");return;}
+  const btn=document.querySelector(".cf-btn");
+  btn.textContent="Sending...";btn.disabled=true;
+  const data={
+    name: fn+" "+document.getElementById("cln").value,
+    email: em,
+    company: document.getElementById("cco").value,
+    industry: document.getElementById("cind").value,
+    supply_base_size: document.getElementById("csz").value,
+    message: document.getElementById("cmsg").value
+  };
+  fetch("https://formspree.io/f/mlgyrbvw",{
+    method:"POST",
+    headers:{"Content-Type":"application/json","Accept":"application/json"},
+    body:JSON.stringify(data)
+  }).then(r=>r.json()).then(d=>{
+    if(d.ok){
+      document.getElementById("cfForm").style.display="none";
+      document.getElementById("cfSuccess").style.display="block";
+    } else {
+      btn.textContent="Request Assessment";btn.disabled=false;
+      alert("Something went wrong. Please email tejaswismandadi@gmail.com directly.");
+    }
+  }).catch(()=>{
+    btn.textContent="Request Assessment";btn.disabled=false;
+    alert("Something went wrong. Please email tejaswismandadi@gmail.com directly.");
+  });
 }
 
 // ════════════════════════════════════════════════════════════════════
