@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Risk Taxonomy - AGNA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.chapter-hero{background:linear-gradient(135deg,#0A1F12 0%,#0D2B1A 50%,#0F0D2B 100%);padding:120px 0 80px;position:relative;overflow:hidden;}
+.chapter-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(29,158,117,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(29,158,117,0.06) 1px,transparent 1px);background-size:50px 50px;}
+.chapter-hero-inner{position:relative;z-index:2;}
+.cat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:40px;}
+.cat-pill{padding:10px 12px;border-radius:var(--radius-md);cursor:pointer;border:1.5px solid transparent;transition:var(--transition);text-decoration:none;display:block;}
+.cat-pill:hover{transform:translateY(-2px);}
+.cat-pill.active{border-width:1.5px;}
+.cat-num{font-size:0.625rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;}
+.cat-name{font-size:0.875rem;font-weight:700;margin-bottom:2px;}
+.cat-count{font-size:0.75rem;}
+.risk-section{margin-bottom:64px;scroll-margin-top:120px;}
+.risk-section-header{display:flex;align-items:center;gap:16px;padding:24px;border-radius:var(--radius-lg);margin-bottom:20px;cursor:pointer;}
+.risk-section-icon{width:52px;height:52px;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;}
+.risk-section-title{font-size:1.25rem;font-weight:700;}
+.risk-section-sub{font-size:0.875rem;margin-top:2px;}
+.risk-section-count{margin-left:auto;font-size:0.75rem;font-weight:600;padding:4px 10px;border-radius:20px;}
+.risk-card{border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:16px;}
+.risk-card-header{display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer;transition:var(--transition);}
+.risk-card-header:hover{background:var(--gray-lt);}
+.risk-card-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;color:var(--white);flex-shrink:0;}
+.risk-card-title{font-size:1rem;font-weight:700;color:var(--gray-dk);flex:1;}
+.risk-card-badges{display:flex;gap:6px;flex-wrap:wrap;}
+.risk-card-chevron{width:20px;height:20px;color:var(--gray);transition:transform 0.25s;flex-shrink:0;}
+.risk-card-chevron.open{transform:rotate(180deg);}
+.risk-card-body{display:none;border-top:1px solid var(--border);}
+.risk-card-body.open{display:block;}
+.risk-layers{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+.risk-layer{padding:16px 20px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);}
+.risk-layer:nth-child(even){border-right:none;}
+.risk-layer:nth-last-child(-n+2){border-bottom:none;}
+.risk-layer-label{font-size:0.6875rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--gray);margin-bottom:6px;}
+.risk-layer-body{font-size:0.875rem;color:var(--gray-dk);line-height:1.6;}
+.nova-strip{background:var(--purple-lt);border-top:1px solid rgba(83,74,183,0.15);padding:14px 20px;display:flex;gap:10px;align-items:flex-start;}
+.nova-strip-label{font-size:0.6875rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--purple);flex-shrink:0;padding-top:2px;}
+.nova-strip-body{font-size:0.875rem;color:var(--purple-dk);line-height:1.55;}
+.emerging-badge{display:inline-flex;align-items:center;gap:4px;font-size:0.625rem;font-weight:700;padding:2px 8px;border-radius:20px;background:#FBEAF0;color:#72243E;border:1px solid #ED93B1;margin-left:8px;}
+.sticky-filter{position:sticky;top:60px;z-index:50;background:rgba(255,255,255,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 0;}
+@media(max-width:768px){.cat-grid{grid-template-columns:1fr 1fr;}.risk-layers{grid-template-columns:1fr;}.risk-layer{border-right:none;}.risk-layer:nth-last-child(-n+2){border-bottom:1px solid var(--border);}.risk-layer:last-child{border-bottom:none;}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">AGNA <span>Supply Chain Risk & Resilience</span></a>
+    <div class="nav-links">
+      <a href="what-is-risk.html" class="nav-link">What is risk</a>
+      <a href="risk-taxonomy.html" class="nav-link active">Risk taxonomy</a>
+      <a href="methodology.html" class="nav-link">Methodology</a>
+      <a href="resilience.html" class="nav-link">Resilience</a>
+      <a href="dashboard.html" class="nav-link">Dashboard</a>
+      <a href="case-studies.html" class="nav-link">Case studies</a>
+      <a href="about.html" class="nav-cta">About Tejaswi</a>
+    </div>
+  </div>
+</nav>
+
+<div class="chapter-hero">
+  <div class="container chapter-hero-inner">
+    <div style="display:inline-flex;align-items:center;gap:8px;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:16px;">
+      <span style="width:24px;height:1px;background:var(--teal);display:inline-block;"></span>Chapter 2<span style="width:24px;height:1px;background:var(--teal);display:inline-block;"></span>
+    </div>
+    <h1 class="headline" style="color:var(--white);margin-bottom:12px;">The Complete Risk Taxonomy</h1>
+    <p class="body-lg" style="color:rgba(255,255,255,0.5);max-width:600px;margin-bottom:28px;">Every disruption that made headlines started somewhere quiet. This is the complete map of where supply chain risks live - 17 risk types across 5 categories. For each one: what it is, how to find it, how to score it, and how to address it.</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <span class="badge badge-teal">17 risk types</span>
+      <span class="badge" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.5);">5 categories</span>
+      <span class="badge" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.5);">8 layers per risk</span>
+      <span class="badge badge-new">2 emerging risks - Sheffi 2024</span>
+    </div>
+  </div>
+</div>
+
+<!-- Sticky category filter -->
+<div class="sticky-filter">
+  <div class="container">
+    <div class="cat-grid">
+      <a href="#supply" class="cat-pill" style="background:var(--coral-lt);border-color:var(--coral);">
+        <div class="cat-num" style="color:var(--coral);">Category 1</div>
+        <div class="cat-name" style="color:var(--coral-dk);">Supply-side</div>
+        <div class="cat-count" style="color:var(--coral);">6 risk types</div>
+      </a>
+      <a href="#demand" class="cat-pill" style="background:var(--amber-lt);border-color:var(--amber);">
+        <div class="cat-num" style="color:var(--amber-dk);">Category 2</div>
+        <div class="cat-name" style="color:var(--amber-dk);">Demand-side</div>
+        <div class="cat-count" style="color:var(--amber);">3 risk types</div>
+      </a>
+      <a href="#environmental" class="cat-pill" style="background:var(--blue-lt);border-color:var(--blue);">
+        <div class="cat-num" style="color:var(--blue-dk);">Category 3</div>
+        <div class="cat-name" style="color:var(--blue-dk);">Environmental</div>
+        <div class="cat-count" style="color:var(--blue);">3 risk types</div>
+      </a>
+      <a href="#infrastructure" class="cat-pill" style="background:var(--purple-lt);border-color:var(--purple);">
+        <div class="cat-num" style="color:var(--purple-dk);">Category 4</div>
+        <div class="cat-name" style="color:var(--purple-dk);">Infrastructure</div>
+        <div class="cat-count" style="color:var(--purple);">3 risk types</div>
+      </a>
+      <a href="#emerging" class="cat-pill" style="background:#FBEAF0;border-color:#ED93B1;">
+        <div class="cat-num" style="color:#72243E;">Category 5</div>
+        <div class="cat-name" style="color:#72243E;">Emerging</div>
+        <div class="cat-count" style="color:#A0446B;">2 risk types · New</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="section-sm" style="padding-top:40px;">
+<div class="container">
+
+<!-- ═══ CATEGORY 1 - Supply-side ═══ -->
+<div class="risk-section" id="supply">
+  <div class="risk-section-header" style="background:var(--coral-lt);">
+    <div class="risk-section-icon" style="background:rgba(216,90,48,0.15);">🔗</div>
+    <div>
+      <div class="risk-section-title" style="color:var(--coral-dk);">Supply-side Risks</div>
+      <div class="risk-section-sub" style="color:var(--coral);">Originate from suppliers - visible at Tier 1, hidden below. The most common category and the one most companies think they manage. They usually don't - not below Tier 1.</div>
+    </div>
+    <span class="risk-section-count" style="background:var(--coral-lt);color:var(--coral-dk);">6 risk types</span>
+  </div>
+
+  <div id="risks-supply"></div>
+</div>
+
+<!-- ═══ CATEGORY 2 - Demand-side ═══ -->
+<div class="risk-section" id="demand">
+  <div class="risk-section-header" style="background:var(--amber-lt);">
+    <div class="risk-section-icon" style="background:rgba(239,159,39,0.15);">📈</div>
+    <div>
+      <div class="risk-section-title" style="color:var(--amber-dk);">Demand-side Risks</div>
+      <div class="risk-section-sub" style="color:var(--amber-dk);">Originate from customers and markets. Less discussed but equally dangerous. A demand collapse destroys a business as effectively as a supply disruption.</div>
+    </div>
+    <span class="risk-section-count" style="background:var(--amber-lt);color:var(--amber-dk);">3 risk types</span>
+  </div>
+  <div id="risks-demand"></div>
+</div>
+
+<!-- ═══ CATEGORY 3 - Environmental ═══ -->
+<div class="risk-section" id="environmental">
+  <div class="risk-section-header" style="background:var(--blue-lt);">
+    <div class="risk-section-icon" style="background:rgba(55,138,221,0.15);">🌍</div>
+    <div>
+      <div class="risk-section-title" style="color:var(--blue-dk);">Environmental Risks</div>
+      <div class="risk-section-sub" style="color:var(--blue);">Originate outside the supply chain in the physical and geopolitical world. Hardest to detect. Many are black swans - requiring resilience planning, not risk scoring.</div>
+    </div>
+    <span class="risk-section-count" style="background:var(--blue-lt);color:var(--blue-dk);">3 risk types</span>
+  </div>
+  <div id="risks-environmental"></div>
+</div>
+
+<!-- ═══ CATEGORY 4 - Infrastructure ═══ -->
+<div class="risk-section" id="infrastructure">
+  <div class="risk-section-header" style="background:var(--purple-lt);">
+    <div class="risk-section-icon" style="background:rgba(83,74,183,0.12);">⚙️</div>
+    <div>
+      <div class="risk-section-title" style="color:var(--purple-dk);">Infrastructure Risks</div>
+      <div class="risk-section-sub" style="color:var(--purple);">Affect the systems supply chains run on - logistics networks, digital systems, regulatory frameworks. Often hidden. Require different monitoring and detection methods.</div>
+    </div>
+    <span class="risk-section-count" style="background:var(--purple-lt);color:var(--purple-dk);">3 risk types</span>
+  </div>
+  <div id="risks-infrastructure"></div>
+</div>
+
+<!-- ═══ CATEGORY 5 - Emerging ═══ -->
+<div class="risk-section" id="emerging">
+  <div class="risk-section-header" style="background:#FBEAF0;">
+    <div class="risk-section-icon" style="background:rgba(160,68,107,0.1);">⚡</div>
+    <div>
+      <div class="risk-section-title" style="color:#72243E;">Foundational Emerging Risks</div>
+      <div class="risk-section-sub" style="color:#A0446B;">Identified by Professor Yossi Sheffi at MIT in 2024–2025. Most organisations have not yet incorporated either into their formal risk systems. AGNA addresses them because forward-looking risk management must account for tomorrow's risks.</div>
+    </div>
+    <span class="risk-section-count" style="background:#FBEAF0;color:#72243E;">2 risk types · New</span>
+  </div>
+  <div id="risks-emerging"></div>
+</div>
+
+<!-- Navigation -->
+<div style="display:flex;justify-content:space-between;align-items:center;padding-top:40px;border-top:1px solid var(--border);margin-top:40px;flex-wrap:wrap;gap:16px;">
+  <a href="what-is-risk.html" class="btn btn-ghost">← Chapter 1: What is risk</a>
+  <a href="methodology.html" class="btn btn-primary">Chapter 3: How to build the system →</a>
+</div>
+
+</div>
+</div>
+
+<script src="main.js"></script>
+<script>
+const RISKS = {
+  supply: [
+    {
+      num:1, title:"Single-source dependency",
+      badges:["P1 Critical","Sudden onset","Hidden"],
+      badgeColors:["p1","badge-coral","badge-gray"],
+      layers:{
+        "What it is":"Only one qualified supplier for a critical part. If they stop - production halts immediately. No backup. Cannot switch because no alternate is qualified.",
+        "Why it is a risk":"Probability non-zero. Impact maximised - single point of failure. TTR almost always exceeds TTS. Automatically P1 Critical.",
+        "How to identify":"ERP extract shows one supplier per part number. No alternate qualification activity in procurement records. No second source in AVL.",
+        "How to quantify":"TTR = qualification lead time + ramp time to full volume. TTS = (on-hand + WIP + in-transit) ÷ daily consumption. Gap = TTR minus TTS in days.",
+        "How to prioritise":"All single-source P1 nodes top of register regardless of spend. A 10-cent part with 180-day TTR beats a $50 commodity with 5 sources.",
+        "How to mitigate":"Dual source qualification. Safety stock increase to cover qualification period. Geographic alternate in different country or region.",
+        "Velocity type":"Sudden onset - hours to days from trigger to production halt. Pre-built playbook required, not monitoring.",
+        "NovaDrive example":"8 single-source P1 nodes identified. Taiwan ECU Corp: TTR 180 days, TTS 14 days, gap 166 days, RPN 504. Previously labelled 'medium.'"
+      },
+      nova:"Taiwan ECU Corp was single-source for the ADAS program for 4 years. No alternate qualified. No TTR measured. When they went offline - $180M loss in 11 days."
+    },
+    {
+      num:2, title:"Tier 1 financial distress",
+      badges:["P1/P2","Slow burn","Visible"],
+      badgeColors:["badge-amber","badge-amber","badge-blue"],
+      layers:{
+        "What it is":"Supplier's financial health deteriorating toward insolvency - declining revenue, rising debt, shrinking margins. Measurable and catchable if you are watching.",
+        "Why it is a risk":"Measurable probability via Altman Z-score. Severe impact - insolvency halts programs for months. Slow velocity gives time to intervene if caught early.",
+        "How to identify":"Altman Z-score below 2.99 = warning zone. Below 1.8 = distress zone requiring immediate intervention. Monitor quarterly for all P1 and P2 suppliers.",
+        "How to quantify":"Probability = Z-score trajectory over 4 quarters. Impact = TTR for replacement × daily revenue at risk. Velocity = slow burn, 6–18 months from signal to insolvency.",
+        "How to prioritise":"P1 if single-source or TTR exceeds TTS significantly. P2 if alternate exists but qualification takes 60+ days. Escalate immediately if Z-score crosses 1.8.",
+        "How to mitigate":"Pre-qualify alternate while distressed supplier is still operational. Negotiate safety stock build. Consider direct financial support for strategic single-source suppliers.",
+        "Velocity type":"Slow burn - months of financial signals before the crisis arrives. Catchable with monitoring. Uncatchable without it.",
+        "NovaDrive example":"Stuttgart Seating GmbH: Z-score declining 3 consecutive quarters. TTR 45 days, TTS 28 days, gap 17 days. P2 Elevated. Monthly monitoring triggered."
+      },
+      nova:"Stuttgart Seating's Z-score dropped from 3.2 to 1.9 over 3 quarters. Without monitoring - discovered at insolvency. With monitoring - 9-month head start to qualify an alternate."
+    },
+    {
+      num:3, title:"Diamond dependency - convergence node",
+      badges:["P1 Critical","Sudden onset","Hidden"],
+      badgeColors:["p1","badge-coral","badge-gray"],
+      layers:{
+        "What it is":"Single Tier 2 or Tier 3 supplier providing inputs to multiple Tier 1 suppliers simultaneously. One failure cascades into multiple programs at once. Invisible on any BOM.",
+        "Why it is a risk":"Impact multiplied across all connected programs. Same TTR problem as single-source but at a deeper tier - and invisible until sub-tier disclosure reveals it.",
+        "How to identify":"Only visible through structured sub-tier supplier disclosure. Same supplier name appearing in multiple Tier 1 responses = diamond node.",
+        "How to quantify":"TTR = time to find, qualify, ramp a Tier 2 alternate - longer than Tier 1. TTS = shortest TTS across all connected programs simultaneously.",
+        "How to prioritise":"Automatically P1 if node serves 3+ Tier 1 suppliers. Combined program exposure almost always exceeds any single-source Tier 1 risk.",
+        "How to mitigate":"Require Tier 1 to qualify second Tier 2 source. Direct engagement with Tier 2 for capacity reservation. Geographic mapping of all diamond nodes.",
+        "Velocity type":"Sudden onset - the same as a Tier 1 single-source failure, but harder to detect and harder to fix.",
+        "NovaDrive example":"Nagoya Resin KK: Tier 2 feeding 6 Tier 1 suppliers across all 5 programs. TTR 112 days, TTS 21 days. Not on original risk list. Found through sub-tier disclosure only."
+      },
+      nova:"Nagoya Resin KK was invisible on every risk register NovaDrive had. One disclosure questionnaire revealed it as the highest combined-impact node in their entire network."
+    },
+    {
+      num:4, title:"Geographic concentration",
+      badges:["P1/P2","Sudden onset","Hidden"],
+      badgeColors:["badge-amber","badge-coral","badge-gray"],
+      layers:{
+        "What it is":"Multiple suppliers physically located in the same zone. One regional event - earthquake, typhoon, power outage, political event - affects all simultaneously.",
+        "Why it is a risk":"Companies believe they have diversified by corporate entity but not by geography. Correlated simultaneous failure is far worse than individual failure.",
+        "How to identify":"Plot every supplier by city and region. Look for clusters, especially industrial zones with shared infrastructure, utilities, or logistics hubs.",
+        "How to quantify":"Score the simultaneous failure scenario: all suppliers in same zone offline together. Combined daily revenue at risk. Combined TTR for geographic alternates.",
+        "How to prioritise":"Flag any zone with 3+ P1 or P2 suppliers within 50km. Score combined simultaneous failure impact - often reveals a much more severe risk than individual scores suggest.",
+        "How to mitigate":"Geographic diversification - alternate in different region for all P1 parts with concentration. Inventory pre-build ahead of known risk seasons (typhoon, monsoon).",
+        "Velocity type":"Sudden onset - regional event cascades across all co-located suppliers in hours.",
+        "NovaDrive example":"4 Taiwan suppliers in Hsinchu Science Park - previously scored as 4 independent risks. Geographic mapping revealed: one correlated risk with $180M+ per week combined impact."
+      },
+      nova:"NovaDrive had 'diversified' across 4 Taiwan suppliers. All 4 were in the same industrial park sharing the same power grid, the same logistics routes, and the same geopolitical exposure."
+    },
+    {
+      num:5, title:"Quality failure and product recall",
+      badges:["P1/P2/P3","Sudden onset","Visible"],
+      badgeColors:["badge-amber","badge-coral","badge-blue"],
+      layers:{
+        "What it is":"Supplier quality deteriorates through process drift, material substitution, workforce turnover, or capacity overload - producing defective parts that reach the production line or end customer.",
+        "Why it is a risk":"Measurable probability via quality data. Impact ranges from rework cost to full recall - quantifiable through warranty reserve models and daily production cost.",
+        "How to identify":"Incoming rejection rates trending up. Audit scores below 70. PPAP lapsing. Customer warranty claims clustering on one part number. Cpk drifting below 1.33.",
+        "How to quantify":"Probability = supplier defect rate trend over 4 quarters. Impact = recall cost + warranty reserve + production disruption + customer penalty clause.",
+        "How to prioritise":"P1 for safety-critical parts (IATF 16949 Part A). P2 for functional parts with warranty exposure. P3 for cosmetic parts with cosmetic defects only.",
+        "How to mitigate":"Incoming quality inspection increase. Supplier process audit. Safety stock build while quality issue resolved. Dual approval for any process change at supplier.",
+        "Velocity type":"Sudden onset once defective parts enter the production line. Slow burn in terms of quality system deterioration - catchable with audit cadence.",
+        "NovaDrive example":"3 suppliers not audited in 18+ months. Incoming rejection trending up on seat foam components. Audit programme initiated as part of P2 management plan."
+      },
+      nova:"NovaDrive's quality monitoring was Tier 1 scorecards only. No audit programme. No Cpk tracking. 3 suppliers showing early deterioration signals that would have become production stoppages."
+    },
+    {
+      num:6, title:"Sub-tier opacity",
+      badges:["P1","Hidden","Structural"],
+      badgeColors:["p1","badge-gray","badge-blue"],
+      layers:{
+        "What it is":"Company knows Tier 1 well. Knows almost nothing about Tier 2 and Tier 3. Risks below the surface are invisible until they cascade upward into a production halt.",
+        "Why it is a risk":"Sheffi identifies deep-tier risks as the most underaddressed area of supply chain vulnerability. Detection time effectively zero - first signal is the halt itself.",
+        "How to identify":"Send Tier 1 suppliers formal questionnaire asking for their key sub-suppliers. Aggregate responses. Track geographic clustering and diamond dependencies.",
+        "How to quantify":"Cannot fully quantify without disclosure data. Treat opacity itself as a P1 risk requiring disclosure as the first mitigation action.",
+        "How to prioritise":"Prioritise disclosure to P1 Tier 1 suppliers first. Focus on critical-path parts. Map no deeper than Tier 3 in most supply chains - beyond that, diminishing returns.",
+        "How to mitigate":"Formal sub-tier disclosure programme. Contractual obligation for Tier 1 to maintain and share visibility of critical Tier 2 sub-suppliers. Annual refresh.",
+        "Velocity type":"Hidden until sudden - disruption arrives with no warning because the monitoring layer does not exist below Tier 1.",
+        "NovaDrive example":"Zero Tier 2 visibility on Day 1. Sub-tier disclosure revealed Nagoya Resin KK (affecting all 5 programs) and 3 other convergence nodes - none on the original risk list."
+      },
+      nova:"NovaDrive's entire risk register was Tier 1 only. Sub-tier disclosure took 6 weeks and revealed 4 risks that were more severe than any Tier 1 risk they had previously identified."
+    }
+  ],
+  demand: [
+    {
+      num:7, title:"Program cancellation or volume collapse",
+      badges:["P1/P2","Slow burn","Visible"],
+      badgeColors:["badge-amber","badge-amber","badge-blue"],
+      layers:{
+        "What it is":"Vehicle program cancelled, delayed, or major volume reduction - eliminating or drastically reducing revenue. Every tooling investment, supplier commitment, and headcount decision unwinds simultaneously.",
+        "Why it is a risk":"Non-zero probability as market conditions shift or technology changes. Severe impact for revenue-concentrated suppliers. Signals appear months before formal cancellation.",
+        "How to identify":"Customer forecast revisions trending down 3+ quarters. OEM platform strategy change announcements. EV adoption pace shifting demand mix. Customer financial distress signals.",
+        "How to quantify":"Revenue impact = cancelled program revenue × remaining life. Plus stranded tooling cost. Plus workforce adjustment cost. Total = sum of all three.",
+        "How to prioritise":"P1 if single program above 40% of facility revenue. P2 if 20–40%. P3 if below 20% with diversified customer base. Revenue concentration threshold = 40%.",
+        "How to mitigate":"Customer concentration monitoring. Program portfolio diversification. Contractual tooling recovery clauses on cancellation. Early warning monitoring of OEM communications.",
+        "Velocity type":"Slow burn - signals appear months to years before formal cancellation. Catchable with OEM intelligence monitoring.",
+        "NovaDrive example":"EV Platform at 34% of revenue - below the 40% P1 threshold but material. Scenario analysis completed for 20% volume reduction: $164M revenue impact over remaining program life."
+      },
+      nova:"NovaDrive's EV Platform at 34% revenue concentration is one market shift away from a P1 crisis. The scenario model built in Chapter 3 quantifies exactly what a 20% volume reduction means in dollar terms."
+    },
+    {
+      num:8, title:"Demand volatility - the bullwhip effect",
+      badges:["P2","Slow burn","Visible"],
+      badgeColors:["badge-amber","badge-amber","badge-blue"],
+      layers:{
+        "What it is":"Small customer demand fluctuations amplify dramatically upstream through the supply chain. 5% at the customer becomes an 80% swing at Tier 2. Identified by Jay Forrester in 1961.",
+        "Why it is a risk":"Near-certain probability in sequential forecasting supply chains. Creates inventory overcorrection, expedite costs, and shortfalls across all tiers simultaneously.",
+        "How to identify":"Order variability above sales variability - ratio above 1.5 confirms bullwhip is active. Forecast accuracy declining. Safety stock growing without corresponding demand growth.",
+        "How to quantify":"Order variance ÷ sales variance = bullwhip ratio. Total financial waste typically 2–5% of supply chain cost across all programs annually.",
+        "How to prioritise":"High priority in automotive - long lead times, batch ordering, multiple forecast handoffs amplify the effect at every tier. Any program with 3+ tier levels on critical path is elevated.",
+        "How to mitigate":"Point-of-sale data sharing directly with Tier 1 and Tier 2. Vendor-managed inventory for critical components. Collaborative S&OP. Reduce batch ordering frequency.",
+        "Velocity type":"Slow burn - builds over months of compounding forecast errors. Catchable by tracking order variance vs sales variance monthly.",
+        "NovaDrive example":"Monthly rolled-up forecasts shared with Tier 1 - creating a 4-week demand signal lag. Daily production data not shared. Bullwhip amplification active and unmonitored across all 5 programs."
+      },
+      nova:"NovaDrive's forecasting system sends monthly batch updates to all Tier 1 suppliers. This single structural choice creates bullwhip amplification at every handoff downstream - measurable as unnecessary inventory cost and periodic shortfalls."
+    },
+    {
+      num:9, title:"EV transition pace uncertainty",
+      badges:["Structural","P2/P3","Portfolio-level"],
+      badgeColors:["badge-blue","badge-amber","badge-purple"],
+      layers:{
+        "What it is":"Structural shift from ICE to EV at an uncertain pace. If EV accelerates - ICE programs stranded. If EV slows - EV investments premature. Either direction creates significant financial risk.",
+        "Why it is a risk":"Structural demand risk with uncertainty driven by policy, infrastructure, consumer sentiment, and battery cost - all simultaneously in flux. Fixed technology-specific investments make structural bets.",
+        "How to identify":"Monitor EV sales data quarterly by market. Track government policy changes and incentive structures. Monitor OEM platform mix announcements. Assess revenue exposure by technology type.",
+        "How to quantify":"Three adoption scenarios: 10% faster, in line, 10% slower than plan. Revenue shift between technology types. Stranded capacity cost. New investment required. Modelled across full portfolio.",
+        "How to prioritise":"Portfolio-level governance - not individual supplier scoring. Requires executive scenario planning and board-level technology strategy conversation.",
+        "How to mitigate":"Technology-agnostic capacity where possible. Component standardisation across EV and ICE. Supplier base with capability in both. Contractual flexibility in volume commitments.",
+        "Velocity type":"Structural - develops over years. Requires strategic planning horizon, not operational monitoring.",
+        "NovaDrive example":"3 ICE programs, 2 EV programs. EV revenue 30% of total. EV 10% faster adoption scenario: $180M revenue shift away from ICE programs before end of program life."
+      },
+      nova:"NovaDrive's technology mix is a strategic bet on the EV transition pace. The scenario model quantifies what each adoption trajectory means for program revenue - making the bet visible and manageable."
+    }
+  ],
+  environmental: [
+    {
+      num:10, title:"Geopolitical supply shock",
+      badges:["P1 Black Swan","Sudden onset","Hidden"],
+      badgeColors:["p1","badge-coral","badge-gray"],
+      layers:{
+        "What it is":"Trade war, sanctions, export controls, military conflict, or diplomatic breakdown disrupts supply from a country or region. Can be permanent - trade routes that close may not reopen.",
+        "Why it is a risk":"Probability uncertain but conditions observable and trackable. Impact potentially existential - entire component categories unavailable with no approved alternate source.",
+        "How to identify":"World Bank country risk index monitoring. CSIS geopolitical risk tracking. Export control database. Supplier concentration by country of origin. Geographic mapping by nation.",
+        "How to quantify":"Scenario: specific country unavailable overnight. Which suppliers, parts, programs affected? TTR to alternatives in different geography? Combined TTS across affected programs simultaneously.",
+        "How to prioritise":"Any country providing 30%+ of critical component supply = geopolitical concentration risk requiring immediate scenario planning regardless of current political stability.",
+        "How to mitigate":"Geographic diversification - no single country above 30% of critical spend. Pre-qualify alternates in friendly-nation geographies. Safety stock ahead of escalating tensions.",
+        "Velocity type":"Sudden onset - signals visible months ahead but impact arrives fast once a trigger event occurs. Requires pre-built playbook, not real-time monitoring response.",
+        "NovaDrive example":"Taiwan: 4 suppliers, 2 single-source critical. Classified as black swan - probability not assignable but impact existential for 4 of 5 programs. Korean and German alternate qualification programme initiated."
+      },
+      nova:"The Taiwan semiconductor situation is NovaDrive's most severe geopolitical exposure. 18-month signals were visible in the trade press before the disruption hit. The monitoring system that would have caught them did not exist."
+    },
+    {
+      num:11, title:"Natural disaster at supplier site",
+      badges:["P1/P2","Sudden onset","Hidden"],
+      badgeColors:["badge-amber","badge-coral","badge-gray"],
+      layers:{
+        "What it is":"Earthquake, flood, typhoon, tsunami, or tornado physically destroys or disables a supplier's facility. The event Sheffi opens The Power of Resilience with - Japan 2011.",
+        "Why it is a risk":"Probability estimated regionally from historical frequency. Japan: major seismic events every decade. Taiwan: typhoon and earthquake seasonally. Only preparation before the event works.",
+        "How to identify":"Geographic risk mapping of all suppliers overlaid with historical disaster frequency. Identify suppliers in high-risk zones. Cross-reference with single-source status.",
+        "How to quantify":"TTR for physically destroyed facility: semiconductor fab 18–36 months, casting plant 6–12 months, chemical supplier 9–18 months. Compare to TTS for each connected program.",
+        "How to prioritise":"Any P1 supplier in a high-frequency disaster zone with no geographic alternate gets a dedicated resilience playbook regardless of current risk register score.",
+        "How to mitigate":"Pre-qualify alternates in different geographic risk zones. Safety stock sized for full disaster-scenario TTR. Annual BCP audit requirement for all P1 suppliers.",
+        "Velocity type":"Sudden onset - zero warning time once the event occurs. Only preparation done before the event is useful.",
+        "NovaDrive example":"Nagoya Resin KK (Japan, no alternates) + Yokohama Glass (Japan, 2 alternates). Same earthquake hits both simultaneously: catastrophic compounded exposure. Nagoya alternate qualification in Germany underway."
+      },
+      nova:"If a Nagoya-magnitude earthquake hits today, NovaDrive loses both Nagoya Resin KK and Yokohama Glass simultaneously. The TTR for Nagoya's resin chemistry is 112 days. TTS is 21 days. The gap is 91 days of halted production."
+    },
+    {
+      num:12, title:"Pandemic and systemic global disruption",
+      badges:["Black Swan","Sudden","Structural"],
+      badgeColors:["p1","badge-coral","badge-blue"],
+      layers:{
+        "What it is":"Global health crisis simultaneously disrupting supply and demand across all geographies, all industries, all tiers at once. COVID-19 was the proof case that standard tools are blind to this category.",
+        "Why it is a risk":"Canonical black swan: outlier, extreme impact, retrospectively predictable. Standard risk tools cannot address it. Only systemic resilience capability works.",
+        "How to identify":"Cannot be predicted at company level. Prepared for through financial buffers, inventory reserves, flexible capacity, and pre-authorised emergency protocols.",
+        "How to quantify":"Scenario: 60-day global shutdown. Which programs survive on current TTS? What is daily revenue loss? What financial reserves cover 90 days of operations?",
+        "How to prioritise":"Systemic resilience - organisation-wide, not individual supplier level. Financial reserves, flexible workforce, inventory buffers, and an eight-phase response playbook.",
+        "How to mitigate":"Extend TTS across all P1 programs to 60 days minimum. Financial reserve: 90 days operating cost. Demand shaping: redirect supply to highest-priority programs when supply is constrained.",
+        "Velocity type":"Sudden onset - sustained over months to years. The eight-phase Sheffi resilience curve applies in full - Chapter 4 builds the complete playbook.",
+        "NovaDrive example":"COVID scenario: TTS ranges from 10 days (ADAS Suite) to 60 days (Chassis Systems). 3 of 5 programs halt within 3 weeks without intervention. Safety stock extended to 45 days on all P1 parts."
+      },
+      nova:"In a COVID-equivalent scenario today, NovaDrive's ADAS Suite halts in 10 days. The EV Platform in 14 days. Body Systems in 18 days. Without the survival window extension built in Chapter 3 - three programs go dark in under 3 weeks."
+    }
+  ],
+  infrastructure: [
+    {
+      num:13, title:"Logistics network disruption",
+      badges:["P1/P2","Sudden onset","Visible"],
+      badgeColors:["badge-amber","badge-coral","badge-blue"],
+      layers:{
+        "What it is":"Disruption to physical infrastructure moving goods - ports, shipping lanes, rail, air freight, road. Suez Canal 2021: one ship halted 12% of global trade for 6 days.",
+        "Why it is a risk":"Visible risk with estimable probability from historical data. Sudden onset requires pre-built response - no time to analyse when a port closes or a lane is blocked.",
+        "How to identify":"Port congestion indices. Shipping lane monitoring. Key route concentration - all critical inbound freight through one port = logistics single point of failure.",
+        "How to quantify":"For each critical part: current route, TTS if route disrupted, TTR via alternate route, cost premium of alternative. These four numbers define exposure and mitigation cost.",
+        "How to prioritise":"Any program dependent on single port or single lane for P1 critical components = logistics concentration risk requiring alternate routing pre-plan.",
+        "How to mitigate":"Multi-modal strategy - pre-approved alternate routes for all P1 parts. Air freight pre-authorisation with cost threshold. Safety stock for alternative route lead time premium.",
+        "Velocity type":"Sudden onset - port or route closure news cascades immediately to logistics teams. Pre-authorised response is the only way to act fast enough.",
+        "NovaDrive example":"ADAS ECU from Taiwan via Kaohsiung - single port dependency for the most critical component. Alternate: air freight from Taipei, 3 days vs 28 days, 6× cost premium. Air freight pre-authorised in playbook."
+      },
+      nova:"The Suez Canal closure was detected in hours. NovaDrive had no pre-approved alternate route for their Taiwan ECU components. The approval process for air freight took 4 days. A pre-authorised playbook makes that decision in 4 hours."
+    },
+    {
+      num:14, title:"Regulatory cascade - CBAM and ESG mandates",
+      badges:["Structural","P1/P2","Hidden"],
+      badgeColors:["badge-blue","badge-amber","badge-gray"],
+      layers:{
+        "What it is":"Single regulation activating across multiple suppliers simultaneously. CBAM is the live example: one EU carbon border tax affecting 7 NovaDrive suppliers at once. Most companies track regulations supplier-by-supplier and miss the cascade entirely.",
+        "Why it is a risk":"Structural risk visible in policy drafts years before activation. Aggregate cascade exposure is always larger than the sum of individual compliance costs. Most companies discover it late.",
+        "How to identify":"Monitor EU regulatory calendar, US trade policy, national ESG disclosure timelines. Map which suppliers are subject to each regulation by geography. Apply Regulatory Trigger Propagation Engine.",
+        "How to quantify":"Compliance cost per supplier × number affected + qualification timeline + non-compliance penalty. Aggregate cascade exposure - not individual supplier cost.",
+        "How to prioritise":"Regulations activating within 12 months: immediate action plans. 12–24 months: strategic planning cycle. 2+ years: monitoring with scenario modelling.",
+        "How to mitigate":"Regulatory calendar monitoring for every jurisdiction where suppliers operate. Pre-compliance support for strategic suppliers. Geographic diversification away from high-regulatory-risk jurisdictions.",
+        "Velocity type":"Structural - years of lead time if detected early through regulatory monitoring. The 18-month detection advantage is what makes regulatory risk manageable.",
+        "NovaDrive example":"7 EU suppliers subject to CBAM. Previously tracked as 7 separate issues. Regulatory Trigger Propagation Engine revealed: combined exposure $34M affecting $340M annual spend. 18-month detection advantage achieved."
+      },
+      nova:"The Kearney CBAM work that AGNA's Regulatory Trigger Propagation Engine is based on covered 800+ suppliers across 7 countries. The tool identified cascade exposures that individual supplier-by-supplier tracking missed entirely."
+    },
+    {
+      num:15, title:"Cyber attack on supplier systems",
+      badges:["P1/P2","Sudden onset","Hidden"],
+      badgeColors:["badge-amber","badge-coral","badge-gray"],
+      layers:{
+        "What it is":"Ransomware, data breach, or cyber intrusion targeting supplier ERP, production control, or logistics systems - halting their ability to manufacture or ship parts.",
+        "Why it is a risk":"67% of manufacturing organisations faced ransomware in 2024. Sudden onset. Shared ERP platforms across multiple suppliers = digital convergence node - one attack can affect all simultaneously.",
+        "How to identify":"Supplier cybersecurity assessments in annual audit. Incident history tracking. Industry sector profiling. Supply chain software dependency mapping - multiple P1 suppliers on same ERP platform.",
+        "How to quantify":"Same TTR/TTS framework. TTR = time to restore systems after ransomware: 2–6 weeks for major incident. TTS = current inventory buffer. TTR > TTS = P1 Critical.",
+        "How to prioritise":"Any P1 or P2 supplier without documented cyber incident response capability = cyber risk flag added regardless of other scores.",
+        "How to mitigate":"Cybersecurity standards as supplier qualification criterion. Cyber incident notification requirement in supplier contracts. Offline inventory buffers for P1 suppliers with shared platform dependency.",
+        "Velocity type":"Sudden onset - ransomware attack is typically discovered within hours. Production impact follows within days. Pre-built response protocol is essential.",
+        "NovaDrive example":"3 P1 suppliers share the same ERP platform from one vendor. Digital convergence node - one platform attack affects all 3 simultaneously. Offline inventory buffers extended from 14 to 28 days for all three."
+      },
+      nova:"NovaDrive's 3 most critical suppliers - Taiwan ECU, Nagoya Resin, and Stuttgart Seating - all run the same ERP platform version. A single platform ransomware attack would halt all three. This digital convergence node was invisible until mapped."
+    }
+  ],
+  emerging: [
+    {
+      num:16, title:"Energy supply - the invisible Tier 0 supplier",
+      badges:["Emerging","P1","Sheffi 2024"],
+      badgeColors:["badge-new","p1","badge-purple"],
+      layers:{
+        "What it is":"Reliable electric power is becoming an active supply chain risk. As data centres expand, facilities electrify, and EV production demands massive energy inputs, grid availability can no longer be assumed. Energy is effectively a Tier 0 supplier - above Tier 1, invisible on any BOM, never sent a risk questionnaire.",
+        "Why it is a risk":"Without power nothing functions. Three layers: grid reliability (outages and capacity), energy price volatility (margin compression), energy geopolitics (countries weaponising supply as Europe discovered in 2022).",
+        "How to identify":"Map energy infrastructure serving each P1 supplier and your own facilities. Identify single grid dependencies. Assess backup power capability and duration. Monitor grid capacity data in key manufacturing zones.",
+        "How to quantify":"Scenario: regional grid failure 72 hours. Which facilities halt? Which programs stop? Daily revenue impact? TTR to restore vs TTS on current backup generation capability.",
+        "How to prioritise":"Any P1 facility or supplier with no backup power and grid-dependent single-source electricity = energy risk P1 node. As EV manufacturing scales, energy risk escalates to board-level priority.",
+        "How to mitigate":"Onsite backup generation - minimum 72-hour production capability. Microgrid investment. Multiple grid connection points, renewable onsite generation, battery storage.",
+        "Velocity type":"Sudden onset for acute grid failure. Structural for long-term capacity constraints as industrial electricity demand grows faster than grid expansion.",
+        "NovaDrive example":"Battery assembly facility: 24-hour operation, 4-hour backup generation only. Regional grid event above 4 hours halts battery production - the highest revenue-per-hour component of the EV Platform. Energy risk classified P1 for first time."
+      },
+      nova:"NovaDrive's battery assembly runs 24 hours. Their backup generation covers 4 hours. A 6-hour regional grid event - not a disaster, just a grid stress event - halts their highest-value production line. This risk was not on any register before AGNA identified it."
+    },
+    {
+      num:17, title:"AI dependency - the new invisible single-source",
+      badges:["Emerging","P1/P2","Sheffi 2024"],
+      badgeColors:["badge-new","badge-amber","badge-purple"],
+      layers:{
+        "What it is":"Adopting AI for demand forecasting, supplier selection, logistics routing, and procurement creates a new single-source dependency. If the AI system fails or produces systematically wrong outputs, decisions across the entire supply chain are corrupted simultaneously. Sheffi's warning: overreliance hollows out the workforce, eliminating the human resilience capability organisations need when systems fail.",
+        "Why it is a risk":"Two mechanisms. First: concentration - most companies adopt from 2–3 AI providers. One platform systematic error = every company using it makes the same wrong decision simultaneously. Correlated industry-wide failure with no precedent. Second: capability erosion - as AI handles decisions, human expertise atrophies.",
+        "How to identify":"Map all AI systems in supply chain decisions: vendor, platform, version, decisions it owns. Identify AI-autonomous vs human-supervised decisions. Audit human capability to make those decisions manually for 48 hours without AI.",
+        "How to quantify":"Scenario: primary AI platform unavailable 5 business days. Which decisions cannot be made? Which orders not placed? Which risks unmonitored? Financial impact across all programs.",
+        "How to prioritise":"Any decision process where AI is the sole input and human fallback capability has been eliminated = P1 AI dependency risk.",
+        "How to mitigate":"Human-in-the-loop requirement for AI-generated decisions above defined financial threshold. Regular AI-offline drills. Vendor concentration monitoring. Maintain human expertise in parallel as a deliberate resilience investment.",
+        "Velocity type":"Sudden onset for acute system failure. Structural for gradual capability erosion - the slower and more dangerous of the two mechanisms.",
+        "NovaDrive example":"Single AI demand forecasting platform for all 5 programs. Three competitor OEMs use the same platform. A systematic error creates correlated demand signal errors across the automotive industry simultaneously. No human backup for demand planning - team restructured when AI was implemented."
+      },
+      nova:"NovaDrive implemented AI demand forecasting 18 months ago and restructured the demand planning team. Today: no human can run demand planning manually for more than 48 hours. One platform outage or systematic error cascades across all 5 programs with no fallback."
+    }
+  ]
+};
+
+function buildRisk(risk, catColor) {
+  const badgesHtml = risk.badges.map((b,i) => `<span class="badge ${risk.badgeColors[i]}">${b}</span>`).join('');
+  const layersHtml = Object.entries(risk.layers).map(([label,body]) => `
+    <div class="risk-layer">
+      <div class="risk-layer-label">${label}</div>
+      <div class="risk-layer-body">${body}</div>
+    </div>`).join('');
+
+  return `
+  <div class="risk-card fade-up">
+    <div class="risk-card-header" onclick="toggleRisk(this)">
+      <div class="risk-card-num" style="background:${catColor};">${risk.num}</div>
+      <div class="risk-card-title">${risk.title}</div>
+      <div class="risk-card-badges">${badgesHtml}</div>
+      <svg class="risk-card-chevron" viewBox="0 0 20 20" fill="none">
+        <path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="risk-card-body">
+      <div class="risk-layers">${layersHtml}</div>
+      <div class="nova-strip">
+        <span class="nova-strip-label">NovaDrive</span>
+        <span class="nova-strip-body">${risk.nova}</span>
+      </div>
+    </div>
+  </div>`;
+}
+
+const catColors = {
+  supply: '#D85A30',
+  demand: '#EF9F27',
+  environmental: '#378ADD',
+  infrastructure: '#534AB7',
+  emerging: '#A0446B'
+};
+
+Object.entries(RISKS).forEach(([cat, risks]) => {
+  const container = document.getElementById('risks-' + cat);
+  if (container) {
+    container.innerHTML = risks.map(r => buildRisk(r, catColors[cat])).join('');
+  }
+});
+
+// Re-observe new elements for animation
+setTimeout(() => {
+  document.querySelectorAll('.fade-up:not(.observed)').forEach(el => {
+    el.classList.add('observed');
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.05 });
+    obs.observe(el);
+  });
+}, 100);
+
+function toggleRisk(header) {
+  const body = header.nextElementSibling;
+  const chevron = header.querySelector('.risk-card-chevron');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  chevron.classList.toggle('open', !isOpen);
+}
+</script>
+</body>
+</html>

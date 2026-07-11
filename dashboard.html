@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Dashboard - AGNA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.chapter-hero{background:linear-gradient(135deg,#050D1A 0%,#0C1A30 60%,#0F0D2B 100%);padding:120px 0 80px;position:relative;overflow:hidden;}
+.chapter-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(55,138,221,0.07) 1px,transparent 1px),linear-gradient(90deg,rgba(55,138,221,0.07) 1px,transparent 1px);background-size:50px 50px;}
+.dash-container{background:#0F1729;border-radius:var(--radius-xl);padding:28px;margin-bottom:48px;border:1px solid rgba(255,255,255,0.08);}
+.dash-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:12px;}
+.dash-title{font-size:0.8125rem;font-weight:700;color:rgba(255,255,255,0.9);display:flex;align-items:center;gap:8px;}
+.dash-live-dot{width:8px;height:8px;border-radius:50%;background:var(--teal);animation:blink 2s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+.dash-time{font-size:0.75rem;color:rgba(255,255,255,0.3);}
+.kri-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px;}
+.kri-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius-md);padding:14px;}
+.kri-label{font-size:0.6875rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:8px;}
+.kri-val{font-size:1.75rem;font-weight:800;line-height:1;margin-bottom:4px;}
+.kri-sub{font-size:0.75rem;color:rgba(255,255,255,0.4);}
+.kri-red{color:#F47474;}
+.kri-amber{color:#FABD45;}
+.kri-green{color:#5FD9A0;}
+.kri-blue{color:#7BC4FA;}
+.tts-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:16px;}
+.tts-card{background:rgba(255,255,255,0.04);border-radius:var(--radius-md);padding:12px;border:1px solid;}
+.tts-card.red{border-color:rgba(244,116,116,0.3);background:rgba(163,45,45,0.1);}
+.tts-card.amber{border-color:rgba(250,189,69,0.3);background:rgba(239,159,39,0.08);}
+.tts-card.green{border-color:rgba(95,217,160,0.3);background:rgba(29,158,117,0.08);}
+.tts-prog{font-size:0.625rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:6px;}
+.tts-days{font-size:1.25rem;font-weight:800;line-height:1;margin-bottom:2px;}
+.tts-bar-wrap{height:4px;background:rgba(255,255,255,0.08);border-radius:2px;margin:6px 0;}
+.tts-bar-fill{height:100%;border-radius:2px;}
+.tts-label{font-size:0.6875rem;color:rgba(255,255,255,0.4);}
+.alert-list{display:flex;flex-direction:column;gap:6px;}
+.alert-item{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:var(--radius-sm);font-size:0.8125rem;}
+.alert-item.red{background:rgba(163,45,45,0.15);border:1px solid rgba(163,45,45,0.3);}
+.alert-item.amber{background:rgba(239,159,39,0.1);border:1px solid rgba(239,159,39,0.25);}
+.alert-item.blue{background:rgba(55,138,221,0.1);border:1px solid rgba(55,138,221,0.2);}
+.alert-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:4px;}
+.alert-text{color:rgba(255,255,255,0.8);flex:1;line-height:1.5;}
+.alert-time{font-size:0.6875rem;color:rgba(255,255,255,0.3);flex-shrink:0;}
+.fin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+.fin-card{background:rgba(255,255,255,0.04);border-radius:var(--radius-md);padding:12px;border:1px solid rgba(255,255,255,0.08);}
+.fin-name{font-size:0.75rem;font-weight:600;color:rgba(255,255,255,0.6);margin-bottom:4px;}
+.fin-score{font-size:1.125rem;font-weight:800;margin-bottom:4px;}
+.fin-bar-track{height:4px;background:rgba(255,255,255,0.08);border-radius:2px;}
+.fin-bar{height:100%;border-radius:2px;}
+.kri-section-label{font-size:0.6875rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin:16px 0 8px;}
+.roi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.roi-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius-md);padding:12px;}
+.roi-label{font-size:0.6875rem;color:rgba(255,255,255,0.4);margin-bottom:6px;}
+.roi-val{font-size:1.25rem;font-weight:800;color:rgba(255,255,255,0.9);}
+.roi-sub{font-size:0.75rem;color:rgba(255,255,255,0.3);margin-top:2px;}
+@media(max-width:768px){.kri-grid{grid-template-columns:1fr 1fr;}.tts-grid{grid-template-columns:1fr 1fr;}.fin-grid{grid-template-columns:1fr 1fr;}.roi-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">AGNA <span>Supply Chain Risk & Resilience</span></a>
+    <div class="nav-links">
+      <a href="what-is-risk.html" class="nav-link">What is risk</a>
+      <a href="risk-taxonomy.html" class="nav-link">Risk taxonomy</a>
+      <a href="methodology.html" class="nav-link">Methodology</a>
+      <a href="resilience.html" class="nav-link">Resilience</a>
+      <a href="dashboard.html" class="nav-link active">Dashboard</a>
+      <a href="case-studies.html" class="nav-link">Case studies</a>
+      <a href="about.html" class="nav-cta">About Tejaswi</a>
+    </div>
+  </div>
+</nav>
+
+<div class="chapter-hero">
+  <div class="container" style="position:relative;z-index:2;">
+    <div style="display:inline-flex;align-items:center;gap:8px;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:16px;">
+      <span style="width:24px;height:1px;background:var(--blue);display:inline-block;"></span>Chapter 5<span style="width:24px;height:1px;background:var(--blue);display:inline-block;"></span>
+    </div>
+    <h1 class="headline" style="color:var(--white);margin-bottom:12px;">The Live Operations Dashboard</h1>
+    <p class="body-lg" style="color:rgba(255,255,255,0.5);max-width:600px;margin-bottom:24px;">Risk management is not a quarterly report. It is what a risk manager sees on a Tuesday morning and knows exactly where to act. This is NovaDrive's live operations dashboard - six KRI categories, real-time trigger alerts, and Time-to-Survive by program.</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <span class="badge" style="background:rgba(55,138,221,0.25);color:#7BC4FA;">6 KRI categories</span>
+      <span class="badge" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.5);">Live trigger alerts</span>
+      <span class="badge" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.5);">TTS by program</span>
+      <span class="badge" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.5);">ROI reporting</span>
+    </div>
+  </div>
+</div>
+
+<div class="section-sm" style="background:#F8F8F6;padding-top:40px;padding-bottom:60px;">
+<div class="container">
+
+<div style="margin-bottom:24px;">
+  <div class="label section-eyebrow" style="margin-bottom:8px;">NovaDrive Motors - Live risk operations</div>
+  <p class="body-md text-gray">This is what the morning dashboard looks like after Steps 0 through 10 are complete. Every number is actionable. Every alert requires a named response. Every metric is updated automatically from live data feeds.</p>
+</div>
+
+<div class="dash-container fade-up">
+  <div class="dash-header">
+    <div class="dash-title"><div class="dash-live-dot"></div>NovaDrive Risk Operations Dashboard</div>
+    <div class="dash-time" id="dashTime">Loading...</div>
+  </div>
+
+  <!-- KRI summary row -->
+  <div class="kri-grid">
+    <div class="kri-card">
+      <div class="kri-label">Active P1 risks</div>
+      <div class="kri-val kri-red">8</div>
+      <div class="kri-sub">2 with mitigation plans active · 6 being managed</div>
+    </div>
+    <div class="kri-card">
+      <div class="kri-label">Trigger alerts today</div>
+      <div class="kri-val kri-amber">3</div>
+      <div class="kri-sub">2 amber · 1 blue · 0 red</div>
+    </div>
+    <div class="kri-card">
+      <div class="kri-label">Shortest TTS (any program)</div>
+      <div class="kri-val kri-amber">26 days</div>
+      <div class="kri-sub">U33 Body Systems · Stuttgart Seating component</div>
+    </div>
+    <div class="kri-card">
+      <div class="kri-label">Korean ECU alternate</div>
+      <div class="kri-val kri-blue">40%</div>
+      <div class="kri-sub">Qualification in progress · On track for Day 45</div>
+    </div>
+    <div class="kri-card">
+      <div class="kri-label">Suppliers in Z-score watch</div>
+      <div class="kri-val kri-amber">2</div>
+      <div class="kri-sub">Stuttgart Seating · Yokohama Glass · Monthly review</div>
+    </div>
+    <div class="kri-card">
+      <div class="kri-label">Revenue protected (YTD)</div>
+      <div class="kri-val kri-green">$34M</div>
+      <div class="kri-sub">Expected value - Taiwan mitigation programme</div>
+    </div>
+  </div>
+
+  <!-- TTS by program -->
+  <div class="kri-section-label">Time-to-Survive by program - days of supply at current consumption rate</div>
+  <div class="tts-grid">
+    <div class="tts-card green">
+      <div class="tts-prog" style="color:#5FD9A0;">U31 EV Platform</div>
+      <div class="tts-days" style="color:#5FD9A0;">45 days</div>
+      <div class="tts-bar-wrap"><div class="tts-bar-fill" style="width:100%;background:#1D9E75;"></div></div>
+      <div class="tts-label">Above 30-day green threshold</div>
+    </div>
+    <div class="tts-card green">
+      <div class="tts-prog" style="color:#5FD9A0;">U32 ADAS Suite</div>
+      <div class="tts-days" style="color:#5FD9A0;">45 days</div>
+      <div class="tts-bar-wrap"><div class="tts-bar-fill" style="width:100%;background:#1D9E75;"></div></div>
+      <div class="tts-label">Above 30-day green threshold</div>
+    </div>
+    <div class="tts-card amber">
+      <div class="tts-prog" style="color:#FABD45;">U33 Body Systems</div>
+      <div class="tts-days" style="color:#FABD45;">26 days</div>
+      <div class="tts-bar-wrap"><div class="tts-bar-fill" style="width:58%;background:#EF9F27;"></div></div>
+      <div class="tts-label">Amber - below 30-day threshold · Action required</div>
+    </div>
+    <div class="tts-card green">
+      <div class="tts-prog" style="color:#5FD9A0;">U34 Interior</div>
+      <div class="tts-days" style="color:#5FD9A0;">38 days</div>
+      <div class="tts-bar-wrap"><div class="tts-bar-fill" style="width:84%;background:#1D9E75;"></div></div>
+      <div class="tts-label">Above 30-day green threshold</div>
+    </div>
+    <div class="tts-card green">
+      <div class="tts-prog" style="color:#5FD9A0;">U35 Chassis</div>
+      <div class="tts-days" style="color:#5FD9A0;">60 days</div>
+      <div class="tts-bar-wrap"><div class="tts-bar-fill" style="width:100%;background:#1D9E75;"></div></div>
+      <div class="tts-label">Above 30-day green threshold</div>
+    </div>
+  </div>
+
+  <!-- Trigger alerts -->
+  <div class="kri-section-label">Active trigger alerts - requiring named response</div>
+  <div class="alert-list">
+    <div class="alert-item amber">
+      <div class="alert-dot" style="background:#FABD45;"></div>
+      <div class="alert-text"><strong>Stuttgart Seating GmbH</strong> - Altman Z-score moved from 2.1 to 1.95 this quarter. Now at amber watch threshold. Monthly review cadence upgraded to weekly. Risk owner notified.</div>
+      <div class="alert-time">Today 07:14</div>
+    </div>
+    <div class="alert-item amber">
+      <div class="alert-dot" style="background:#FABD45;"></div>
+      <div class="alert-text"><strong>U33 Body Systems TTS</strong> - Dropped to 26 days following increased production rate. Below 30-day governance threshold. Safety stock replenishment order required within 5 days.</div>
+      <div class="alert-time">Today 07:14</div>
+    </div>
+    <div class="alert-item blue">
+      <div class="alert-dot" style="background:#7BC4FA;"></div>
+      <div class="alert-text"><strong>CBAM regulatory calendar</strong> - 3 EU suppliers within 90 days of first CBAM compliance deadline. Compliance support programme timeline review required. Legal team notified.</div>
+      <div class="alert-time">Yesterday 18:00</div>
+    </div>
+  </div>
+
+  <!-- Supplier financial health -->
+  <div class="kri-section-label">Supplier financial health - Altman Z-score (P1 and P2 suppliers)</div>
+  <div class="fin-grid">
+    <div class="fin-card">
+      <div class="fin-name">Taiwan ECU Corp</div>
+      <div class="fin-score" style="color:#5FD9A0;">3.8</div>
+      <div class="fin-bar-track"><div class="fin-bar" style="width:95%;background:#1D9E75;"></div></div>
+      <div style="font-size:0.6875rem;color:rgba(255,255,255,0.3);margin-top:4px;">Safe zone · Stable</div>
+    </div>
+    <div class="fin-card" style="border-color:rgba(250,189,69,0.3);">
+      <div class="fin-name">Stuttgart Seating GmbH</div>
+      <div class="fin-score" style="color:#FABD45;">1.95</div>
+      <div class="fin-bar-track"><div class="fin-bar" style="width:25%;background:#EF9F27;"></div></div>
+      <div style="font-size:0.6875rem;color:rgba(255,255,255,0.3);margin-top:4px;">Watch zone · Declining · Weekly review</div>
+    </div>
+    <div class="fin-card">
+      <div class="fin-name">Nagoya Resin KK</div>
+      <div class="fin-score" style="color:#5FD9A0;">4.2</div>
+      <div class="fin-bar-track"><div class="fin-bar" style="width:100%;background:#1D9E75;"></div></div>
+      <div style="font-size:0.6875rem;color:rgba(255,255,255,0.3);margin-top:4px;">Safe zone · Improving</div>
+    </div>
+    <div class="fin-card" style="border-color:rgba(250,189,69,0.25);">
+      <div class="fin-name">Yokohama Glass</div>
+      <div class="fin-score" style="color:#FABD45;">2.3</div>
+      <div class="fin-bar-track"><div class="fin-bar" style="width:45%;background:#EF9F27;"></div></div>
+      <div style="font-size:0.6875rem;color:rgba(255,255,255,0.3);margin-top:4px;">Watch zone · Stable · Quarterly review</div>
+    </div>
+  </div>
+
+  <!-- ROI reporting -->
+  <div class="kri-section-label">ROI of risk programme - board reporting format</div>
+  <div class="roi-grid">
+    <div class="roi-card">
+      <div class="roi-label">Programme investment (18 months)</div>
+      <div class="roi-val">$4.2M</div>
+      <div class="roi-sub">Dual sourcing + safety stock + monitoring</div>
+    </div>
+    <div class="roi-card">
+      <div class="roi-label">Expected disruption cost avoided (annual)</div>
+      <div class="roi-val" style="color:#5FD9A0;">$42M</div>
+      <div class="roi-sub">Based on Taiwan exposure + P1 risk profile</div>
+    </div>
+    <div class="roi-card">
+      <div class="roi-label">Net ROI - programme</div>
+      <div class="roi-val" style="color:#5FD9A0;">10:1</div>
+      <div class="roi-sub">Year 1 · Board-approved for full rollout</div>
+    </div>
+  </div>
+</div>
+
+<div class="callout callout-purple fade-up">
+  <div class="callout-label" style="color:var(--purple-dk);">What the dashboard makes possible</div>
+  <div class="callout-body">A risk manager opens this dashboard at 7am. The Stuttgart Seating Z-score has moved overnight. The U33 TTS has crossed the amber threshold. The CBAM deadline is 90 days away. Three specific actions are required today - not a quarterly report saying "financial distress remains elevated." Every metric drives a decision. That is the difference between a risk register and a risk management system.</div>
+</div>
+
+<div style="display:flex;justify-content:space-between;align-items:center;padding-top:32px;border-top:1px solid var(--border);margin-top:40px;flex-wrap:wrap;gap:16px;">
+  <a href="resilience.html" class="btn btn-ghost">← Chapter 4: Resilience</a>
+  <a href="case-studies.html" class="btn btn-primary">Chapter 6: Case studies →</a>
+</div>
+
+</div>
+</div>
+
+<script src="main.js"></script>
+<script>
+function updateTime() {
+  const el = document.getElementById('dashTime');
+  if (el) el.textContent = new Date().toLocaleString('en-US', {weekday:'short',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
+}
+updateTime();
+setInterval(updateTime, 60000);
+</script>
+</body>
+</html>

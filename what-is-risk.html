@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What is Risk - AGNA</title>
+<meta name="description" content="Chapter 1: What is risk - the precise definition, probability spectrum, P×I×V scoring, Knightian uncertainty, and black swans.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.chapter-hero{background:linear-gradient(135deg,#0F0D2B 0%,#1A1650 60%,#0D2B1A 100%);padding:120px 0 80px;position:relative;overflow:hidden;}
+.chapter-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(83,74,183,0.07) 1px,transparent 1px),linear-gradient(90deg,rgba(83,74,183,0.07) 1px,transparent 1px);background-size:50px 50px;}
+.chapter-hero-content{position:relative;z-index:2;}
+.chapter-badge{display:inline-flex;align-items:center;gap:8px;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:16px;}
+.chapter-badge span{width:24px;height:1px;background:var(--purple);}
+.step-layout{display:grid;grid-template-columns:280px 1fr;gap:0;min-height:80vh;}
+.step-sidebar{position:sticky;top:60px;height:calc(100vh - 60px);overflow-y:auto;border-right:1px solid var(--border);padding:32px 0;background:var(--white);}
+.step-sidebar-header{padding:0 24px 20px;border-bottom:1px solid var(--border);margin-bottom:16px;}
+.step-sidebar-label{font-size:0.6875rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--gray);margin-bottom:4px;}
+.step-sidebar-title{font-size:0.9375rem;font-weight:700;color:var(--gray-dk);}
+.step-nav-item{display:flex;align-items:center;gap:12px;padding:10px 24px;cursor:pointer;transition:var(--transition);text-decoration:none;}
+.step-nav-item:hover{background:var(--gray-lt);}
+.step-nav-item.active{background:var(--purple-lt);}
+.step-nav-num{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:0.6875rem;font-weight:700;color:var(--gray);flex-shrink:0;transition:var(--transition);}
+.step-nav-item.done .step-nav-num{background:var(--teal);border-color:var(--teal);color:var(--white);}
+.step-nav-item.active .step-nav-num{background:var(--purple);border-color:var(--purple);color:var(--white);}
+.step-nav-text{font-size:0.8125rem;font-weight:500;color:var(--gray);line-height:1.3;}
+.step-nav-item.active .step-nav-text{color:var(--purple);font-weight:600;}
+.step-content{padding:48px 56px;max-width:780px;}
+.step-header{margin-bottom:40px;}
+.step-chip{display:inline-flex;align-items:center;gap:6px;font-size:0.6875rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--purple);background:var(--purple-lt);padding:4px 10px;border-radius:20px;margin-bottom:16px;}
+.step-title{font-size:clamp(1.5rem,3vw,2.25rem);font-weight:700;color:var(--gray-dk);line-height:1.2;margin-bottom:16px;}
+.step-opening{font-size:1.0625rem;color:var(--gray);line-height:1.75;font-style:italic;border-left:3px solid var(--purple);padding-left:18px;margin-bottom:32px;}
+.concept-block{margin-bottom:32px;}
+.concept-label{font-size:0.875rem;font-weight:700;color:var(--gray-dk);margin-bottom:8px;}
+.concept-body{font-size:0.9375rem;color:var(--gray);line-height:1.75;}
+.highlight-word{background:var(--purple-lt);color:var(--purple-dk);padding:2px 7px;border-radius:4px;font-size:0.875rem;font-weight:600;}
+.highlight-teal{background:var(--teal-lt);color:var(--teal-dk);padding:2px 7px;border-radius:4px;font-size:0.875rem;font-weight:600;}
+.highlight-amber{background:var(--amber-lt);color:var(--amber-dk);padding:2px 7px;border-radius:4px;font-size:0.875rem;font-weight:600;}
+.highlight-coral{background:var(--coral-lt);color:var(--coral-dk);padding:2px 7px;border-radius:4px;font-size:0.875rem;font-weight:600;}
+.highlight-blue{background:var(--blue-lt);color:var(--blue-dk);padding:2px 7px;border-radius:4px;font-size:0.875rem;font-weight:600;}
+.prob-spectrum{display:flex;flex-direction:column;gap:10px;margin:24px 0;}
+.prob-row{display:flex;align-items:stretch;border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden;}
+.prob-left{width:180px;flex-shrink:0;padding:14px 16px;border-right:1px solid var(--border);background:var(--gray-lt);}
+.prob-label-text{font-size:0.8125rem;font-weight:700;margin-bottom:4px;}
+.prob-example{font-size:0.75rem;color:var(--gray);line-height:1.4;font-style:italic;}
+.prob-right{flex:1;padding:14px 16px;background:var(--white);}
+.prob-verdict{font-size:0.6875rem;font-weight:700;padding:2px 8px;border-radius:20px;display:inline-block;margin-bottom:6px;}
+.prob-explain{font-size:0.8125rem;color:var(--gray);line-height:1.5;}
+.cond-rows{display:flex;flex-direction:column;gap:10px;margin:20px 0;}
+.cond-row-item{display:flex;align-items:flex-start;gap:12px;}
+.cond-pill{font-size:0.8125rem;font-weight:600;padding:5px 14px;border-radius:20px;flex-shrink:0;white-space:nowrap;}
+.cond-text-body{font-size:0.9rem;color:var(--gray);line-height:1.6;padding-top:4px;}
+.vel-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0;}
+.vel-card{border:1px solid var(--border);border-radius:var(--radius-md);padding:18px;}
+.vel-title{font-size:0.9375rem;font-weight:700;margin-bottom:6px;}
+.vel-desc{font-size:0.8125rem;color:var(--gray);line-height:1.5;margin-bottom:10px;}
+.vel-action{font-size:0.75rem;font-weight:600;padding-top:10px;border-top:1px solid var(--border);}
+.dfmea-block{border:1px solid var(--teal-lt);border-radius:var(--radius-md);overflow:hidden;margin:20px 0;}
+.dfmea-header{padding:12px 18px;background:var(--teal-lt);border-bottom:1px solid rgba(29,158,117,0.2);}
+.dfmea-header-label{font-size:0.875rem;font-weight:700;color:var(--teal-dk);}
+.dfmea-header-sub{font-size:0.75rem;color:var(--teal);margin-top:2px;}
+.dfmea-grid{display:grid;grid-template-columns:1fr 1fr;}
+.dfmea-col{padding:16px 18px;}
+.dfmea-col:first-child{border-right:1px solid rgba(29,158,117,0.15);}
+.dfmea-col-label{font-size:0.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--teal-dk);margin-bottom:10px;}
+.dfmea-item{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.dfmea-dim-badge{font-size:0.75rem;font-weight:600;padding:4px 10px;border-radius:20px;width:100px;flex-shrink:0;text-align:center;}
+.dfmea-eq-text{font-size:0.8125rem;color:var(--gray);}
+.dfmea-formula-row{display:flex;align-items:center;gap:8px;padding:12px 18px;background:var(--gray-lt);flex-wrap:wrap;border-top:1px solid rgba(29,158,117,0.15);}
+.dfmea-f{font-size:0.75rem;font-weight:600;padding:5px 12px;border-radius:6px;}
+.dfmea-op{font-size:1rem;color:var(--gray);font-weight:300;}
+.dfmea-note{padding:12px 18px;font-size:0.8125rem;color:var(--teal-dk);line-height:1.6;background:rgba(29,158,117,0.04);}
+.knightian-split{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0;}
+.k-card{border-radius:var(--radius-md);padding:20px;}
+.k-blue{background:var(--blue-lt);border:1px solid rgba(55,138,221,0.25);}
+.k-coral{background:var(--coral-lt);border:1px solid rgba(216,90,48,0.25);}
+.k-label{font-size:0.9375rem;font-weight:700;margin-bottom:8px;}
+.k-blue .k-label{color:var(--blue-dk);}
+.k-coral .k-label{color:var(--coral-dk);}
+.k-desc{font-size:0.8125rem;line-height:1.55;margin-bottom:10px;}
+.k-blue .k-desc{color:var(--blue-dk);}
+.k-coral .k-desc{color:var(--coral-dk);}
+.k-eg{font-size:0.8125rem;padding:8px 10px;border-radius:6px;font-style:italic;margin-bottom:8px;}
+.k-blue .k-eg{background:rgba(55,138,221,0.15);color:var(--blue-dk);}
+.k-coral .k-eg{background:rgba(216,90,48,0.15);color:var(--coral-dk);}
+.k-tool{font-size:0.75rem;line-height:1.5;}
+.k-blue .k-tool{color:var(--blue);}
+.k-coral .k-tool{color:var(--coral);}
+.bs-props{display:flex;flex-direction:column;gap:10px;margin:20px 0;}
+.bs-prop{display:flex;gap:14px;padding:14px 16px;border-radius:var(--radius-md);border:1px solid rgba(216,90,48,0.25);background:var(--coral-lt);}
+.bs-num{font-size:1rem;font-weight:800;color:var(--coral-dk);flex-shrink:0;width:20px;}
+.bs-ptitle{font-size:0.875rem;font-weight:700;color:var(--coral-dk);margin-bottom:4px;}
+.bs-pdesc{font-size:0.8125rem;color:var(--coral);line-height:1.5;}
+.taxonomy-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0;}
+.tax-card{border:1px solid var(--border);border-radius:var(--radius-md);padding:16px;cursor:pointer;transition:var(--transition);}
+.tax-card:hover{border-color:var(--purple);background:var(--purple-lt);}
+.tax-icon{font-size:1.25rem;margin-bottom:8px;}
+.tax-name{font-size:0.9375rem;font-weight:700;color:var(--gray-dk);margin-bottom:4px;}
+.tax-items{font-size:0.8125rem;color:var(--gray);line-height:1.5;}
+.vis-tags{display:flex;gap:6px;margin-top:8px;}
+.vis-tag{font-size:0.625rem;font-weight:600;padding:2px 7px;border-radius:20px;}
+.vis-tag.visible{background:var(--blue-lt);color:var(--blue-dk);}
+.vis-tag.hidden{background:var(--gray-lt);color:var(--gray);}
+.nova-box{background:var(--gray-lt);border:1px solid var(--border);border-radius:var(--radius-md);padding:16px;margin-top:24px;}
+.nova-label{font-size:0.6875rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--purple);margin-bottom:8px;}
+.nova-body{font-size:0.875rem;color:var(--gray-dk);line-height:1.65;}
+.outcome-box{background:var(--teal-lt);border:1px solid rgba(29,158,117,0.25);border-radius:var(--radius-md);padding:20px;margin:20px 0;}
+.outcome-label{font-size:0.875rem;font-weight:700;color:var(--teal-dk);margin-bottom:14px;}
+.outcome-item{display:flex;align-items:flex-start;gap:10px;margin-bottom:8px;}
+.outcome-item:last-child{margin-bottom:0;}
+.outcome-check{color:var(--teal);font-size:1rem;flex-shrink:0;margin-top:1px;}
+.outcome-text{font-size:0.875rem;color:var(--teal-dk);line-height:1.55;}
+.step-nav-buttons{display:flex;justify-content:space-between;align-items:center;margin-top:48px;padding-top:32px;border-top:1px solid var(--border);}
+.rPN-table{width:100%;border-collapse:collapse;font-size:0.875rem;margin:20px 0;}
+.rPN-table th{font-size:0.75rem;font-weight:600;color:var(--gray);text-transform:uppercase;letter-spacing:0.05em;padding:8px 12px;border-bottom:2px solid var(--border);text-align:left;}
+.rPN-table td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top;}
+.rPN-table tr:last-child td{border-bottom:none;}
+@media(max-width:900px){.step-layout{grid-template-columns:1fr;}.step-sidebar{display:none;}.step-content{padding:32px 20px;}.vel-cards{grid-template-columns:1fr;}.knightian-split{grid-template-columns:1fr;}.taxonomy-grid{grid-template-columns:1fr;}.dfmea-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">AGNA <span>Supply Chain Risk & Resilience</span></a>
+    <div class="nav-links">
+      <a href="index.html#what-is-risk" class="nav-link active">What is risk</a>
+      <a href="risk-taxonomy.html" class="nav-link">Risk taxonomy</a>
+      <a href="methodology.html" class="nav-link">Methodology</a>
+      <a href="resilience.html" class="nav-link">Resilience</a>
+      <a href="dashboard.html" class="nav-link">Dashboard</a>
+      <a href="case-studies.html" class="nav-link">Case studies</a>
+      <a href="about.html" class="nav-cta">About Tejaswi</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Chapter hero -->
+<div class="chapter-hero">
+  <div class="container chapter-hero-content">
+    <div class="chapter-badge"><span></span>Chapter 1<span></span></div>
+    <h1 class="headline" style="color:var(--white);margin-bottom:12px;">What is Risk</h1>
+    <p class="body-lg" style="color:rgba(255,255,255,0.5);max-width:560px;">The conceptual foundation. Before any supplier is scored or any playbook is built, everyone in the organisation needs to speak the same language about risk.</p>
+    <div style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;">
+      <span class="badge badge-purple">7 steps</span>
+      <span class="badge" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.5);">~15 min read</span>
+      <span class="badge" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.5);">NovaDrive case study throughout</span>
+    </div>
+  </div>
+</div>
+
+<!-- Step layout -->
+<div class="step-layout">
+
+  <!-- Sidebar -->
+  <aside class="step-sidebar">
+    <div class="step-sidebar-header">
+      <div class="step-sidebar-label">Chapter 1</div>
+      <div class="step-sidebar-title">What is risk</div>
+    </div>
+    <nav id="stepNav">
+      <a class="step-nav-item active" href="#step1" onclick="setStep(1)">
+        <div class="step-nav-num" id="snum1">1</div>
+        <div class="step-nav-text">Before we begin</div>
+      </a>
+      <a class="step-nav-item" href="#step2" onclick="setStep(2)">
+        <div class="step-nav-num" id="snum2">2</div>
+        <div class="step-nav-text">What is risk</div>
+      </a>
+      <a class="step-nav-item" href="#step3" onclick="setStep(3)">
+        <div class="step-nav-num" id="snum3">3</div>
+        <div class="step-nav-text">How we measure it</div>
+      </a>
+      <a class="step-nav-item" href="#step4" onclick="setStep(4)">
+        <div class="step-nav-num" id="snum4">4</div>
+        <div class="step-nav-text">The uncertainty line</div>
+      </a>
+      <a class="step-nav-item" href="#step5" onclick="setStep(5)">
+        <div class="step-nav-num" id="snum5">5</div>
+        <div class="step-nav-text">How we classify it</div>
+      </a>
+      <a class="step-nav-item" href="#step6" onclick="setStep(6)">
+        <div class="step-nav-num" id="snum6">6</div>
+        <div class="step-nav-text">How we score it</div>
+      </a>
+      <a class="step-nav-item" href="#step7" onclick="setStep(7)">
+        <div class="step-nav-num" id="snum7">7</div>
+        <div class="step-nav-text">What changed</div>
+      </a>
+    </nav>
+
+    <div style="padding:20px 24px;margin-top:auto;">
+      <div style="background:var(--purple-lt);border-radius:var(--radius-md);padding:14px;">
+        <div style="font-size:0.75rem;font-weight:700;color:var(--purple-dk);margin-bottom:6px;">Next chapter</div>
+        <div style="font-size:0.8125rem;color:var(--purple);margin-bottom:10px;">The complete risk taxonomy - 17 risk types, 5 categories</div>
+        <a href="risk-taxonomy.html" class="btn btn-primary btn-sm" style="width:100%;justify-content:center;">Chapter 2 →</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Content -->
+  <main class="step-content">
+
+    <!-- Progress bar -->
+    <div class="progress-bar" id="progressBar">
+      <div class="progress-step active" id="pb1"></div>
+      <div class="progress-step" id="pb2"></div>
+      <div class="progress-step" id="pb3"></div>
+      <div class="progress-step" id="pb4"></div>
+      <div class="progress-step" id="pb5"></div>
+      <div class="progress-step" id="pb6"></div>
+      <div class="progress-step" id="pb7"></div>
+    </div>
+    <div style="font-size:0.75rem;color:var(--gray);margin-bottom:32px;" id="stepCounter">Step 1 of 7 - Before we begin</div>
+
+    <!-- ═══ STEP 1 ═══ -->
+    <div id="step1">
+      <div class="step-header">
+        <div class="step-chip">Before we begin</div>
+        <h2 class="step-title">NovaDrive Motors has no risk management system. The methodology starts here.</h2>
+        <div class="step-opening">Every supply chain disruption that made headlines started somewhere quiet - a signal nobody was watching, a dependency nobody had mapped, a risk nobody had named.</div>
+      </div>
+
+      <div style="background:var(--gray-lt);border-radius:var(--radius-lg);padding:24px;margin-bottom:32px;border-left:4px solid var(--purple);">
+        <div style="font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--purple);margin-bottom:10px;">NovaDrive Motors - Day 1</div>
+        <div style="font-size:1rem;color:var(--gray-dk);line-height:1.7;font-style:italic;">"We have 45 suppliers across 5 vehicle programs and $2.4B in annual revenue. Two months ago a single semiconductor supplier in Taiwan went offline for 11 days and we lost $180M in production. We have never formally mapped our risks. We do not know what else is out there."</div>
+        <div style="font-size:0.8125rem;color:var(--gray);margin-top:10px;">- NovaDrive VP of Supply Chain, framing the case study starting point</div>
+      </div>
+
+      <div class="concept-block">
+        <div class="concept-label">What this case study demonstrates</div>
+        <div class="concept-body">NovaDrive represents any manufacturer starting from zero - no risk register, no scoring methodology, no resilience plan. What follows is the exact sequence of thinking that builds one from the ground up. Each step answers one question. Together they answer the only question that matters: <em>what could hurt us, how badly, and what do we do about it?</em></div>
+      </div>
+
+      <div class="grid-2" style="gap:16px;margin:24px 0;">
+        <div style="background:var(--coral-lt);border:1px solid rgba(216,90,48,0.2);border-radius:var(--radius-md);padding:18px;">
+          <div style="font-size:0.875rem;font-weight:700;color:var(--coral-dk);margin-bottom:8px;">Where NovaDrive starts</div>
+          <div style="font-size:0.8125rem;color:var(--coral);line-height:1.6;">67 informal concerns on a shared spreadsheet. No probability scores. No impact quantification. No ownership. No action plan. A $180M loss that was entirely preventable.</div>
+          <span class="badge badge-coral" style="margin-top:10px;display:inline-flex;">No system</span>
+        </div>
+        <div style="background:var(--teal-lt);border:1px solid rgba(29,158,117,0.2);border-radius:var(--radius-md);padding:18px;">
+          <div style="font-size:0.875rem;font-weight:700;color:var(--teal-dk);margin-bottom:8px;">Where this methodology takes them</div>
+          <div style="font-size:0.8125rem;color:var(--teal-dk);line-height:1.6;">41 named, scored, and classified risks. 3 black swans separated and resilience-planned. A live dashboard for day-to-day action. A team that sees disruptions before they happen.</div>
+          <span class="badge badge-teal" style="margin-top:10px;display:inline-flex;">Full visibility</span>
+        </div>
+      </div>
+
+      <div class="nova-box">
+        <div class="nova-label">NovaDrive - the $180M loss</div>
+        <div class="nova-body">The $180M loss was not bad luck. It was the cost of invisibility. The Taiwan semiconductor supplier had been single-source on NovaDrive's ADAS program for 4 years. No alternate had been qualified. No TTR had been calculated. No TTS had been measured. When the supplier went offline, nobody knew how long they could last - because nobody had ever asked the question. That changes in the next six steps.</div>
+      </div>
+
+      <div class="step-nav-buttons">
+        <div></div>
+        <button class="btn btn-primary" onclick="nextStep()">Next - What is risk <svg viewBox="0 0 18 18" fill="none" width="16" height="16"><path d="M3 9h12M9 3l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+
+    <!-- ═══ STEP 2 ═══ -->
+    <div id="step2" style="display:none;">
+      <div class="step-header">
+        <div class="step-chip">What is risk</div>
+        <h2 class="step-title">Most companies treat 'things that worry us' as risks. They are not.</h2>
+        <div class="step-opening">Most companies treat 'things that worry us' as risks. They are not - and that distinction is where risk management either begins or stays broken.</div>
+      </div>
+
+      <div class="concept-block">
+        <div class="concept-label">A precise definition everyone in the organisation can use</div>
+        <div class="concept-body">A risk is a <span class="highlight-word">future event</span> with an <span class="highlight-teal">uncertain outcome</span> that could cause <span class="highlight-amber">measurable harm</span> to the business if it occurs. Three words carry all the weight: <strong>future</strong>, <strong>uncertain</strong>, <strong>measurable</strong>.<br><br>If it already happened - it is an <span class="highlight-coral">incident</span>. Manage it as a lesson learned.<br>If it is certain to happen - it is a <span class="highlight-amber">crisis</span>. Execute your contingency plan today.<br>If you cannot measure the harm - you cannot prioritise it. Quantify before acting.</div>
+      </div>
+
+      <div class="concept-label" style="margin-bottom:12px;">The probability spectrum - where a concern becomes a risk becomes a crisis</div>
+      <div class="prob-spectrum">
+        <div class="prob-row">
+          <div class="prob-left">
+            <div class="prob-label-text" style="color:var(--red);">Probability = 0</div>
+            <div class="prob-example">"Our supplier might be hit by a meteor." No plausible trigger, no precedent.</div>
+          </div>
+          <div class="prob-right">
+            <span class="prob-verdict" style="background:var(--red-lt);color:var(--red);">Not a risk - remove it</span>
+            <div class="prob-explain">The event cannot happen in any realistic scenario. Keeping it on the register wastes attention and budget. Delete it entirely.</div>
+          </div>
+        </div>
+        <div class="prob-row">
+          <div class="prob-left">
+            <div class="prob-label-text" style="color:var(--amber-dk);">Probability = 1 (certainty)</div>
+            <div class="prob-example">"Our supplier confirmed in writing they close next month."</div>
+          </div>
+          <div class="prob-right">
+            <span class="prob-verdict" style="background:var(--amber-lt);color:var(--amber-dk);">Not a risk - it is a crisis</span>
+            <div class="prob-explain">Risk requires uncertainty. Once certain, it leaves the risk register and enters the incident response queue. Stop modelling it. Execute your contingency plan today.</div>
+          </div>
+        </div>
+        <div class="prob-row">
+          <div class="prob-left">
+            <div class="prob-label-text" style="color:var(--teal-dk);">Probability between 0 and 1</div>
+            <div class="prob-example">"Our supplier might have a fire." Possible. Not certain. Not impossible.</div>
+          </div>
+          <div class="prob-right">
+            <span class="prob-verdict" style="background:var(--teal-lt);color:var(--teal-dk);">Possible risk - test the second condition</span>
+            <div class="prob-explain">Uncertainty exists. Now check: if this happens, does it cause measurable harm? If yes to both - you have a real risk. Score it and manage it.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="concept-label" style="margin:24px 0 12px;">The two-condition rule - both must be true simultaneously</div>
+      <div class="cond-rows">
+        <div class="cond-row-item">
+          <span class="cond-pill" style="background:var(--purple-lt);color:var(--purple-dk);">Condition 1: Probability is between 0 and 1</span>
+          <div class="cond-text-body">The event is uncertain - not impossible, not certain. Only the uncertain middle belongs on a risk register.</div>
+        </div>
+        <div class="cond-row-item">
+          <span class="cond-pill" style="background:var(--teal-lt);color:var(--teal-dk);">Condition 2: Impact is greater than zero</span>
+          <div class="cond-text-body">If it happens, it causes real measurable harm - production loss, cost, delay, penalty, reputational damage.</div>
+        </div>
+      </div>
+      <div class="callout callout-purple" style="margin-top:8px;">
+        <div class="callout-label" style="color:var(--purple-dk);">NovaDrive result</div>
+        <div class="callout-body">67 concern items reduced to 41 real risks after applying the two-condition test. 26 items removed - either probability was zero (no realistic trigger) or impact was zero (full redundancy or contractual pass-through). Every mitigation dollar now goes to real risks.</div>
+      </div>
+
+      <div class="step-nav-buttons">
+        <button class="btn btn-ghost btn-sm" onclick="prevStep()">← Back</button>
+        <button class="btn btn-primary" onclick="nextStep()">Next - How we measure it →</button>
+      </div>
+    </div>
+
+    <!-- ═══ STEP 3 ═══ -->
+    <div id="step3" style="display:none;">
+      <div class="step-header">
+        <div class="step-chip">How we measure it</div>
+        <h2 class="step-title">Probability and impact tell you what. Velocity tells you when. You need all three.</h2>
+        <div class="step-opening">A single label tells you very little about a risk. Three numbers scored honestly and combined tell you almost everything.</div>
+      </div>
+
+      <div class="concept-block">
+        <div class="concept-label">The Risk Priority Number - three dimensions, not one</div>
+        <div class="concept-body">Most risk registers assign a single "high / medium / low" label based on gut feel. That is how NovaDrive labelled their Taiwan semiconductor exposure as "medium" - right up until it cost them $180M. A complete risk score requires all three dimensions scored independently.</div>
+      </div>
+
+      <div class="formula-row" style="margin:20px 0;">
+        <div class="formula-box" style="background:var(--purple-lt);color:var(--purple-dk);">Probability (P)</div>
+        <div class="formula-op">×</div>
+        <div class="formula-box" style="background:var(--teal-lt);color:var(--teal-dk);">Impact (I)</div>
+        <div class="formula-op">×</div>
+        <div class="formula-box" style="background:var(--amber-lt);color:var(--amber-dk);">Velocity (V)</div>
+        <div class="formula-op">=</div>
+        <div class="formula-result">Risk Priority Number (RPN) - scored 1 to 729</div>
+      </div>
+
+      <div class="concept-block">
+        <div class="concept-label">Probability - how likely is the event to occur</div>
+        <div class="concept-body">Scored 1 to 9. Based on historical data - how often has this type of disruption occurred at comparable suppliers or in comparable regions? Score 1 means it has never happened. Score 9 means it has happened multiple times in recent history.</div>
+      </div>
+
+      <div class="concept-block">
+        <div class="concept-label">Impact - how much harm does it cause if it occurs</div>
+        <div class="concept-body">Scored 1 to 9. Measured in revenue at risk per day of disruption multiplied by estimated duration. A disruption halting $45M of daily production for 180 days scores 9. Must be quantified - not estimated as "high" by feel. This is the number connected to the program revenue master built in Chapter 3.</div>
+      </div>
+
+      <div class="concept-block">
+        <div class="concept-label">Velocity - the dimension most companies never score</div>
+        <div class="concept-body">Velocity is not how fast the event happens. It is how much time you have between the first detectable signal and the moment the risk reaches its full business impact. Two risks with identical P and I scores can demand completely different responses - because one gives you weeks and the other gives you hours.</div>
+      </div>
+
+      <div class="vel-cards">
+        <div class="vel-card">
+          <div class="vel-title" style="color:var(--red);">Sudden onset</div>
+          <div class="vel-desc">Hours to days. By the time you detect it, the damage is already running. Cannot design the response in real time.</div>
+          <div class="vel-action" style="color:var(--red);">Response: pre-built playbook, activates on first signal</div>
+          <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap;">
+            <span class="badge badge-coral">Natural disaster</span>
+            <span class="badge badge-coral">Cyber attack</span>
+            <span class="badge badge-coral">Port closure</span>
+          </div>
+        </div>
+        <div class="vel-card">
+          <div class="vel-title" style="color:var(--amber-dk);">Slow burn</div>
+          <div class="vel-desc">Weeks to months. Signals exist and are catchable - but only with active monitoring in place.</div>
+          <div class="vel-action" style="color:var(--amber-dk);">Response: early warning monitoring, staged intervention</div>
+          <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap;">
+            <span class="badge badge-amber">Financial distress</span>
+            <span class="badge badge-amber">Quality drift</span>
+          </div>
+        </div>
+        <div class="vel-card">
+          <div class="vel-title" style="color:var(--blue-dk);">Structural</div>
+          <div class="vel-desc">Years. Regulatory or geopolitical shift building so gradually it feels invisible until it is not.</div>
+          <div class="vel-action" style="color:var(--blue-dk);">Response: scenario planning, portfolio-level decisions</div>
+          <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap;">
+            <span class="badge badge-blue">CBAM</span>
+            <span class="badge badge-blue">Trade policy</span>
+            <span class="badge badge-blue">ESG mandates</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="dfmea-block">
+        <div class="dfmea-header">
+          <div class="dfmea-header-label">The engineering connection - DFMEA and supply chain risk use identical logic</div>
+          <div class="dfmea-header-sub">If you have worked with DFMEA, you already know this framework intuitively. Grounded in SAE J1739.</div>
+        </div>
+        <div class="dfmea-grid">
+          <div class="dfmea-col">
+            <div class="dfmea-col-label">DFMEA (engineering)</div>
+            <div class="dfmea-item"><span class="dfmea-dim-badge" style="background:var(--purple-lt);color:var(--purple-dk);">Occurrence (O)</span><span class="dfmea-eq-text">How often the failure occurs</span></div>
+            <div class="dfmea-item"><span class="dfmea-dim-badge" style="background:var(--teal-lt);color:var(--teal-dk);">Severity (S)</span><span class="dfmea-eq-text">How bad the failure effect is</span></div>
+            <div class="dfmea-item"><span class="dfmea-dim-badge" style="background:var(--amber-lt);color:var(--amber-dk);">Detection (D)</span><span class="dfmea-eq-text">How hard the failure is to catch</span></div>
+          </div>
+          <div class="dfmea-col">
+            <div class="dfmea-col-label">Supply chain risk</div>
+            <div class="dfmea-item"><span class="dfmea-dim-badge" style="background:var(--purple-lt);color:var(--purple-dk);">Probability (P)</span><span class="dfmea-eq-text">How likely the disruption is</span></div>
+            <div class="dfmea-item"><span class="dfmea-dim-badge" style="background:var(--teal-lt);color:var(--teal-dk);">Impact (I)</span><span class="dfmea-eq-text">How much harm it causes</span></div>
+            <div class="dfmea-item"><span class="dfmea-dim-badge" style="background:var(--amber-lt);color:var(--amber-dk);">Velocity (V)</span><span class="dfmea-eq-text">How fast it reaches full impact</span></div>
+          </div>
+        </div>
+        <div class="dfmea-formula-row">
+          <span class="dfmea-f" style="background:var(--purple-lt);color:var(--purple-dk);">O</span>
+          <span class="dfmea-op">×</span>
+          <span class="dfmea-f" style="background:var(--teal-lt);color:var(--teal-dk);">S</span>
+          <span class="dfmea-op">×</span>
+          <span class="dfmea-f" style="background:var(--amber-lt);color:var(--amber-dk);">D</span>
+          <span class="dfmea-op">=</span>
+          <span class="dfmea-f" style="background:var(--teal-lt);color:var(--teal-dk);">RPN (DFMEA)</span>
+          <span class="dfmea-op" style="margin:0 12px;font-size:0.875rem;color:var(--gray);">mirrors exactly</span>
+          <span class="dfmea-f" style="background:var(--purple-lt);color:var(--purple-dk);">P</span>
+          <span class="dfmea-op">×</span>
+          <span class="dfmea-f" style="background:var(--teal-lt);color:var(--teal-dk);">I</span>
+          <span class="dfmea-op">×</span>
+          <span class="dfmea-f" style="background:var(--amber-lt);color:var(--amber-dk);">V</span>
+          <span class="dfmea-op">=</span>
+          <span class="dfmea-f" style="background:var(--purple-lt);color:var(--purple-dk);">RPN (supply chain)</span>
+        </div>
+        <div class="dfmea-note">In DFMEA, a failure mode with Occurrence = 0 is removed - it cannot happen. Severity = 0 gets no corrective action - it causes no harm. Supply chain risk follows the exact same discipline. The engineering foundation is not a workaround - it is the academically correct approach.</div>
+      </div>
+
+      <div class="step-nav-buttons">
+        <button class="btn btn-ghost btn-sm" onclick="prevStep()">← Back</button>
+        <button class="btn btn-primary" onclick="nextStep()">Next - The uncertainty line →</button>
+      </div>
+    </div>
+
+    <!-- ═══ STEP 4 ═══ -->
+    <div id="step4" style="display:none;">
+      <div class="step-header">
+        <div class="step-chip">The uncertainty line</div>
+        <h2 class="step-title">Some risks can be measured. Others cannot. Knowing which is which changes everything.</h2>
+        <div class="step-opening">Some risks can be measured. Others cannot. Knowing which is which changes everything about how you respond - and the tools you use.</div>
+      </div>
+
+      <div class="concept-block">
+        <div class="concept-label">Frank Knight's line - drawn in 1921, still defining the field today</div>
+        <div class="concept-body">In 1921, an economist named Frank Knight drew a line that risk managers still use today. On one side: risks you can measure and assign a probability. On the other side: true uncertainty - events so unprecedented that no probability can be meaningfully assigned. Applying the wrong tools to the wrong side of this line creates false confidence, which is more dangerous than having no system at all.</div>
+      </div>
+
+      <div class="knightian-split">
+        <div class="k-card k-blue">
+          <div class="k-label">Knightian risk - you CAN estimate probability</div>
+          <div class="k-desc">Historical data exists. You can assign a meaningful number. Actuaries, insurers, and risk models are built for this territory.</div>
+          <div class="k-eg">"This supplier type has experienced a major disruption once every 8 years. Annual probability ≈ 12%."</div>
+          <div class="k-tool"><strong>Tools that work:</strong> FMEA · REI scoring · heat maps · Monte Carlo · Altman Z-score</div>
+        </div>
+        <div class="k-card k-coral">
+          <div class="k-label">Knightian uncertainty - you CANNOT estimate probability</div>
+          <div class="k-desc">No reference class exists. The event has never happened at this scale. Standard risk tools are completely blind here.</div>
+          <div class="k-eg">"What is the probability a novel virus shuts down global automotive supply chains for 18 months?"</div>
+          <div class="k-tool"><strong>Tools that work:</strong> resilience capability · scenario planning · survival window analysis · flexibility buffers</div>
+        </div>
+      </div>
+
+      <div class="concept-block">
+        <div class="concept-label">Black swans - the most dangerous subset of Knightian uncertainty</div>
+        <div class="concept-body">Not every uncertain event is a black swan. Nassim Taleb defined the concept precisely: a black swan has exactly three properties, and all three must be present simultaneously. If any one is missing, it is not a black swan.</div>
+      </div>
+
+      <div class="bs-props">
+        <div class="bs-prop">
+          <div class="bs-num">1</div>
+          <div>
+            <div class="bs-ptitle">It is an outlier - completely outside all normal expectations</div>
+            <div class="bs-pdesc">NovaDrive: Full stoppage of leading-edge semiconductor fabrication due to geopolitical escalation had no direct historical precedent at this scale. No risk model had it in its range of scenarios.</div>
+          </div>
+        </div>
+        <div class="bs-prop">
+          <div class="bs-num">2</div>
+          <div>
+            <div class="bs-ptitle">It carries extreme impact - not marginal, not quickly recoverable</div>
+            <div class="bs-pdesc">NovaDrive: 4 of 5 programs halted within 6 days. $45M per week in lost production. No qualified alternate source. Estimated time to qualification of an alternate: 14–18 months.</div>
+          </div>
+        </div>
+        <div class="bs-prop">
+          <div class="bs-num">3</div>
+          <div>
+            <div class="bs-ptitle">After it happens, it feels like it should have been predictable</div>
+            <div class="bs-pdesc">NovaDrive: Geopolitical tension signals around Taiwan had been reported in trade press for 18 months prior. Three industry analysts had flagged semiconductor concentration risk. The signals existed. No system was watching for them.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout callout-purple">
+        <div class="callout-label" style="color:var(--purple-dk);">Why this distinction matters for AGNA</div>
+        <div class="callout-body">This is why AGNA separates the risk methodology (Chapters 1–3) from the resilience playbooks (Chapter 4). You cannot put a black swan on a heat map and assign it a probability. The correct response is to build resilience capability - the ability to absorb the shock and recover - before the event occurs. Of NovaDrive's 41 risks: 38 are Knightian risks scored via REI. 3 are black swans managed only through resilience playbooks.</div>
+      </div>
+
+      <div class="step-nav-buttons">
+        <button class="btn btn-ghost btn-sm" onclick="prevStep()">← Back</button>
+        <button class="btn btn-primary" onclick="nextStep()">Next - How we classify it →</button>
+      </div>
+    </div>
+
+    <!-- ═══ STEP 5 ═══ -->
+    <div id="step5" style="display:none;">
+      <div class="step-header">
+        <div class="step-chip">How we classify it</div>
+        <h2 class="step-title">Once you can see a risk clearly, the next question is: where does it live?</h2>
+        <div class="step-opening">Where it lives determines who owns it, how you detect it, and how fast it can reach you.</div>
+      </div>
+
+      <div class="concept-block">
+        <div class="concept-label">The four-bucket taxonomy - used by MIT, Sheffi, and ISO 31000</div>
+        <div class="concept-body">Without taxonomy, a risk register is just a list. With taxonomy, you can assign ownership, detection strategy, and response methodology by category. Every risk NovaDrive faces - all 41 of them - falls into one of four buckets. Chapter 2 covers each bucket in depth with all risk types, identification methods, and mitigation strategies.</div>
+      </div>
+
+      <div class="taxonomy-grid">
+        <a href="risk-taxonomy.html#supply" class="tax-card" style="text-decoration:none;">
+          <div class="tax-icon">🔗</div>
+          <div class="tax-name">Supply-side</div>
+          <div class="tax-items">Supplier failure · single-source · capacity · quality · financial distress · sub-tier opacity</div>
+          <div class="vis-tags"><span class="vis-tag visible">Visible</span><span class="vis-tag hidden">Hidden</span></div>
+        </a>
+        <a href="risk-taxonomy.html#demand" class="tax-card" style="text-decoration:none;">
+          <div class="tax-icon">📈</div>
+          <div class="tax-name">Demand-side</div>
+          <div class="tax-items">Program cancellation · volume volatility · bullwhip effect · EV transition uncertainty</div>
+          <div class="vis-tags"><span class="vis-tag visible">Visible</span></div>
+        </a>
+        <a href="risk-taxonomy.html#environmental" class="tax-card" style="text-decoration:none;">
+          <div class="tax-icon">🌍</div>
+          <div class="tax-name">Environmental</div>
+          <div class="tax-items">Geopolitical shock · natural disaster · pandemic · climate change</div>
+          <div class="vis-tags"><span class="vis-tag hidden">Hidden</span></div>
+        </a>
+        <a href="risk-taxonomy.html#infrastructure" class="tax-card" style="text-decoration:none;">
+          <div class="tax-icon">⚙️</div>
+          <div class="tax-name">Infrastructure</div>
+          <div class="tax-items">Logistics disruption · cyber attack · regulatory cascade · CBAM</div>
+          <div class="vis-tags"><span class="vis-tag hidden">Hidden</span></div>
+        </a>
+      </div>
+
+      <div class="concept-block">
+        <div class="concept-label">Visible vs hidden - the secondary classification that matters most</div>
+        <div class="concept-body">Within each bucket, every risk is classified as visible or hidden.</div>
+      </div>
+
+      <div class="grid-2" style="gap:14px;margin:16px 0 24px;">
+        <div style="background:var(--blue-lt);border:1px solid rgba(55,138,221,0.2);border-radius:var(--radius-md);padding:16px;">
+          <div style="font-size:0.875rem;font-weight:700;color:var(--blue-dk);margin-bottom:6px;">👁 Visible risks</div>
+          <div style="font-size:0.8125rem;color:var(--blue-dk);line-height:1.6;">Detectable through standard supplier monitoring - financial reports, quality scorecards, audits, delivery performance. Standard monitoring is sufficient.</div>
+        </div>
+        <div style="background:var(--gray-lt);border:1px solid var(--border);border-radius:var(--radius-md);padding:16px;">
+          <div style="font-size:0.875rem;font-weight:700;color:var(--gray-dk);margin-bottom:6px;">🫥 Hidden risks</div>
+          <div style="font-size:0.8125rem;color:var(--gray);line-height:1.6;">Invisible to standard monitoring. Require sub-tier mapping, geopolitical intelligence, regulatory tracking, Altman Z-score analysis, geographic concentration analysis.</div>
+        </div>
+      </div>
+
+      <div class="callout callout-red">
+        <div class="callout-label" style="color:var(--red);">NovaDrive's $180M loss</div>
+        <div class="callout-body">Came from a hidden environmental risk - a Tier 2 semiconductor dependency in Taiwan completely invisible to their standard monitoring system. Their entire monitoring infrastructure was designed for visible risks. This is not unusual. It is the norm. The risks that cause the most damage are almost always the ones nobody was watching for.</div>
+      </div>
+
+      <div class="callout callout-purple" style="margin-top:12px;">
+        <div class="callout-label" style="color:var(--purple-dk);">Two emerging risks - not yet in standard frameworks</div>
+        <div class="callout-body">Chapter 2 adds a fifth category: <strong>Foundational emerging risks</strong> - identified by Professor Yossi Sheffi at MIT in 2024–2025. Energy supply as an invisible Tier 0 supplier, and AI dependency as the new single-source risk. Most organisations have not yet incorporated either into their formal risk management systems.</div>
+      </div>
+
+      <div class="step-nav-buttons">
+        <button class="btn btn-ghost btn-sm" onclick="prevStep()">← Back</button>
+        <button class="btn btn-primary" onclick="nextStep()">Next - How we score it →</button>
+      </div>
+    </div>
+
+    <!-- ═══ STEP 6 ═══ -->
+    <div id="step6" style="display:none;">
+      <div class="step-header">
+        <div class="step-chip">How we score it</div>
+        <h2 class="step-title">NovaDrive's Taiwan risk was labelled 'medium.' The correct score is 504.</h2>
+        <div class="step-opening">A single label tells you very little. Three numbers scored honestly - and combined - tell you almost everything. Here is the RPN in action on NovaDrive's highest priority risk.</div>
+      </div>
+
+      <div class="concept-block">
+        <div class="concept-label">Applying P × I × V to NovaDrive's most critical exposure</div>
+        <div class="concept-body">After classifying all 41 risks into four buckets, each one is scored using the three-dimension framework. Every score is traceable to a data source - not an opinion. Here is what that looks like applied to the risk that cost NovaDrive $180M.</div>
+      </div>
+
+      <table class="rPN-table">
+        <tr>
+          <th>Dimension</th>
+          <th>NovaDrive's original</th>
+          <th>Corrected score</th>
+          <th>Data source and reasoning</th>
+        </tr>
+        <tr>
+          <td style="font-weight:600;">Probability (1–9)</td>
+          <td style="color:var(--gray);font-style:italic;">Not scored</td>
+          <td><span class="highlight-word">7</span></td>
+          <td>3 prior disruptions at comparable Taiwan fabs in 5 years. Historical data from industry disruption database.</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;">Impact (1–9)</td>
+          <td style="color:var(--gray);font-style:italic;">"High" - no number</td>
+          <td><span class="highlight-teal">9</span></td>
+          <td>Single-source across 4 of 5 programs - $45M per week in halted production. Calculated from program revenue master.</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;">Velocity (1–9)</td>
+          <td style="color:var(--gray);font-style:italic;">Not scored</td>
+          <td><span class="highlight-amber">8</span></td>
+          <td>Fab shutdown cascades to NovaDrive line halt within 6 days - sudden onset. Requires pre-built playbook not monitoring.</td>
+        </tr>
+        <tr style="background:var(--red-lt);">
+          <td style="font-weight:700;">RPN</td>
+          <td style="color:var(--gray);font-style:italic;">Unknown - labelled "medium"</td>
+          <td><span style="background:var(--red-lt);color:var(--red);font-weight:800;font-size:1rem;">504</span></td>
+          <td>Highest priority risk in NovaDrive's entire supplier network. The $180M loss was the proof.</td>
+        </tr>
+      </table>
+
+      <div class="concept-block" style="margin-top:24px;">
+        <div class="concept-label">What the velocity score tells you specifically</div>
+        <div class="concept-body">The velocity score of 8 is not just a number - it carries a specific instruction. Sudden-onset risks cannot be managed by monitoring alone. By the time the signal is visible, the production line is already stopping. What NovaDrive needs is a pre-built resilience playbook that activates the moment a Taiwan disruption signal appears. That is exactly what Chapter 4 builds.</div>
+      </div>
+
+      <div style="margin-top:24px;">
+        <div class="concept-label" style="margin-bottom:12px;">NovaDrive top risks by RPN - the ranked action list</div>
+        <table class="rPN-table">
+          <tr>
+            <th>Risk</th><th>P</th><th>I</th><th>V</th><th>RPN</th><th>Velocity type</th>
+          </tr>
+          <tr><td style="font-weight:600;">Taiwan ECU Corp - single-source</td><td>7</td><td>9</td><td>8</td><td><span class="badge p1">504</span></td><td><span class="badge badge-coral">Sudden</span></td></tr>
+          <tr><td style="font-weight:600;">Single-source ADAS ECU - no alternate</td><td>4</td><td>9</td><td>9</td><td><span class="badge p1">324</span></td><td><span class="badge badge-coral">Sudden</span></td></tr>
+          <tr><td style="font-weight:600;">Tier 1 financial distress - Stuttgart Seating</td><td>6</td><td>8</td><td>5</td><td><span class="badge p2">240</span></td><td><span class="badge badge-amber">Slow burn</span></td></tr>
+          <tr><td style="font-weight:600;">CBAM regulatory cascade - 7 EU suppliers</td><td>8</td><td>7</td><td>4</td><td><span class="badge p2">224</span></td><td><span class="badge badge-blue">Structural</span></td></tr>
+          <tr><td style="font-weight:600;">Logistics disruption - single port dependency</td><td>5</td><td>6</td><td>7</td><td><span class="badge p2">210</span></td><td><span class="badge badge-coral">Sudden</span></td></tr>
+          <tr><td style="font-weight:600;">Michigan steel - commodity, 5 alternates</td><td>5</td><td>3</td><td>2</td><td><span class="badge p3">30</span></td><td><span class="badge badge-teal">Manageable</span></td></tr>
+        </table>
+      </div>
+
+      <div class="callout callout-teal" style="margin-top:16px;">
+        <div class="callout-label" style="color:var(--teal-dk);">The output of this step</div>
+        <div class="callout-body">A ranked, defensible action list where every number is traceable to a data source. NovaDrive's leadership can now walk into a board meeting and say: here are our top risks, here is why they are ranked this way, and here is what we are doing about each one. Chapter 3 builds this list from scratch for any organisation.</div>
+      </div>
+
+      <div class="step-nav-buttons">
+        <button class="btn btn-ghost btn-sm" onclick="prevStep()">← Back</button>
+        <button class="btn btn-primary" onclick="nextStep()">Next - What changed →</button>
+      </div>
+    </div>
+
+    <!-- ═══ STEP 7 ═══ -->
+    <div id="step7" style="display:none;">
+      <div class="step-header">
+        <div class="step-chip">What changed</div>
+        <h2 class="step-title">NovaDrive arrived with 67 concerns and no system.</h2>
+        <div class="step-opening">NovaDrive arrived with 67 concerns and no system. They leave Chapter 1 with 41 named, classified, and scored risks - and three black swans that no scoring system will ever touch.</div>
+      </div>
+
+      <div class="outcome-box">
+        <div class="outcome-label">What NovaDrive can now see - that they could not see before</div>
+        <div class="outcome-item"><div class="outcome-check">✓</div><div class="outcome-text">A shared definition of risk that the VP of Supply Chain, the CFO, and the board all use - not "things that worry us" but future uncertain events with measurable harm</div></div>
+        <div class="outcome-item"><div class="outcome-check">✓</div><div class="outcome-text">41 real risks from a list of 67 concerns - 26 removed because they failed the two-condition test. Every mitigation dollar now goes to things that can actually hurt the business</div></div>
+        <div class="outcome-item"><div class="outcome-check">✓</div><div class="outcome-text">The Taiwan semiconductor risk rescored from "medium" to RPN 504 - the highest priority in the network, with a defensible justification presentable to any board</div></div>
+        <div class="outcome-item"><div class="outcome-check">✓</div><div class="outcome-text">3 black swans separated from 38 scoreable risks - resilience planning budget allocated separately, managed with a completely different methodology</div></div>
+        <div class="outcome-item"><div class="outcome-check">✓</div><div class="outcome-text">A visible vs hidden classification that reveals NovaDrive's monitoring gap - 13 hidden risks, including the one that cost $180M, are completely outside their current detection system</div></div>
+        <div class="outcome-item"><div class="outcome-check">✓</div><div class="outcome-text">Velocity scores that separate sudden-onset from slow-burn and structural risks - so response plans are designed for the right time horizon, not a one-size-fits-all template</div></div>
+      </div>
+
+      <div class="concept-block">
+        <div class="concept-label">The honest truth about where NovaDrive stands</div>
+        <div class="concept-body">Seeing the risks clearly is not the same as being protected from them. NovaDrive now has a map. What they do not yet have is a route - the step-by-step action plan that turns classification into mitigation. Chapter 2 covers every risk type in depth. Chapter 3 builds the complete system from scratch. Chapter 4 addresses the black swans. Chapter 5 shows what the result looks like every day.</div>
+      </div>
+
+      <div style="background:var(--gray-lt);border-radius:var(--radius-lg);padding:24px;margin-top:24px;">
+        <div style="font-size:0.6875rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--gray);margin-bottom:16px;">Continue the methodology</div>
+        <div class="grid-2" style="gap:12px;">
+          <a href="risk-taxonomy.html" style="display:flex;flex-direction:column;gap:6px;padding:16px;background:var(--white);border:1px solid var(--border);border-radius:var(--radius-md);text-decoration:none;transition:var(--transition);" onmouseover="this.style.borderColor='var(--purple)'" onmouseout="this.style.borderColor='var(--border)'">
+            <span class="badge badge-teal" style="width:fit-content;">Chapter 2</span>
+            <span style="font-size:0.9375rem;font-weight:700;color:var(--gray-dk);">The complete risk taxonomy</span>
+            <span style="font-size:0.8125rem;color:var(--gray);">17 risk types · 5 categories · how to identify, quantify, prioritise, and mitigate each one</span>
+          </a>
+          <a href="methodology.html" style="display:flex;flex-direction:column;gap:6px;padding:16px;background:var(--white);border:1px solid var(--border);border-radius:var(--radius-md);text-decoration:none;transition:var(--transition);" onmouseover="this.style.borderColor='var(--purple)'" onmouseout="this.style.borderColor='var(--border)'">
+            <span class="badge badge-purple" style="width:fit-content;">Chapter 3</span>
+            <span style="font-size:0.9375rem;font-weight:700;color:var(--gray-dk);">How to build the system</span>
+            <span style="font-size:0.8125rem;color:var(--gray);">11 steps · maturity assessment · governance · BOM explosion · TTR/TTS · scoring</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="step-nav-buttons">
+        <button class="btn btn-ghost btn-sm" onclick="prevStep()">← Back</button>
+        <a href="risk-taxonomy.html" class="btn btn-primary">Chapter 2 - Risk taxonomy →</a>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="main.js"></script>
+<script>
+let currentStep = 1;
+const totalSteps = 7;
+const stepLabels = [
+  'Before we begin',
+  'What is risk',
+  'How we measure it',
+  'The uncertainty line',
+  'How we classify it',
+  'How we score it',
+  'What changed'
+];
+
+function showStep(n) {
+  for (let i = 1; i <= totalSteps; i++) {
+    const el = document.getElementById('step' + i);
+    if (el) el.style.display = i === n ? 'block' : 'none';
+    const pb = document.getElementById('pb' + i);
+    if (pb) {
+      pb.className = 'progress-step';
+      if (i < n) pb.classList.add('done');
+      if (i === n) pb.classList.add('active');
+    }
+    const navItem = document.querySelectorAll('.step-nav-item')[i - 1];
+    if (navItem) {
+      navItem.classList.remove('active', 'done');
+      if (i < n) navItem.classList.add('done');
+      if (i === n) navItem.classList.add('active');
+    }
+  }
+  const counter = document.getElementById('stepCounter');
+  if (counter) counter.textContent = `Step ${n} of ${totalSteps} - ${stepLabels[n-1]}`;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function nextStep() {
+  if (currentStep < totalSteps) { currentStep++; showStep(currentStep); }
+}
+function prevStep() {
+  if (currentStep > 1) { currentStep--; showStep(currentStep); }
+}
+function setStep(n) {
+  currentStep = n;
+  showStep(n);
+  return false;
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextStep();
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') prevStep();
+});
+
+showStep(1);
+</script>
+</body>
+</html>

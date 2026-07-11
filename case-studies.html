@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Studies - AGNA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.chapter-hero{background:linear-gradient(135deg,#0A150A 0%,#0D2015 50%,#0F0D2B 100%);padding:120px 0 80px;position:relative;overflow:hidden;}
+.chapter-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(29,158,117,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(29,158,117,0.05) 1px,transparent 1px);background-size:50px 50px;}
+.cs-card{border:1px solid var(--border);border-radius:var(--radius-xl);overflow:hidden;margin-bottom:32px;}
+.cs-header{padding:28px 32px;display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:start;}
+.cs-num{width:48px;height:48px;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;font-size:1.25rem;flex-shrink:0;}
+.cs-event-label{font-size:0.6875rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;}
+.cs-event-title{font-size:1.25rem;font-weight:700;color:var(--gray-dk);margin-bottom:8px;}
+.cs-event-desc{font-size:0.9375rem;color:var(--gray);line-height:1.6;}
+.cs-badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;}
+.cs-impact-box{text-align:right;flex-shrink:0;}
+.cs-impact-val{font-size:1.5rem;font-weight:800;line-height:1;}
+.cs-impact-lbl{font-size:0.6875rem;color:var(--gray);margin-top:2px;}
+.cs-body{border-top:1px solid var(--border);}
+.cs-tabs{display:flex;overflow-x:auto;}
+.cs-tab{padding:12px 20px;font-size:0.8125rem;font-weight:500;color:var(--gray);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:var(--transition);}
+.cs-tab:hover{color:var(--purple);}
+.cs-tab.active{color:var(--purple);border-bottom-color:var(--purple);}
+.cs-panel{display:none;padding:24px 32px;}
+.cs-panel.active{display:block;}
+.timeline-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.tl-col{border-radius:var(--radius-md);padding:18px;}
+.tl-col.bad{background:var(--red-lt);border:1px solid rgba(163,45,45,0.2);}
+.tl-col.good{background:var(--teal-lt);border:1px solid rgba(29,158,117,0.2);}
+.tl-label{font-size:0.75rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;}
+.tl-col.bad .tl-label{color:var(--red);}
+.tl-col.good .tl-label{color:var(--teal-dk);}
+.tl-event{display:flex;gap:10px;margin-bottom:8px;}
+.tl-d{font-size:0.6875rem;font-weight:700;width:55px;flex-shrink:0;padding-top:2px;}
+.tl-col.bad .tl-d{color:var(--red);}
+.tl-col.good .tl-d{color:var(--teal-dk);}
+.tl-t{font-size:0.8125rem;line-height:1.5;}
+.tl-col.bad .tl-t{color:var(--red);}
+.tl-col.good .tl-t{color:var(--teal-dk);}
+.lesson-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.lesson-card{border:1px solid var(--border);border-radius:var(--radius-md);padding:16px;}
+.lesson-label{font-size:0.75rem;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;}
+.lesson-body{font-size:0.875rem;color:var(--gray-dk);line-height:1.6;}
+@media(max-width:768px){.cs-header{grid-template-columns:1fr;}.cs-impact-box{text-align:left;}.timeline-row{grid-template-columns:1fr;}.lesson-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">AGNA <span>Supply Chain Risk & Resilience</span></a>
+    <div class="nav-links">
+      <a href="what-is-risk.html" class="nav-link">What is risk</a>
+      <a href="risk-taxonomy.html" class="nav-link">Risk taxonomy</a>
+      <a href="methodology.html" class="nav-link">Methodology</a>
+      <a href="resilience.html" class="nav-link">Resilience</a>
+      <a href="dashboard.html" class="nav-link">Dashboard</a>
+      <a href="case-studies.html" class="nav-link active">Case studies</a>
+      <a href="about.html" class="nav-cta">About Tejaswi</a>
+    </div>
+  </div>
+</nav>
+
+<div class="chapter-hero">
+  <div class="container" style="position:relative;z-index:2;">
+    <div style="display:inline-flex;align-items:center;gap:8px;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:16px;">
+      <span style="width:24px;height:1px;background:var(--teal);display:inline-block;"></span>Chapter 6<span style="width:24px;height:1px;background:var(--teal);display:inline-block;"></span>
+    </div>
+    <h1 class="headline" style="color:var(--white);margin-bottom:12px;">Case Studies</h1>
+    <p class="body-lg" style="color:rgba(255,255,255,0.5);max-width:600px;margin-bottom:24px;">Real disruptions. Real outcomes. Five events that reshaped how the world thinks about supply chain resilience - shown as two timelines each: what happened to companies without AGNA's methodology, and what would have happened with it. The gap between those two lines is the value of everything built in Chapters 1 through 5.</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <span class="badge badge-teal">5 real events</span>
+      <span class="badge" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.5);">Without vs with timeline</span>
+      <span class="badge" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.5);">Lessons and frameworks</span>
+    </div>
+  </div>
+</div>
+
+<div class="section-sm" style="padding-top:48px;">
+<div class="container">
+
+<div class="cs-card fade-up">
+  <div class="cs-header">
+    <div class="cs-num" style="background:var(--red-lt);font-size:1.5rem;">🦠</div>
+    <div>
+      <div class="cs-event-label" style="color:var(--red);">COVID-19 · 2020</div>
+      <div class="cs-event-title">The pandemic that exposed every supply chain built for efficiency, not resilience</div>
+      <div class="cs-event-desc">A novel coronavirus in Wuhan became a global economic shutdown in 12 weeks. Every assumption about supply chain continuity was invalidated simultaneously. The companies that survived were not lucky - they had built buffer into the white space.</div>
+      <div class="cs-badges"><span class="badge p1">Black swan</span><span class="badge badge-coral">Global simultaneous</span><span class="badge badge-gray">18-month impact</span></div>
+    </div>
+    <div class="cs-impact-box">
+      <div class="cs-impact-val" style="color:var(--red);">$4.4T</div>
+      <div class="cs-impact-lbl">global trade impact</div>
+    </div>
+  </div>
+  <div class="cs-body">
+    <div class="cs-tabs">
+      <div class="cs-tab active" onclick="csTab(this,'cv-t')">Timeline comparison</div>
+      <div class="cs-tab" onclick="csTab(this,'cv-l')">Key lessons</div>
+      <div class="cs-tab" onclick="csTab(this,'cv-n')">NovaDrive application</div>
+    </div>
+    <div class="cs-panel active" id="cv-t">
+      <div class="timeline-row">
+        <div class="tl-col bad">
+          <div class="tl-label">Without AGNA - what happened</div>
+          <div class="tl-event"><div class="tl-d">Jan 2020</div><div class="tl-t">Novel virus reports from Wuhan. No supply chain monitoring system flags it.</div></div>
+          <div class="tl-event"><div class="tl-d">Feb 2020</div><div class="tl-t">Chinese factory closures begin. Companies scrambling for inventory data nobody has.</div></div>
+          <div class="tl-event"><div class="tl-d">Mar 2020</div><div class="tl-t">Global shutdown. JIT inventory exhausted in 2–3 weeks. Production lines halt worldwide.</div></div>
+          <div class="tl-event"><div class="tl-d">Q2 2020</div><div class="tl-t">Emergency air freight at 600% normal cost. No pre-authorised budgets. Approval delays.</div></div>
+          <div class="tl-event"><div class="tl-d">2021</div><div class="tl-t">Semiconductor shortage compounds. No visibility into sub-tier dependencies. Still reactive.</div></div>
+        </div>
+        <div class="tl-col good">
+          <div class="tl-label">With AGNA - what would have happened</div>
+          <div class="tl-event"><div class="tl-d">Jan 2020</div><div class="tl-t">WHO emergency committee declaration triggers pandemic playbook preparation phase.</div></div>
+          <div class="tl-event"><div class="tl-d">Feb 2020</div><div class="tl-t">45-day safety stock on all P1 parts confirmed. Demand shaping protocol activated. Survival window calculated.</div></div>
+          <div class="tl-event"><div class="tl-d">Mar 2020</div><div class="tl-t">Global shutdown. All 5 programs running on extended safety stock. Pre-authorised response active.</div></div>
+          <div class="tl-event"><div class="tl-d">Q2 2020</div><div class="tl-t">Geographic alternates activated. Safety stock buys time. Revenue protected through 6-week survival window.</div></div>
+          <div class="tl-event"><div class="tl-d">2021</div><div class="tl-t">Sub-tier visibility reveals semiconductor dependency early. Korean alternate already 40% qualified.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="cs-panel" id="cv-l">
+      <div class="lesson-grid">
+        <div class="lesson-card"><div class="lesson-label">Lesson 1</div><div class="lesson-body">Geographic diversification is insufficient for a global simultaneous disruption. Only systemic resilience - financial buffers, flexible capacity, pre-built protocols - works. Single-country diversification did not help in COVID because all countries were affected.</div></div>
+        <div class="lesson-card"><div class="lesson-label">Lesson 2</div><div class="lesson-body">The survival window is binary. Companies with 45+ days of P1 safety stock survived and recovered. Companies with JIT 7-day buffers halted within 2 weeks and took months to restart. The investment in buffer was trivially small compared to the loss.</div></div>
+        <div class="lesson-card"><div class="lesson-label">Lesson 3</div><div class="lesson-body">Pre-authorised response protocols are not bureaucracy - they are the mechanism that converts a good plan into fast action. Companies with pre-authorised air freight, pre-negotiated safety stock builds, and pre-approved alternate sourcing responded in hours. Others in weeks.</div></div>
+        <div class="lesson-card"><div class="lesson-label">Lesson 4</div><div class="lesson-body">The sub-tier semiconductor shortage was predictable from sub-tier mapping. Companies that had done Tier 2 disclosure in 2019 knew their exposure in January 2020. Companies without it discovered it in Q3 2020 - 6 months too late to act.</div></div>
+      </div>
+    </div>
+    <div class="cs-panel" id="cv-n">
+      <div class="callout callout-purple"><div class="callout-label" style="color:var(--purple-dk);">NovaDrive COVID scenario result</div><div class="callout-body">TTS before AGNA: 10–22 days (3 of 5 programs halt within 3 weeks). TTS after AGNA: 45 days across all P1 parts. Survival window extended by 23–35 days across all programs. Revenue protected in a 6-week shutdown scenario: $240M. Investment cost: $1.8M in safety stock increase. ROI: 133:1.</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="cs-card fade-up" data-delay="100">
+  <div class="cs-header">
+    <div class="cs-num" style="background:var(--blue-lt);font-size:1.5rem;">🚢</div>
+    <div>
+      <div class="cs-event-label" style="color:var(--blue-dk);">Suez Canal · March 2021</div>
+      <div class="cs-event-title">One ship. 6 days. $9 billion per day in halted global trade.</div>
+      <div class="cs-event-desc">The Ever Given grounding proved that a single logistics node failure can cascade into a global supply chain event within hours. The response window was days - not weeks. Only pre-built responses worked.</div>
+      <div class="cs-badges"><span class="badge badge-blue">Logistics disruption</span><span class="badge badge-coral">Sudden onset</span><span class="badge badge-gray">6 days</span></div>
+    </div>
+    <div class="cs-impact-box">
+      <div class="cs-impact-val" style="color:var(--blue-dk);">$9B/day</div>
+      <div class="cs-impact-lbl">trade halted</div>
+    </div>
+  </div>
+  <div class="cs-body">
+    <div class="cs-tabs">
+      <div class="cs-tab active" onclick="csTab(this,'sc-t')">Timeline comparison</div>
+      <div class="cs-tab" onclick="csTab(this,'sc-l')">Key lessons</div>
+    </div>
+    <div class="cs-panel active" id="sc-t">
+      <div class="timeline-row">
+        <div class="tl-col bad">
+          <div class="tl-label">Without AGNA</div>
+          <div class="tl-event"><div class="tl-d">Day 1</div><div class="tl-t">Canal blockage confirmed. No alternate route plan. Emergency logistics review called.</div></div>
+          <div class="tl-event"><div class="tl-d">Day 3</div><div class="tl-t">Air freight option identified. Approval process begins. Procurement, finance, COO all involved.</div></div>
+          <div class="tl-event"><div class="tl-d">Day 5</div><div class="tl-t">Air freight approved after 4 days. First shipment ordered. TTS: 7 days remaining.</div></div>
+          <div class="tl-event"><div class="tl-d">Day 7</div><div class="tl-t">Air freight arrives. Near-miss. $5.5M in expedite costs. Production barely maintained.</div></div>
+        </div>
+        <div class="tl-col good">
+          <div class="tl-label">With AGNA</div>
+          <div class="tl-event"><div class="tl-d">Day 1</div><div class="tl-t">Canal blockage triggers logistics playbook. Air freight pre-authorised. Order placed within 4 hours.</div></div>
+          <div class="tl-event"><div class="tl-d">Day 2</div><div class="tl-t">Air freight confirmed from Taipei. 3-day delivery. TTS comfortable at 12 days.</div></div>
+          <div class="tl-event"><div class="tl-d">Day 4</div><div class="tl-t">Air freight arrives. Safety maintained. Canal still blocked. No concern.</div></div>
+          <div class="tl-event"><div class="tl-d">Day 6</div><div class="tl-t">Canal opens. Cost: $380K premium. Zero production impact. Playbook updated.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="cs-panel" id="sc-l">
+      <div class="lesson-grid">
+        <div class="lesson-card"><div class="lesson-label">Key lesson</div><div class="lesson-body">Logistics disruption playbooks must pre-authorise the response - including the cost threshold - before the event. Every day of approval time is a day of production risk. The Suez Canal was resolved in 6 days. Companies with 7-day TTS and a 4-day approval process had zero margin.</div></div>
+        <div class="lesson-card"><div class="lesson-label">Framework insight</div><div class="lesson-body">Single-port dependencies are logistics single-source risk. The same TTR/TTS logic that applies to supplier single-source applies to logistics routes. Any P1 component transiting a single port with no alternate routing plan is a logistics P1 risk - regardless of how stable that route has historically been.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cs-card fade-up" data-delay="200">
+  <div class="cs-header">
+    <div class="cs-num" style="background:var(--amber-lt);font-size:1.5rem;">🌊</div>
+    <div>
+      <div class="cs-event-label" style="color:var(--amber-dk);">Japan Earthquake · March 2011</div>
+      <div class="cs-event-title">The event that proved sub-tier visibility is not optional.</div>
+      <div class="cs-event-desc">The Tōhoku earthquake and tsunami destroyed facilities across Japan's manufacturing heartland. Companies with Tier 2 visibility knew their exposure within hours. Companies without it discovered it weeks later - when their production lines had already stopped.</div>
+      <div class="cs-badges"><span class="badge badge-amber">Natural disaster</span><span class="badge badge-coral">Sudden onset</span><span class="badge badge-gray">Tier 2 cascade</span></div>
+    </div>
+    <div class="cs-impact-box">
+      <div class="cs-impact-val" style="color:var(--amber-dk);">$235B</div>
+      <div class="cs-impact-lbl">economic damage</div>
+    </div>
+  </div>
+  <div class="cs-body">
+    <div class="cs-tabs">
+      <div class="cs-tab active" onclick="csTab(this,'jp-t')">Timeline comparison</div>
+      <div class="cs-tab" onclick="csTab(this,'jp-l')">Key lessons</div>
+    </div>
+    <div class="cs-panel active" id="jp-t">
+      <div class="timeline-row">
+        <div class="tl-col bad">
+          <div class="tl-label">Without AGNA</div>
+          <div class="tl-event"><div class="tl-d">Day 0</div><div class="tl-t">Earthquake. Tier 2 suppliers offline. Nobody knows which ones - no sub-tier map exists.</div></div>
+          <div class="tl-event"><div class="tl-d">Day 14</div><div class="tl-t">Tier 1 suppliers stop delivering. Companies discover their sub-tier exposure for the first time.</div></div>
+          <div class="tl-event"><div class="tl-d">Day 21</div><div class="tl-t">Production lines halt. No alternate Tier 2 qualified. TTR for Tier 2 alternates: 90–180 days.</div></div>
+          <div class="tl-event"><div class="tl-d">Month 6</div><div class="tl-t">Partial recovery. Many companies still running at 60% capacity. Sub-tier mapping finally initiated - too late.</div></div>
+        </div>
+        <div class="tl-col good">
+          <div class="tl-label">With AGNA</div>
+          <div class="tl-event"><div class="tl-d">Day 0</div><div class="tl-t">Earthquake. Sub-tier map already exists. Affected Tier 2 suppliers identified within 4 hours.</div></div>
+          <div class="tl-event"><div class="tl-d">Day 5</div><div class="tl-t">Alternate Tier 2 suppliers contacted. Emergency qualification initiated. Safety stock holds all programs.</div></div>
+          <div class="tl-event"><div class="tl-d">Day 30</div><div class="tl-t">Alternate Tier 2 at 35% capacity. Production maintained at reduced rate.</div></div>
+          <div class="tl-event"><div class="tl-d">Day 90</div><div class="tl-t">Alternate Tier 2 at full capacity. Revenue protected. Sub-tier map updated to reflect new permanent alternate.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="cs-panel" id="jp-l">
+      <div class="lesson-grid">
+        <div class="lesson-card"><div class="lesson-label">Sub-tier insight</div><div class="lesson-body">Toyota - widely considered the benchmark of supply chain management - took 6 months to fully recover from the 2011 earthquake because their sub-tier visibility below Tier 1 was limited. The lesson was so definitive that Toyota fundamentally changed their supplier mapping approach. AGNA incorporates that lesson as Step 6 of the methodology.</div></div>
+        <div class="lesson-card"><div class="lesson-label">Geographic insight</div><div class="lesson-body">The earthquake showed that geographic concentration of Tier 2 suppliers is as dangerous as Tier 1 concentration. Multiple Tier 1 suppliers, all sourcing specialty materials from the same Tōhoku region, created a hidden diamond dependency that only became visible when the earthquake hit.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="text-align:center;padding:32px;background:var(--gray-lt);border-radius:var(--radius-xl);margin-bottom:32px;">
+  <div class="label section-eyebrow" style="margin-bottom:12px;">Taiwan Semiconductor 2021 and Strait of Hormuz</div>
+  <p class="body-md text-gray" style="max-width:500px;margin:0 auto 20px;">Detailed playbooks for these two events are covered in Chapter 4 - Black Swan Resilience, including full detection signals, eight-phase response timelines, and NovaDrive-specific mitigation outcomes.</p>
+  <a href="resilience.html" class="btn btn-ghost">View full resilience playbooks →</a>
+</div>
+
+<div style="display:flex;justify-content:space-between;align-items:center;padding-top:32px;border-top:1px solid var(--border);flex-wrap:wrap;gap:16px;">
+  <a href="dashboard.html" class="btn btn-ghost">← Chapter 5: Dashboard</a>
+  <a href="about.html" class="btn btn-primary">About Tejaswi →</a>
+</div>
+
+</div>
+</div>
+
+<script src="main.js"></script>
+<script>
+function csTab(btn, panelId) {
+  const card = btn.closest('.cs-card');
+  card.querySelectorAll('.cs-tab').forEach(t => t.classList.remove('active'));
+  card.querySelectorAll('.cs-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  const panel = document.getElementById(panelId);
+  if (panel) panel.classList.add('active');
+}
+setTimeout(() => {
+  document.querySelectorAll('.fade-up:not(.observed)').forEach(el => {
+    el.classList.add('observed');
+    const obs = new IntersectionObserver(e => e.forEach(en => { if(en.isIntersecting) en.target.classList.add('visible'); }),{threshold:0.05});
+    obs.observe(el);
+  });
+},100);
+</script>
+</body>
+</html>
