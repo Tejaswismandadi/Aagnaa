@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Methodology — AGNA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.chapter-hero{background:linear-gradient(135deg,#1A1200 0%,#2B1A00 50%,#0F0D2B 100%);padding:120px 0 80px;position:relative;overflow:hidden;}
+.chapter-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(239,159,39,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(239,159,39,0.06) 1px,transparent 1px);background-size:50px 50px;}
+.meth-layout{display:grid;grid-template-columns:300px 1fr;gap:0;min-height:90vh;}
+.meth-sidebar{position:sticky;top:60px;height:calc(100vh - 60px);overflow-y:auto;border-right:1px solid var(--border);background:var(--white);}
+.meth-sidebar-inner{padding:20px 0;}
+.step-group-label{font-size:0.625rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray);padding:8px 20px 4px;}
+.step-link{display:flex;align-items:center;gap:10px;padding:9px 20px;cursor:pointer;transition:var(--transition);text-decoration:none;}
+.step-link:hover{background:var(--gray-lt);}
+.step-link.active{background:var(--amber-lt);}
+.step-link-num{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.625rem;font-weight:700;background:var(--gray-lt);color:var(--gray);flex-shrink:0;transition:var(--transition);}
+.step-link.active .step-link-num{background:var(--amber);color:var(--white);}
+.step-link.done .step-link-num{background:var(--teal);color:var(--white);}
+.step-link-text{font-size:0.8125rem;color:var(--gray);font-weight:500;}
+.step-link.active .step-link-text{color:var(--amber-dk);font-weight:600;}
+.meth-content{padding:48px 56px;max-width:800px;}
+.step-panel{display:none;}
+.step-panel.active{display:block;}
+.step-header-band{background:var(--amber-lt);border-radius:var(--radius-lg);padding:24px 28px;margin-bottom:32px;border-left:4px solid var(--amber);}
+.step-num-big{font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--amber-dk);margin-bottom:6px;}
+.step-title-big{font-size:clamp(1.4rem,3vw,2rem);font-weight:700;color:var(--gray-dk);line-height:1.2;margin-bottom:8px;}
+.step-tagline{font-size:1rem;color:var(--amber-dk);font-style:italic;line-height:1.6;}
+.pmra-tabs{display:flex;gap:0;border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden;margin-bottom:24px;}
+.pmra-tab{flex:1;padding:10px 12px;font-size:0.8125rem;font-weight:600;cursor:pointer;text-align:center;color:var(--gray);background:var(--white);border-right:1px solid var(--border);transition:var(--transition);}
+.pmra-tab:last-child{border-right:none;}
+.pmra-tab:hover{background:var(--gray-lt);}
+.pmra-tab.active{background:var(--amber);color:var(--white);}
+.pmra-panel{display:none;}
+.pmra-panel.active{display:block;}
+.panel-card{border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;margin-bottom:16px;}
+.panel-label{font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:12px;}
+.panel-body{font-size:0.9375rem;color:var(--gray);line-height:1.75;}
+.output-list{display:flex;flex-direction:column;gap:8px;margin-top:12px;}
+.output-item{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:var(--teal-lt);border-radius:var(--radius-md);}
+.output-check{color:var(--teal);font-size:0.875rem;flex-shrink:0;margin-top:2px;}
+.output-text{font-size:0.875rem;color:var(--teal-dk);line-height:1.5;}
+.resistance-item{display:flex;gap:12px;margin-bottom:16px;}
+.resist-q{background:var(--red-lt);border:1px solid rgba(163,45,45,0.2);border-radius:var(--radius-md);padding:12px;flex:1;}
+.resist-q-label{font-size:0.6875rem;font-weight:700;color:var(--red);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.06em;}
+.resist-q-text{font-size:0.875rem;color:var(--red);font-style:italic;line-height:1.5;}
+.resist-arrow{font-size:1.25rem;color:var(--gray);flex-shrink:0;margin-top:16px;}
+.resist-a{background:var(--teal-lt);border:1px solid rgba(29,158,117,0.2);border-radius:var(--radius-md);padding:12px;flex:1;}
+.resist-a-label{font-size:0.6875rem;font-weight:700;color:var(--teal-dk);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.06em;}
+.resist-a-text{font-size:0.875rem;color:var(--teal-dk);line-height:1.5;}
+.formula-display{display:flex;align-items:center;gap:10px;padding:18px 22px;background:var(--gray-lt);border-radius:var(--radius-md);margin:16px 0;flex-wrap:wrap;}
+.fd-box{padding:8px 18px;border-radius:var(--radius-sm);font-size:0.9375rem;font-weight:700;}
+.fd-op{font-size:1.25rem;color:var(--gray);font-weight:300;}
+.fd-eq{font-size:0.875rem;color:var(--gray);font-style:italic;}
+.mat-levels{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0;}
+.mat-card{border-radius:var(--radius-md);padding:16px;}
+.ttr-table{width:100%;border-collapse:collapse;font-size:0.875rem;margin:16px 0;}
+.ttr-table th{font-size:0.75rem;font-weight:600;color:var(--gray);text-transform:uppercase;letter-spacing:0.05em;padding:8px 12px;border-bottom:2px solid var(--border);text-align:left;}
+.ttr-table td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:middle;}
+.ttr-table tr:last-child td{border-bottom:none;}
+.mit-option{display:flex;gap:12px;align-items:flex-start;padding:12px 16px;border:1px solid var(--border);border-radius:var(--radius-md);margin-bottom:10px;}
+.mit-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;color:var(--white);flex-shrink:0;margin-top:2px;}
+.mit-title{font-size:0.9375rem;font-weight:700;color:var(--gray-dk);margin-bottom:3px;}
+.mit-body{font-size:0.875rem;color:var(--gray);line-height:1.55;}
+.nav-buttons{display:flex;justify-content:space-between;align-items:center;margin-top:48px;padding-top:32px;border-top:1px solid var(--border);}
+@media(max-width:900px){.meth-layout{grid-template-columns:1fr;}.meth-sidebar{display:none;}.meth-content{padding:32px 20px;}.mat-levels{grid-template-columns:1fr;}.resistance-item{flex-direction:column;}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">AGNA <span>Supply Chain Risk & Resilience</span></a>
+    <div class="nav-links">
+      <a href="what-is-risk.html" class="nav-link">What is risk</a>
+      <a href="risk-taxonomy.html" class="nav-link">Risk taxonomy</a>
+      <a href="methodology.html" class="nav-link active">Methodology</a>
+      <a href="resilience.html" class="nav-link">Resilience</a>
+      <a href="dashboard.html" class="nav-link">Dashboard</a>
+      <a href="case-studies.html" class="nav-link">Case studies</a>
+      <a href="about.html" class="nav-cta">About Tejaswi</a>
+    </div>
+  </div>
+</nav>
+
+<div class="chapter-hero">
+  <div class="container" style="position:relative;z-index:2;">
+    <div style="display:inline-flex;align-items:center;gap:8px;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:16px;">
+      <span style="width:24px;height:1px;background:var(--amber);display:inline-block;"></span>Chapter 3<span style="width:24px;height:1px;background:var(--amber);display:inline-block;"></span>
+    </div>
+    <h1 class="headline" style="color:var(--white);margin-bottom:12px;">How to Build the System</h1>
+    <p class="body-lg" style="color:rgba(255,255,255,0.5);max-width:600px;margin-bottom:24px;">The step-by-step methodology. From resilience maturity assessment to a live monitoring dashboard — every step shown with the actual work, not just the output. Three threads run through every step: stakeholder engagement, maintenance protocol, and the human reality of making it happen.</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <span class="badge badge-amber">11 steps</span>
+      <span class="badge" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.5);">Problem → Method → Application → Result</span>
+      <span class="badge" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.5);">NovaDrive throughout</span>
+    </div>
+  </div>
+</div>
+
+<div class="meth-layout">
+  <!-- Sidebar -->
+  <aside class="meth-sidebar">
+    <div class="meth-sidebar-inner">
+      <div class="step-group-label">Foundation</div>
+      <a class="step-link active" onclick="goStep('s0')" href="#s0">
+        <div class="step-link-num" id="ln-s0">0</div>
+        <div class="step-link-text">Resilience maturity assessment</div>
+      </a>
+      <a class="step-link" onclick="goStep('s1')" href="#s1">
+        <div class="step-link-num" id="ln-s1">1</div>
+        <div class="step-link-text">Risk governance and risk appetite</div>
+      </a>
+      <a class="step-link" onclick="goStep('s2')" href="#s2">
+        <div class="step-link-num" id="ln-s2">2</div>
+        <div class="step-link-text">Programs and daily revenue at risk</div>
+      </a>
+      <div class="step-group-label" style="margin-top:8px;">Data architecture</div>
+      <a class="step-link" onclick="goStep('s3')" href="#s3">
+        <div class="step-link-num" id="ln-s3">3</div>
+        <div class="step-link-text">BOM explosion to critical parts</div>
+      </a>
+      <a class="step-link" onclick="goStep('s4')" href="#s4">
+        <div class="step-link-num" id="ln-s4">4</div>
+        <div class="step-link-text">ERP extraction and Supplier Master</div>
+      </a>
+      <a class="step-link" onclick="goStep('s4b')" href="#s4b">
+        <div class="step-link-num" id="ln-s4b">4B</div>
+        <div class="step-link-text">Spend concentration analysis</div>
+      </a>
+      <div class="step-group-label" style="margin-top:8px;">Scoring</div>
+      <a class="step-link" onclick="goStep('s5')" href="#s5">
+        <div class="step-link-num" id="ln-s5">5</div>
+        <div class="step-link-text">TTR/TTS criticality test — all Tier 1</div>
+      </a>
+      <a class="step-link" onclick="goStep('s6')" href="#s6">
+        <div class="step-link-num" id="ln-s6">6</div>
+        <div class="step-link-text">Sub-tier disclosure — P1 suppliers</div>
+      </a>
+      <a class="step-link" onclick="goStep('s7')" href="#s7">
+        <div class="step-link-num" id="ln-s7">7</div>
+        <div class="step-link-text">Score all risks — P×I×V and REI</div>
+      </a>
+      <div class="step-group-label" style="margin-top:8px;">Action</div>
+      <a class="step-link" onclick="goStep('s8')" href="#s8">
+        <div class="step-link-num" id="ln-s8">8</div>
+        <div class="step-link-text">Mitigation plans — every P1 risk</div>
+      </a>
+      <a class="step-link" onclick="goStep('s8b')" href="#s8b">
+        <div class="step-link-num" id="ln-s8b">8B</div>
+        <div class="step-link-text">Near-miss register and signal library</div>
+      </a>
+      <a class="step-link" onclick="goStep('s9')" href="#s9">
+        <div class="step-link-num" id="ln-s9">9</div>
+        <div class="step-link-text">Resilience playbooks — black swans</div>
+      </a>
+      <a class="step-link" onclick="goStep('s10')" href="#s10">
+        <div class="step-link-num" id="ln-s10">10</div>
+        <div class="step-link-text">Monitoring system and dashboard</div>
+      </a>
+      <a class="step-link" onclick="goStep('s11')" href="#s11">
+        <div class="step-link-num" id="ln-s11">11</div>
+        <div class="step-link-text">ROI and board communication</div>
+      </a>
+    </div>
+  </aside>
+
+  <!-- Content -->
+  <main class="meth-content">
+
+    <!-- STEP 0 -->
+    <div class="step-panel active" id="s0">
+      <div class="step-header-band">
+        <div class="step-num-big">Step 0</div>
+        <div class="step-title-big">Resilience Maturity Assessment</div>
+        <div class="step-tagline">Before any framework is applied — where is the organisation today? The answer determines everything about what you do first.</div>
+      </div>
+      <div class="pmra-tabs">
+        <div class="pmra-tab active" onclick="setPmra(this,'p0')">The problem</div>
+        <div class="pmra-tab" onclick="setPmra(this,'m0')">The method</div>
+        <div class="pmra-tab" onclick="setPmra(this,'a0')">NovaDrive</div>
+        <div class="pmra-tab" onclick="setPmra(this,'r0')">The result</div>
+      </div>
+      <div class="pmra-panel active" id="p0">
+        <div class="panel-card">
+          <div class="panel-label" style="color:var(--amber-dk);">The problem</div>
+          <div class="panel-body">The first mistake most risk managers make is jumping straight to the methodology. Walking into a Level 1 organisation and running TTR/TTS analysis immediately will fail — the data does not exist. Walking into a Level 3 organisation and starting from scratch loses credibility on Day 1. The maturity assessment calibrates your entire approach and is the first deliverable you present to leadership.</div>
+        </div>
+      </div>
+      <div class="pmra-panel" id="m0">
+        <div class="panel-card">
+          <div class="panel-label" style="color:var(--amber-dk);">Four maturity levels</div>
+          <div class="mat-levels">
+            <div class="mat-card" style="background:var(--red-lt);border:1px solid rgba(163,45,45,0.25);">
+              <div style="font-size:0.75rem;font-weight:700;color:var(--red);margin-bottom:6px;">Level 1 — Reactive</div>
+              <div style="font-size:0.8125rem;color:var(--red);line-height:1.55;">No risk register. Tier 1 visibility only and incomplete. TTR/TTS never calculated. Disruptions managed by whoever is available. Leadership learns about disruptions from production impact.</div>
+            </div>
+            <div class="mat-card" style="background:var(--amber-lt);border:1px solid rgba(239,159,39,0.25);">
+              <div style="font-size:0.75rem;font-weight:700;color:var(--amber-dk);margin-bottom:6px;">Level 2 — Aware</div>
+              <div style="font-size:0.8125rem;color:var(--amber-dk);line-height:1.55;">Risk register exists but updated irregularly. Some TTR/TTS for top-spend suppliers. Single-source suppliers known. No Tier 2 mapping. Financial monitoring informal.</div>
+            </div>
+            <div class="mat-card" style="background:var(--blue-lt);border:1px solid rgba(55,138,221,0.25);">
+              <div style="font-size:0.75rem;font-weight:700;color:var(--blue-dk);margin-bottom:6px;">Level 3 — Structured</div>
+              <div style="font-size:0.8125rem;color:var(--blue-dk);line-height:1.55;">Full TTR/TTS for P1/P2 suppliers. P1/P2/P3 tiering with formal ownership. Some Tier 2 mapping. Altman Z monitoring running. Mitigation plans exist but no black swan playbooks.</div>
+            </div>
+            <div class="mat-card" style="background:var(--teal-lt);border:1px solid rgba(29,158,117,0.25);">
+              <div style="font-size:0.75rem;font-weight:700;color:var(--teal-dk);margin-bottom:6px;">Level 4 — Embedded</div>
+              <div style="font-size:0.8125rem;color:var(--teal-dk);line-height:1.55;">Live dashboard with real-time KRIs. Full Tier 2 + targeted Tier 3 mapping. Black swan playbooks built and tabletop-tested. Near-miss register active. ROI reported to board quarterly.</div>
+            </div>
+          </div>
+          <div class="callout callout-purple" style="margin-top:16px;">
+            <div class="callout-label" style="color:var(--purple-dk);">The diagnostic question</div>
+            <div class="callout-body">If your most critical single-source supplier went offline today, how many days before your production line stops — and how long before you could restore supply from anywhere? When nobody can answer this, the case for building the system makes itself.</div>
+          </div>
+        </div>
+      </div>
+      <div class="pmra-panel" id="a0">
+        <div class="panel-card">
+          <div class="panel-label" style="color:var(--amber-dk);">NovaDrive — Day 1 maturity assessment result</div>
+          <div class="panel-body">NovaDrive scores Level 1 on all seven diagnostic dimensions. No risk register maintained. TTR/TTS never calculated for any supplier. Zero Tier 2 visibility. Financial monitoring informal. No escalation thresholds defined. No review cadence. Leadership learned about the Taiwan disruption when the production line stopped.</div>
+          <div class="callout callout-amber" style="margin-top:16px;">
+            <div class="callout-label" style="color:var(--amber-dk);">The 12-month journey from Level 1</div>
+            <div class="callout-body"><strong>Days 1–30:</strong> Risk governance structure · Risk appetite statement · Program revenue mapping · ERP data extraction initiated<br><br><strong>Days 31–90:</strong> Supplier Master built · TTR/TTS for all Tier 1 · P1/P2/P3 tiering · First risk register<br><br><strong>Days 91–180:</strong> Mitigation plans for P1 risks · Altman Z monitoring · Sub-tier disclosure · Dashboard v1</div>
+          </div>
+        </div>
+      </div>
+      <div class="pmra-panel" id="r0">
+        <div class="output-list">
+          <div class="output-item"><div class="output-check">✓</div><div class="output-text">Current maturity level clearly identified — 1 through 4</div></div>
+          <div class="output-item"><div class="output-check">✓</div><div class="output-text">12-month journey designed from the actual starting point — not a generic plan</div></div>
+          <div class="output-item"><div class="output-check">✓</div><div class="output-text">Stakeholder map — who you need at each stage and what you need from them</div></div>
+          <div class="output-item"><div class="output-check">✓</div><div class="output-text">First leadership deliverable — a clear, honest picture of where the organisation stands</div></div>
+        </div>
+      </div>
+      <div class="nav-buttons">
+        <div></div>
+        <button class="btn btn-primary btn-sm" onclick="goStep('s1')">Step 1 — Governance →</button>
+      </div>
+    </div>
+
+    <!-- STEP 1 -->
+    <div class="step-panel" id="s1">
+      <div class="step-header-band">
+        <div class="step-num-big">Step 1</div>
+        <div class="step-title-big">Risk Governance and Risk Appetite</div>
+        <div class="step-tagline">A risk register without governance is just a document. Define who owns this, who decides, and what the organisation is willing to accept — before collecting any data.</div>
+      </div>
+      <div class="pmra-tabs">
+        <div class="pmra-tab active" onclick="setPmra(this,'p1')">The problem</div>
+        <div class="pmra-tab" onclick="setPmra(this,'m1')">The method</div>
+        <div class="pmra-tab" onclick="setPmra(this,'a1')">NovaDrive</div>
+        <div class="pmra-tab" onclick="setPmra(this,'r1')">Result + resistance</div>
+      </div>
+      <div class="pmra-panel active" id="p1">
+        <div class="panel-card">
+          <div class="panel-label" style="color:var(--amber-dk);">The problem</div>
+          <div class="panel-body">Risk management initiatives fail not because the frameworks are wrong but because the organisational structure to act on them does not exist. The risk manager identifies a P1 node, recommends dual-sourcing at $2M, and the recommendation sits in an email chain for six weeks. Three structural failures drive this every time: nobody owns risk management with cross-functional authority, the risk appetite has never been stated, and escalation thresholds are undefined.</div>
+        </div>
+      </div>
+      <div class="pmra-panel" id="m1">
+        <div class="panel-card">
+          <div class="panel-label" style="color:var(--amber-dk);">Four governance components — all must exist</div>
+          <div class="panel-body">
+            <strong>1. Ownership and authority matrix:</strong> Risk owner (VP Supply Chain) · Executive sponsor (COO) · Risk analyst · Functional contributors (engineering, finance, IT, legal). One named person per role — not a committee.<br><br>
+            <strong>2. Escalation thresholds:</strong> TTR–TTS gap above 30 days = P1 requiring mitigation plan within 30 days. Altman Z below 1.8 = immediate intervention. Active P1 disruption = 24-hour response window. Pre-agreed by leadership before the first risk is scored.<br><br>
+            <strong>3. Risk appetite vs risk tolerance:</strong>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0;">
+            <div style="background:var(--purple-lt);border-radius:var(--radius-md);padding:14px;">
+              <div style="font-size:0.75rem;font-weight:700;color:var(--purple-dk);margin-bottom:6px;">Risk appetite — strategic, board level</div>
+              <div style="font-size:0.8125rem;color:var(--purple-dk);line-height:1.55;">How much risk the organisation is willing to accept in pursuit of its objectives. Qualitative. Example: "We will not accept supply chain risks that could halt production for more than 14 days without a pre-approved mitigation plan."</div>
+            </div>
+            <div style="background:var(--teal-lt);border-radius:var(--radius-md);padding:14px;">
+              <div style="font-size:0.75rem;font-weight:700;color:var(--teal-dk);margin-bottom:6px;">Risk tolerance — operational, executive level</div>
+              <div style="font-size:0.8125rem;color:var(--teal-dk);line-height:1.55;">Specific measurable thresholds that operationalise the appetite. TTR–TTS gap above 30 days = P1. Altman Z below 1.8 = intervention. These numbers remove ambiguity from every mitigation investment decision.</div>
+            </div>
+          </div>
+          <div class="panel-body"><strong>4. Review cadence:</strong> Weekly signal monitoring · Monthly P1 review · Quarterly full register refresh · Annual audit and tabletop exercise · Out-of-cycle on trigger events</div>
+        </div>
+      </div>
+      <div class="pmra-panel" id="a1">
+        <div class="panel-card">
+          <div class="panel-label" style="color:var(--amber-dk);">NovaDrive — governance established in Days 1–14</div>
+          <div class="panel-body">Before AGNA: 11 days to approve $2.4M air freight for Taiwan disruption. No pre-authorised spend. No defined decision maker. Three people simultaneously trying to solve the same crisis with no clarity on authority.<br><br>After Step 1: Risk owner (Jennifer Lim, VP Supply Chain) · Executive sponsor (David Park, COO) · Risk analyst (Sarah Chen) · Pre-authorised emergency spend up to $500K · 24-hour response requirement for P1 crises · Same Taiwan decision: resolved in under 4 hours.</div>
+          <div class="callout callout-teal" style="margin-top:16px;">
+            <div class="callout-label" style="color:var(--teal-dk);">NovaDrive risk appetite — approved Day 14</div>
+            <div class="callout-body">NovaDrive will not accept supply chain risks that could halt production for more than 14 days without a pre-approved mitigation plan. TTR–TTS gap above 30 days = P1. Altman Z below 1.8 = immediate intervention. No single program above 40% of revenue. No single supplier above 15% of total spend.</div>
+          </div>
+        </div>
+      </div>
+      <div class="pmra-panel" id="r1">
+        <div class="output-list">
+          <div class="output-item"><div class="output-check">✓</div><div class="output-text">Named risk owner with defined cross-functional authority — one person accountable</div></div>
+          <div class="output-item"><div class="output-check">✓</div><div class="output-text">Escalation thresholds formally agreed — every trigger maps to a decision maker and response time</div></div>
+          <div class="output-item"><div class="output-check">✓</div><div class="output-text">Risk appetite statement approved by executive team</div></div>
+          <div class="output-item"><div class="output-check">✓</div><div class="output-text">Risk tolerance thresholds defined — specific numbers that convert appetite into operational decisions</div></div>
+          <div class="output-item"><div class="output-check">✓</div><div class="output-text">Pre-authorised emergency response budget — the $500K that eliminates the 11-day decision delay</div></div>
+        </div>
+        <div style="margin-top:24px;">
+          <div class="panel-label" style="color:var(--red);margin-bottom:12px;">Resistance you will face — and what works</div>
+          <div class="resistance-item">
+            <div class="resist-q"><div class="resist-q-label">Procurement says</div><div class="resist-q-text">"We already manage supplier risk. This is just bureaucracy."</div></div>
+            <div class="resist-arrow">→</div>
+            <div class="resist-a"><div class="resist-a-label">The response</div><div class="resist-a-text">When the Taiwan disruption hit, it took 11 days to approve air freight. This framework makes that same decision in 24 hours. I am not adding work — I am removing the ambiguity that slows you down when it matters most.</div></div>
+          </div>
+          <div class="resistance-item">
+            <div class="resist-q"><div class="resist-q-label">Finance says</div><div class="resist-q-text">"We cannot pre-approve spend we have not seen a business case for."</div></div>
+            <div class="resist-arrow">→</div>
+            <div class="resist-a"><div class="resist-a-label">The response</div><div class="resist-a-text">The Taiwan disruption cost $180M. The pre-authorised budget is $500K. This is not a blank cheque — it is a ceiling below which the risk owner can act without delay. Above it, you still approve everything.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-buttons">
+        <button class="btn btn-ghost btn-sm" onclick="goStep('s0')">← Step 0</button>
+        <button class="btn btn-primary btn-sm" onclick="goStep('s2')">Step 2 — Programs →</button>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="step-panel" id="s2">
+      <div class="step-header-band">
+        <div class="step-num-big">Step 2</div>
+        <div class="step-title-big">Programs and Daily Revenue at Risk</div>
+        <div class="step-tagline">Start with programs — not suppliers. Every risk score is anchored to one number: how much does it cost if production stops for one day?</div>
+      </div>
+      <div class="pmra-tabs">
+        <div class="pmra-tab active" onclick="setPmra(this,'p2')">The formula</div>
+        <div class="pmra-tab" onclick="setPmra(this,'m2')">NovaDrive programs</div>
+        <div class="pmra-tab" onclick="setPmra(this,'a2')">What it reveals</div>
+        <div class="pmra-tab" onclick="setPmra(this,'r2')">The result</div>
+      </div>
+      <div class="pmra-panel active" id="p2">
+        <div class="panel-card">
+          <div class="panel-label" style="color:var(--amber-dk);">The formula — daily revenue at risk</div>
+          <div class="formula-display">
+            <div class="fd-box" style="background:var(--purple-lt);color:var(--purple-dk);">Annual revenue ($)</div>
+            <div class="fd-op">÷</div>
+            <div class="fd-box" style="background:var(--teal-lt);color:var(--teal-dk);">365 days</div>
+            <div class="fd-op">+</div>
+            <div class="fd-box" style="background:var(--amber-lt);color:var(--amber-dk);">Daily penalty ($)</div>
+            <div class="fd-op">=</div>
+            <div class="fd-eq">Daily revenue at risk — anchors every RPN score</div>
+          </div>
+          <div class="panel-body">Why programs first — not suppliers: a supplier who serves an $820M program and a supplier who serves a $10M program may look identical on a supplier list. They are completely different risk priorities. Programs are the financial foundation. Every risk score is only meaningful in relation to the programs it threatens. Collecting penalty clause data is the step most risk registers skip — and it consistently understates impact by 15–25%.</div>
+        </div>
+      </div>
+      <div class="pmra-panel" id="m2">
+        <div class="panel-card">
+          <div class="panel-label" style="color:var(--amber-dk);">NovaDrive — five programs fully mapped</div>
+          <div style="overflow-x:auto;">
+          <table class="ttr-table">
+            <tr><th>Program</th><th>Annual revenue</th><th>Daily revenue</th><th>Penalty/day</th><th>Daily at risk</th><th>Remaining</th></tr>
+            <tr><td style="font-weight:600;">U31 EV Platform</td><td>$820M</td><td>$2.25M</td><td>$0.50M</td><td style="font-weight:700;color:var(--red);">$2.75M</td><td>7.5 yrs</td></tr>
+            <tr><td style="font-weight:600;">U32 ADAS Suite</td><td>$410M</td><td>$1.12M</td><td>$0.25M</td><td style="font-weight:700;color:var(--red);">$1.37M</td><td>7.5 yrs</td></tr>
+            <tr><td style="font-weight:600;">U33 Body Systems</td><td>$380M</td><td>$1.04M</td><td>$0.15M</td><td style="font-weight:700;color:var(--amber-dk);">$1.19M</td><td>2.5 yrs</td></tr>
+            <tr><td style="font-weight:600;">U34 Interior</td><td>$290M</td><td>$0.79M</td><td>$0.10M</td><td style="font-weight:700;color:var(--amber-dk);">$0.89M</td><td>5.0 yrs</td></tr>
+            <tr><td style="font-weight:600;">U35 Chassis</td><td>$500M</td><td>$1.37M</td><td>$0.20M</td><td style="font-weight:700;color:var(--amber-dk);">$1.57M</td><td>1.5 yrs</td></tr>
+            <tr style="background:var(--gray-lt);font-weight:700;"><td>Total</td><td>$2.4B</td><td>$6.57M</td><td>$1.20M</td><td style="color:var(--red);">$7.77M</td><td>—</td></tr>
+          </table>
+          </div>
+        </div>
+      </div>
+      <div class="pmra-panel" id="a2">
+        <div class="panel-card">
+          <div class="panel-label" style="color:var(--amber-dk);">What the program master immediately reveals</div>
+          <div class="callout callout-red"><div class="callout-label" style="color:var(--red);">EV Platform concentration</div><div class="callout-body">U31 represents 34% of total revenue — below the 40% governance threshold but material. A permanent supply failure on this program costs $6.15B in total remaining program revenue.</div></div>
+          <div class="callout callout-amber" style="margin-top:10px;"><div class="callout-label" style="color:var(--amber-dk);">Short remaining life risk</div><div class="callout-body">U33 has 2.5 years remaining, U35 has 1.5 years. A $2M dual-sourcing investment for a program with 1.5 years left has very different ROI than the same investment for a 7.5-year program. Mitigation investment is proportional to remaining life.</div></div>
+          <div class="callout callout-teal" style="margin-top:10px;"><div class="callout-label" style="color:var(--teal-dk);">The number that changes the conversation</div><div class="callout-body">All five programs halted simultaneously: $7.77M per day in combined lost revenue and penalties. Total remaining revenue at risk: $12.35B. Present this to a CFO who has been sceptical of risk management investment — and the conversation changes permanently.</div></div>
+        </div>
+      </div>
+      <div class="pmra-panel" id="r2">
+        <div class="output-list">
+          <div class="output-item"><div class="output-check">✓</div><div class="output-text">Five programs fully documented with customer, technology type, revenue, volume, dates, and penalty terms</div></div>
+          <div class="output-item"><div class="output-check">✓</div><div class="output-text">Daily revenue at risk calculated — including penalty clauses that most risk registers ignore</div></div>
+          <div class="output-item"><div class="output-check">✓</div><div class="output-text">$12.35B total remaining revenue at risk — the full financial exposure of NovaDrive's supply chain</div></div>
+          <div class="output-item"><div class="output-check">✓</div><div class="output-text">The impact denominator for every subsequent RPN score — every risk calculation anchored to real program revenue</div></div>
+          <div class="output-item"><div class="output-check">✓</div><div class="output-text">Maintenance protocol: Finance BP updates revenue annually · Program management updates end dates on confirmation · Legal updates penalty terms on renegotiation · Risk analyst refreshes register within 14 days of any change</div></div>
+        </div>
+      </div>
+      <div class="nav-buttons">
+        <button class="btn btn-ghost btn-sm" onclick="goStep('s1')">← Step 1</button>
+        <button class="btn btn-primary btn-sm" onclick="goStep('s3')">Step 3 — BOM explosion →</button>
+      </div>
+    </div>
+
+    <!-- STEPS 3–11 rendered from data -->
+    <div id="remaining-steps"></div>
+
+  </main>
+</div>
+
+<script src="../js/main.js"></script>
+<script>
+const STEPS = [
+  {
+    id:'s3', num:'Step 3', title:'BOM Explosion to Critical Parts',
+    tagline:'Not all 50,000 part numbers on a BOM matter for risk. Identify the ones whose absence halts production.',
+    problem:'Starting with every part number is impractical and produces noise. The discipline is identifying the subset that matters: single-source parts, long lead time parts, and parts with no safety stock buffer. Engineering knows which ones these are — the structured BOM explosion surfaces them systematically.',
+    method:`Work with engineering to identify parts that meet any of three criteria: (1) Single-source — only one qualified supplier in the AVL. (2) Lead time above 90 days — any disruption outruns normal replenishment. (3) Safety stock below 14 days — current buffer is insufficient to cover qualification of an alternate.\n\nFor NovaDrive's 5 programs and approximately 12,000 active part numbers: approximately 380 parts meet at least one criterion. This becomes the critical parts list — the input to Step 4.`,
+    nova:'NovaDrive had 12,000 active part numbers. BOM explosion identified 380 critical parts — 3% of the total, but representing 89% of production halt risk. The remaining 11,600 parts either had multiple sources, long safety stock, or both.',
+    outputs:['Critical parts list per program — 380 parts from 12,000','Single-source flags from ERP — immediate P1 candidates','Long lead time flags — parts where TTR calculation is essential','Safety stock flags — parts where buffer extension is needed']
+  },
+  {
+    id:'s4', num:'Step 4', title:'ERP Extraction and Supplier Master',
+    tagline:'The three-column extract that connects every supplier to every part to every program — the foundation of all subsequent analysis.',
+    problem:'Without the supplier-part-program link, every subsequent step is guesswork. Most companies have this data in their ERP — but it has never been assembled into a single structured architecture designed for risk analysis.',
+    method:`Extract three columns from ERP: Supplier ID · Part number · Program code. This is the bridge. Every supplier is now visible in relation to every part they supply and every program those parts serve.\n\nEnrich with location, spend, tier level, contact, and payment terms. Build the five-table data architecture — the Excel proforma available for download captures this exactly:\n\n1. Supplier Master · 2. Program Master · 3. Part Master · 4. Inventory and TTR/TTS · 5. Alternate Source Map\n\nConnected through shared IDs. Any analysis runs as a query across 1,100 suppliers in seconds.`,
+    nova:'NovaDrive\'s ERP had the supplier-part link but no program mapping. The extraction took 3 days with IT. The resulting database showed for the first time which programs each supplier was critical to — revealing that 8 suppliers were critical to 4 or 5 programs simultaneously.',
+    outputs:['Complete supplier-part-program database from ERP','Five-table architecture with shared IDs','All 60 NovaDrive Tier 1 suppliers mapped to programs and parts','Data foundation for all steps 5 through 11']
+  },
+  {
+    id:'s4b', num:'Step 4B', title:'Spend Concentration Analysis',
+    tagline:'Which suppliers above 10% of total spend? Spend concentration and risk concentration are different — and both matter.',
+    problem:'A supplier with $90M annual spend who is P3 manageable is a different conversation from a $2M supplier who is P1 critical. Both matter — but for different reasons. Spend concentration flags where financial leverage and relationship investment should be concentrated. Risk concentration flags where mitigation investment must go.',
+    method:`Run spend concentration analysis across the supplier base: any supplier above 10% of total spend gets a concentration flag. Any part above 5% of program cost gets a cost concentration flag.\n\nThe REI framework incorporates spend concentration as a scoring input — high-spend single-source suppliers carry compounded risk from both financial dependency and supply dependency.\n\nOutput: spend concentration heat map. Top 10 suppliers by spend vs top 10 by risk score — the gap between these two lists is where investment is misallocated.`,
+    nova:'NovaDrive\'s top 10 suppliers by spend included 3 P3-managed commodity suppliers. Their top 10 by risk score included 5 suppliers who received minimal procurement attention because their spend was low. The misalignment was striking — and corrected through REI scoring in Step 7.',
+    outputs:['Spend concentration flags — any supplier above 10% of total spend','Part cost concentration flags — any part above 5% of program cost','Misalignment analysis — spend priority vs risk priority','REI weighting inputs for Step 7 scoring']
+  },
+  {
+    id:'s5', num:'Step 5', title:'TTR/TTS Criticality Test — All Tier 1',
+    tagline:'1,100 suppliers become 30–50 critical nodes. TTR/TTS is the test that does it.',
+    problem:'The instinct is to score all suppliers — but scoring 1,100 suppliers equally is impractical and produces a risk register nobody can act on. The TTR/TTS criticality test is the filter that identifies the nodes where detailed analysis is worth the investment.',
+    method:`For each supplier on the critical parts list:\n\nTTS = (on-hand inventory + WIP + in-transit) ÷ daily consumption rate = days of supply currently available.\n\nTTR = qualification lead time + ramp to full volume = days to restore supply from any source after a disruption.\n\nCriticality test: TTR − TTS = Gap\n- Gap above 30 days = P1 Critical: mitigation plan required\n- Gap 0–30 days = P2 Elevated: contingency plan required\n- TTS exceeds TTR = P3 Managed: monitor, no immediate action\n\nTTS comes from inventory data — available immediately. TTR requires engineering conversations for single-source parts — 2 hours per supplier for a range estimate is sufficient.`,
+    nova:'NovaDrive: 380 critical parts from 60 Tier 1 suppliers. TTR/TTS test took 3 weeks (engineering provided estimates for 180 single-source parts). Result: 8 P1 Critical, 14 P2 Elevated, 38 P3 Managed. Taiwan ECU Corp: TTR 180 days, TTS 14 days, gap 166 days.',
+    outputs:['P1/P2/P3 tiering for all 60 NovaDrive Tier 1 suppliers','TTR/TTS gap calculated for all 380 critical parts','8 P1 Critical nodes identified — requiring immediate mitigation plans','Basis for REI scoring in Step 7']
+  },
+  {
+    id:'s6', num:'Step 6', title:'Sub-tier Disclosure — P1 Tier 1 Suppliers',
+    tagline:'The only practical way to see below Tier 1. Send the questionnaire. The results will surprise you.',
+    problem:'Tier 2 and Tier 3 risks are invisible without sub-tier disclosure. The discipline is not mapping every sub-supplier — it is getting structured disclosure from P1 Tier 1 suppliers about their key sub-suppliers. This single step revealed NovaDrive\'s most severe risk node.',
+    method:`Send a structured disclosure questionnaire to every P1 Tier 1 supplier asking for: their top 5 sub-suppliers by spend · single-source dependencies at Tier 2 · geographic location of each Tier 2 facility · any known financial distress at Tier 2.\n\nAggregate all responses. Cross-reference supplier names across multiple Tier 1 responses — the same name appearing in multiple responses = diamond convergence node.\n\nFor P1 Tier 2 nodes identified: repeat a shorter disclosure to map one tier deeper. Do not map below Tier 3 in most supply chains — diminishing returns.`,
+    nova:'NovaDrive sent 8 questionnaires to P1 Tier 1 suppliers. 6 of 8 responded within 30 days. Responses revealed: Nagoya Resin KK appearing in 6 of 6 responses — a Tier 2 supplier feeding all 6 responding Tier 1s simultaneously. Not on any register. TTR 112 days, TTS 21 days.',
+    outputs:['Tier 2 mapping for all 8 P1 NovaDrive Tier 1 suppliers','Diamond dependency nodes identified — Nagoya Resin KK and 3 others','Alternate Source Map fully built for all P1 nodes','Tier 3 mapping for Nagoya Resin KK (highest-impact diamond node)']
+  },
+  {
+    id:'s7', num:'Step 7', title:'Score All Risks — P×I×V and REI',
+    tagline:'Apply the framework. Every risk gets a number. Every number is traceable to a data source.',
+    problem:'Without scoring, a risk register is a list of concerns with no action priority. The scoring step converts classification and TTR/TTS data into a ranked, defensible action list where every investment decision is justified by a calculation — not an opinion.',
+    method:`Apply P×I×V scoring to every risk in the register:\n\nProbability: historical frequency data from industry disruption databases · supplier incident history · country risk index\n\nImpact: daily revenue at risk (from Step 2 program master) × estimated duration in days. Real dollar figures — not "high".\n\nVelocity: sudden onset / slow burn / structural — determines response type, not just severity.\n\nREI (Risk Exposure Index): combines TTR/TTS node criticality with program revenue exposure. Developed at the Nexteer engagement. Every P1 node gets an REI score that combines supply vulnerability with revenue exposure into one prioritised action list with named owners and deadlines.`,
+    nova:'NovaDrive: 41 risks scored. Top 5 RPNs: Taiwan ECU 504 · ADAS ECU 324 · Stuttgart Seating 240 · CBAM cascade 224 · Logistics concentration 210. 3 risks classified as black swans — not scored, resilience-planned in Step 9.',
+    outputs:['Scored risk register — every risk has a defensible RPN','REI ranked action list with named owners and deadlines','3 black swans separated — managed through Step 9 resilience playbooks','Board-presentable risk summary: here are our top risks, why they are ranked this way, what we are doing']
+  },
+  {
+    id:'s8', num:'Step 8', title:'Mitigation Plans — Every P1 Risk',
+    tagline:'Six options. Choose in order. Every P1 risk gets a named owner, a deadline, a cost, and a target state.',
+    problem:'Risk scores without mitigation plans are exercises in awareness, not management. The discipline is converting every P1 score into a specific action: who does what by when, at what cost, measured how.',
+    method:`Six mitigation options in order of preference:\n\n1. Redundancy (dual sourcing) — qualify a second supplier before disruption hits. Most durable but highest cost.\n2. Flexibility — build the ability to switch suppliers or routes quickly rather than hold spare capacity. Lower ongoing cost than redundancy.\n3. Safety stock — extend TTS to cover qualification period. Cost-effective bridge while qualification proceeds.\n4. Supplier development — proactive investment in supplier capability, capacity, or financial health to reduce risk at source.\n5. Insurance — financial risk transfer via business interruption or supply chain insurance for risks where mitigation is cost-prohibitive.\n6. Accept and monitor — residual risk with documented rationale and pre-agreed by executive sponsor.\n\nSheffi and Rice identify flexibility as the more durable resilience source over redundancy. AGNA explicitly recommends flexibility first wherever viable.`,
+    nova:'NovaDrive P1 mitigation plans: Taiwan ECU Corp — Korean alternate qualification initiated (18-month programme, $2.4M). Nagoya Resin KK — German alternate sourcing initiated via Tier 1 supplier contract amendment. Stuttgart Seating — financial monitoring monthly, safety stock extended 60 days.',
+    outputs:['Mitigation plan for every P1 risk — 8 plans for NovaDrive','Named owner · deadline · cost · target state for each plan','Live mitigation tracking document — reviewed monthly by risk owner','Investment total for NovaDrive P1 mitigation: $4.2M over 18 months vs $180M+ exposure avoided']
+  },
+  {
+    id:'s8b', num:'Step 8B', title:'Near-miss Register and Early Signal Library',
+    tagline:'The near-misses that do not make it into the risk register are the next disruptions. Sheffi makes this point explicitly.',
+    problem:'Most risk registers are built once and updated reluctantly. The near-miss register is a continuous feed — events that almost caused disruptions, signals that were caught just in time, industry incidents at comparable companies. This data dramatically improves both risk register quality and resilience playbook accuracy.',
+    method:`Maintain a structured near-miss register with three inputs:\n\n1. Internal near-misses: events at NovaDrive suppliers or in NovaDrive logistics that caused concern but did not halt production. Log them within 72 hours.\n2. Industry incident monitoring: track disruptions at comparable automotive manufacturers. What hit Ford or Toyota this quarter is a leading indicator for NovaDrive.\n3. Early signal library: pre-defined signals for each P1 risk that trigger an out-of-cycle review. Altman Z moving to watch zone · Lead time variance above 20% baseline · Country risk index change · News monitoring flag on supplier name.`,
+    nova:'NovaDrive early signal library for Taiwan ECU: Taiwan Strait CSIS index above 6.5 · Any fab outage report in Hsinchu Science Park · Lead time increase above 15% over 30-day baseline · Any geopolitical escalation news involving Taiwan semiconductor export controls.',
+    outputs:['Near-miss register — continuously updated from internal and industry sources','Early signal library for every P1 risk — specific measurable triggers','Out-of-cycle review protocol — what triggers it, who reviews, in what timeframe','Risk register improvement cycle — near-misses become risk register updates within 14 days']
+  },
+  {
+    id:'s9', num:'Step 9', title:'Resilience Playbooks for Black Swans',
+    tagline:'Black swans cannot be scored. They can only be survived. The survival window concept determines whether your organisation recovers or does not.',
+    problem:'The risk management methodology (Steps 0–8) handles 38 of NovaDrive\'s 41 risks. The remaining 3 — Taiwan geopolitical shock, pandemic, and a Japan mega-earthquake — are black swans. Standard mitigation tools do not apply. The only response that works is resilience capability built before the event occurs.',
+    method:`The eight-phase Sheffi resilience curve:\n1. Preparation — resilience capability built before any event\n2. Detection — first signal identified\n3. Response escalation — governance chain activated\n4. Initial impact — first effects reach production\n5. Full impact — peak disruption, maximum revenue loss\n6. Stabilisation — disruption contained, recovery path identified\n7. Recovery — supply restoring, production ramping\n8. New normal — adaptation, lessons captured\n\nSurvival window: the time between when a disruption starts and when it becomes catastrophic. Extending TTS, pre-qualifying alternates, and pre-authorising response budgets are the tools that extend the window.\n\nTabletop exercise: cross-functional teams walk through each scenario. Who decides what, with what information, in what timeframe. A playbook never tested is just a document.`,
+    nova:'NovaDrive has playbooks for 3 black swans: Taiwan geopolitical shock · Japan earthquake (Nagoya Resin KK + Yokohama Glass) · Global pandemic (COVID equivalent). Each tested in a 2-hour tabletop exercise. Survival window for ADAS Suite extended from 10 days to 45 days through safety stock programme.',
+    outputs:['Three black swan resilience playbooks — built and tabletop-tested','Survival window calculated for all 5 programs by scenario','Pre-authorised response budgets for each playbook — no approval needed when playbook activates','Eight-phase response choreography for each scenario']
+  },
+  {
+    id:'s10', num:'Step 10', title:'Monitoring System and Live Dashboard',
+    tagline:'Risk management is not a report. It is what a risk manager looks at on a Tuesday morning and knows exactly where to act.',
+    problem:'A risk register scored once a quarter is not risk management — it is documentation. The monitoring system converts the methodology into a daily operational tool that shows where risk is moving, where resilience is decaying, and where the next action is needed.',
+    method:`Six KRI categories in the dashboard:\n\n1. Time-to-Survive by program — the primary operational metric. Shown in days, by program, from current inventory. Red below 14 days, amber 14–30, green above 30.\n2. Trigger alerts — automatic flags when a supplier crosses a defined threshold. Altman Z watch zone · Lead time variance above 20% · Country risk index change · News flag on supplier name.\n3. Risk scores live — RPN movement highlighted. Score increase since last refresh = immediate flag.\n4. Resilience score decay — resilience degrades without action. Dashboard shows where it is eroding.\n5. Supplier financial health — Altman Z trend for all P1 and P2 suppliers. Three-quarter trend line.\n6. ROI reporting — revenue protected per active mitigation programme. Board-ready quarterly summary.`,
+    nova:'NovaDrive dashboard: 8 P1 nodes with live TTS. Stuttgart Seating currently showing amber (TTS 26 days, below 30-day green threshold). CBAM regulatory calendar showing 3 EU suppliers within 90 days of compliance deadline. Taiwan ECU alternate qualification: 40% complete, on track.',
+    outputs:['Live dashboard with 6 KRI categories — operational every morning','Trigger alert system — automatic escalation when thresholds crossed','TTS by program updated from live inventory data','Board-ready quarterly summary — one page, actionable, ROI-anchored']
+  },
+  {
+    id:'s11', num:'Step 11', title:'ROI Calculation and Board Communication',
+    tagline:'The board does not need a risk report. They need a business case. This step builds it.',
+    problem:'Risk management investment competes with every other capital allocation decision. The only way to win that competition consistently is to present the investment in language finance and leadership understand: expected value of disruption avoided vs cost of mitigation.',
+    method:`Three ROI calculations:\n\n1. Revenue protected per P1 mitigation: TTR gap days × daily revenue at risk × disruption probability = expected annual disruption cost avoided. Compare to annual mitigation investment.\n\n2. Inventory optimisation saving: TTS analysis identifies suppliers where safety stock is excessive relative to their P tier. Reducing over-stocked P3 inventory while extending P1 buffers = net working capital improvement.\n\n3. Total programme ROI: sum of all revenue protected + inventory savings − total programme cost = the number for the board.\n\nBoard communication format: one page. Three numbers: total programme investment, expected disruption cost avoided, net ROI. Supporting detail available but not pushed. The discipline is leading with outcome, not methodology.`,
+    nova:'NovaDrive ROI model: total programme cost $4.2M over 18 months · Revenue protected from Taiwan ECU mitigation alone (expected value) $34M/year · Inventory optimisation saving $8.2M (reducing P3 over-stock) · Net ROI presented to board: 10:1 in year 1. Programme approved for full rollout.',
+    outputs:['ROI model for every P1 mitigation investment — defensible to CFO','Inventory optimisation saving quantified from TTS analysis','Board pack — one page, three numbers, supporting detail available','Programme approval for full rollout secured through ROI presentation']
+  }
+];
+
+const container = document.getElementById('remaining-steps');
+STEPS.forEach(s => {
+  const panel = document.createElement('div');
+  panel.className = 'step-panel';
+  panel.id = s.id;
+  panel.innerHTML = `
+    <div class="step-header-band">
+      <div class="step-num-big">${s.num}</div>
+      <div class="step-title-big">${s.title}</div>
+      <div class="step-tagline">${s.tagline}</div>
+    </div>
+    <div class="pmra-tabs">
+      <div class="pmra-tab active" onclick="setPmra(this,'prob-${s.id}')">The problem</div>
+      <div class="pmra-tab" onclick="setPmra(this,'meth-${s.id}')">The method</div>
+      <div class="pmra-tab" onclick="setPmra(this,'nova-${s.id}')">NovaDrive</div>
+      <div class="pmra-tab" onclick="setPmra(this,'outp-${s.id}')">The result</div>
+    </div>
+    <div class="pmra-panel active" id="prob-${s.id}">
+      <div class="panel-card"><div class="panel-label" style="color:var(--amber-dk);">The problem</div><div class="panel-body">${s.problem}</div></div>
+    </div>
+    <div class="pmra-panel" id="meth-${s.id}">
+      <div class="panel-card"><div class="panel-label" style="color:var(--amber-dk);">The method</div><div class="panel-body" style="white-space:pre-line;">${s.method}</div></div>
+    </div>
+    <div class="pmra-panel" id="nova-${s.id}">
+      <div class="panel-card"><div class="panel-label" style="color:var(--purple);">NovaDrive application</div><div class="panel-body">${s.nova}</div></div>
+    </div>
+    <div class="pmra-panel" id="outp-${s.id}">
+      <div class="output-list">${s.outputs.map(o => `<div class="output-item"><div class="output-check">✓</div><div class="output-text">${o}</div></div>`).join('')}</div>
+    </div>
+    <div class="nav-buttons">
+      <button class="btn btn-ghost btn-sm" onclick="navPrev('${s.id}')">← Previous</button>
+      <button class="btn btn-primary btn-sm" onclick="navNext('${s.id}')">Next →</button>
+    </div>`;
+  container.appendChild(panel);
+});
+
+const stepOrder = ['s0','s1','s2','s3','s4','s4b','s5','s6','s7','s8','s8b','s9','s10','s11'];
+
+function goStep(id) {
+  document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.step-link').forEach(l => l.classList.remove('active'));
+  const panel = document.getElementById(id);
+  const link = document.querySelector(`[onclick="goStep('${id}')"]`);
+  if (panel) panel.classList.add('active');
+  if (link) link.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  return false;
+}
+
+function navNext(id) {
+  const idx = stepOrder.indexOf(id);
+  if (idx < stepOrder.length - 1) goStep(stepOrder[idx + 1]);
+  else window.location.href = 'resilience.html';
+}
+function navPrev(id) {
+  const idx = stepOrder.indexOf(id);
+  if (idx > 0) goStep(stepOrder[idx - 1]);
+}
+
+function setPmra(btn, panelId) {
+  const container = btn.closest('.step-panel');
+  container.querySelectorAll('.pmra-tab').forEach(t => t.classList.remove('active'));
+  container.querySelectorAll('.pmra-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  const panel = document.getElementById(panelId);
+  if (panel) panel.classList.add('active');
+}
+</script>
+</body>
+</html>
