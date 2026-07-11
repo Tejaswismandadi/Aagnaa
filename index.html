@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AGNA - Supply Chain Risk & Resilience</title>
+<meta name="description" content="A complete supply chain risk and resilience methodology - from first principles to a live operations dashboard. Demonstrated through NovaDrive Motors.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+/* ─── Page-specific styles ─────────────────── */
+.hero-layout{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:center;min-height:100vh;padding-top:60px;}
+.hero-left{padding:80px 32px 80px 60px;}
+.hero-right{display:flex;align-items:center;justify-content:center;padding:60px 40px 60px 20px;}
+
+/* The question visual */
+.question-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:32px;position:relative;overflow:hidden;}
+.question-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(83,74,183,0.1),rgba(29,158,117,0.05));pointer-events:none;}
+.question-label{font-size:0.6875rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:16px;}
+.question-text{font-size:1.0625rem;color:rgba(255,255,255,0.9);line-height:1.6;margin-bottom:24px;font-style:italic;}
+.question-reveal{display:flex;flex-direction:column;gap:8px;}
+.q-answer{display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;font-size:0.875rem;color:rgba(255,255,255,0.5);transition:all 0.3s;}
+.q-answer.highlighted{background:rgba(163,45,45,0.15);border-color:rgba(163,45,45,0.4);color:rgba(255,255,255,0.9);}
+.q-answer .q-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.2);flex-shrink:0;}
+.q-answer.highlighted .q-dot{background:#A32D2D;}
+
+/* Chapter overview cards */
+.chapter-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px;transition:var(--transition);position:relative;overflow:hidden;cursor:pointer;}
+.chapter-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.chapter-card:nth-child(1)::before{background:var(--purple);}
+.chapter-card:nth-child(2)::before{background:var(--teal);}
+.chapter-card:nth-child(3)::before{background:var(--amber);}
+.chapter-card:nth-child(4)::before{background:var(--coral);}
+.chapter-card:nth-child(5)::before{background:var(--blue);}
+.chapter-card:nth-child(6)::before{background:linear-gradient(90deg,var(--purple),var(--teal));}
+.chapter-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);}
+.chapter-num{font-size:0.6875rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray);margin-bottom:12px;}
+.chapter-title{font-size:1.125rem;font-weight:700;color:var(--gray-dk);margin-bottom:8px;line-height:1.3;}
+.chapter-desc{font-size:0.875rem;color:var(--gray);line-height:1.6;margin-bottom:20px;}
+.chapter-steps{display:flex;gap:6px;flex-wrap:wrap;}
+.chapter-step-pill{font-size:0.6875rem;font-weight:500;padding:3px 8px;background:var(--gray-lt);color:var(--gray);border-radius:20px;}
+
+/* Stats section */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);}
+.stat-block{background:var(--white);padding:40px 32px;text-align:center;}
+.stat-number{font-size:3rem;font-weight:800;letter-spacing:-0.03em;line-height:1;margin-bottom:8px;}
+.stat-label{font-size:0.875rem;color:var(--gray);line-height:1.4;}
+
+/* Why section */
+.why-card{padding:28px;border-radius:var(--radius-lg);border:1px solid var(--border);}
+.why-icon{width:48px;height:48px;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:1.5rem;}
+.why-title{font-size:1.0625rem;font-weight:700;margin-bottom:8px;color:var(--gray-dk);}
+.why-desc{font-size:0.9rem;color:var(--gray);line-height:1.65;}
+
+/* Quote section */
+.quote-section{background:linear-gradient(135deg,#0F0D2B,#1A1650);padding:100px 0;text-align:center;position:relative;overflow:hidden;}
+.quote-text{font-size:clamp(1.25rem,2.5vw,1.875rem);color:rgba(255,255,255,0.9);font-style:italic;line-height:1.6;max-width:760px;margin:0 auto 24px;}
+.quote-author{font-size:0.875rem;color:rgba(255,255,255,0.4);}
+
+/* Disclaimer */
+.disclaimer{background:var(--blue-lt);border:1px solid rgba(55,138,221,0.2);border-radius:var(--radius-md);padding:12px 18px;font-size:0.8125rem;color:var(--blue-dk);display:flex;align-items:flex-start;gap:10px;}
+.disclaimer svg{flex-shrink:0;margin-top:1px;}
+
+/* Framework badges */
+.framework-badges{display:flex;gap:8px;flex-wrap:wrap;}
+.fw-badge{font-size:0.75rem;font-weight:500;padding:5px 12px;background:var(--gray-lt);color:var(--gray-dk);border-radius:20px;border:1px solid var(--border);}
+
+/* Network section */
+.network-section{background:#0F0D2B;padding:80px 0;}
+.network-legend{display:flex;gap:20px;flex-wrap:wrap;margin-top:16px;}
+.network-leg{display:flex;align-items:center;gap:6px;font-size:0.75rem;color:rgba(255,255,255,0.5);}
+.network-leg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+
+@media(max-width:1024px){.hero-layout{grid-template-columns:1fr;}.hero-left{padding:80px 24px 40px;}.hero-right{display:none;}.stats-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:768px){.stats-grid{grid-template-columns:1fr;}.hero-left{padding:60px 16px 40px;}}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <div class="nav-logo">AGNA <span>Supply Chain Risk & Resilience</span></div>
+    <div class="nav-links">
+      <a href="what-is-risk.html" class="nav-link">What is risk</a>
+      <a href="risk-taxonomy.html" class="nav-link">Risk taxonomy</a>
+      <a href="methodology.html" class="nav-link">Methodology</a>
+      <a href="resilience.html" class="nav-link">Resilience</a>
+      <a href="dashboard.html" class="nav-link">Dashboard</a>
+      <a href="case-studies.html" class="nav-link">Case studies</a>
+      <a href="about.html" class="nav-cta">About Tejaswi</a>
+    </div>
+    <button class="nav-mobile-btn" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M2 5h16M2 10h16M2 15h16" stroke="#888" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="hero">
+  <div class="hero-bg-grid" aria-hidden="true"></div>
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="hero-glow-2" aria-hidden="true"></div>
+
+  <div class="hero-layout container-lg">
+    <div class="hero-left">
+      <div class="hero-eyebrow fade-in">Supply chain risk and resilience methodology</div>
+
+      <h1 class="display hero-title fade-up" data-delay="100">
+        Every disruption starts<br>
+        somewhere <span class="accent">quiet.</span>
+      </h1>
+
+      <p class="body-lg hero-subtitle fade-up" data-delay="200">
+        A signal nobody was watching. A dependency nobody had mapped. A risk nobody had named. AGNA is a complete methodology - from first principles to a live daily dashboard - that makes the invisible visible.
+      </p>
+
+      <div class="hero-cta-row fade-up" data-delay="300">
+        <a href="what-is-risk.html" class="btn btn-primary btn-lg">
+          Start the methodology
+          <svg viewBox="0 0 18 18" fill="none"><path d="M3 9h12M9 3l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="about.html" class="btn btn-outline btn-lg">Meet Tejaswi</a>
+      </div>
+
+      <div class="hero-stats fade-up" data-delay="400">
+        <div>
+          <div class="hero-stat-val" data-target="17" data-suffix=" risks">0</div>
+          <div class="hero-stat-lbl">risk types covered</div>
+        </div>
+        <div>
+          <div class="hero-stat-val" data-target="11" data-suffix=" steps">0</div>
+          <div class="hero-stat-lbl">methodology steps</div>
+        </div>
+        <div>
+          <div class="hero-stat-val" data-target="5" data-suffix=" playbooks">0</div>
+          <div class="hero-stat-lbl">black swan playbooks</div>
+        </div>
+        <div>
+          <div class="hero-stat-val" data-target="12" data-suffix=" frameworks">0</div>
+          <div class="hero-stat-lbl">academic frameworks</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right fade-in" data-delay="300">
+      <div class="question-card" style="max-width:420px;width:100%;">
+        <div class="question-label">The question that starts every engagement</div>
+        <div class="question-text">"If your most critical single-source supplier went offline today, how many days before your production line stops - and how long before you could restore supply from anywhere?"</div>
+        <div class="question-reveal">
+          <div class="q-answer"><div class="q-dot"></div>We don't know - this has never been calculated</div>
+          <div class="q-answer"><div class="q-dot"></div>We have a rough estimate for our top suppliers</div>
+          <div class="q-answer highlighted"><div class="q-dot"></div>This is why AGNA exists - to answer this precisely</div>
+        </div>
+        <div style="margin-top:20px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.08);">
+          <div style="font-size:0.75rem;color:rgba(255,255,255,0.35);">When nobody in the room can answer this question, the case for building the system makes itself.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Disclaimer -->
+<section class="section-sm section-gray">
+  <div class="container">
+    <div class="disclaimer fade-up">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0;margin-top:1px">
+        <circle cx="8" cy="8" r="7" stroke="#378ADD" stroke-width="1.5"/>
+        <path d="M8 7v4M8 5.5v.5" stroke="#378ADD" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <div><strong>NovaDrive Motors</strong> is a fictional automotive OEM constructed entirely to demonstrate this methodology from first principles. All supplier names, figures, revenue data, and scenarios are illustrative - not claims of a real client engagement. The methodology itself is grounded in real academic frameworks and practitioner experience from Nexteer Automotive and Kearney.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Why this exists -->
+<section class="section" id="why">
+  <div class="container">
+    <div class="section-header">
+      <div class="label section-eyebrow fade-up">Why AGNA exists</div>
+      <h2 class="headline fade-up" data-delay="100">Most companies don't have a risk management problem.<br>They have a visibility problem.</h2>
+      <p class="body-lg section-subtitle fade-up" data-delay="200">Research shows 70%+ of supply disruptions show early warning signals weeks before impact. The gap is not luck - it is visibility, methodology, and the discipline to act before the crisis hits.</p>
+    </div>
+
+    <div class="grid-3" style="margin-bottom:64px;">
+      <div class="why-card fade-up" data-delay="100">
+        <div class="why-icon" style="background:var(--purple-lt);">👁️</div>
+        <div class="why-title">See what others cannot</div>
+        <div class="why-desc">Diamond dependencies, geographic concentration, sub-tier opacity - the risks that cause the most damage are almost always the ones nobody was watching for. AGNA makes them visible before they strike.</div>
+      </div>
+      <div class="why-card fade-up" data-delay="200">
+        <div class="why-icon" style="background:var(--teal-lt);">⚖️</div>
+        <div class="why-title">Score with precision</div>
+        <div class="why-desc">Not "high / medium / low." Probability × Impact × Velocity = a Risk Priority Number grounded in data. Every score is traceable to program revenue, supplier inventory, and engineering lead times.</div>
+      </div>
+      <div class="why-card fade-up" data-delay="300">
+        <div class="why-icon" style="background:var(--amber-lt);">🛡️</div>
+        <div class="why-title">Survive what cannot be predicted</div>
+        <div class="why-desc">COVID. Suez Canal. Taiwan semiconductor crisis. Black swans cannot be scored - but organisations can be built to survive them. The survival window concept shows exactly how.</div>
+      </div>
+    </div>
+
+    <div class="framework-badges flex-center fade-up" style="gap:10px;flex-wrap:wrap;">
+      <div style="font-size:0.75rem;color:var(--gray);margin-right:4px;">Built on:</div>
+      <span class="fw-badge">Simchi-Levi - TTR/TTS</span>
+      <span class="fw-badge">Sheffi - Resilience curve</span>
+      <span class="fw-badge">Frank Knight - Risk vs uncertainty</span>
+      <span class="fw-badge">Nassim Taleb - Black swans</span>
+      <span class="fw-badge">ISO 31000</span>
+      <span class="fw-badge">IATF 16949</span>
+      <span class="fw-badge">SAE J1739</span>
+      <span class="fw-badge">Altman Z-score</span>
+      <span class="fw-badge">Forrester - Bullwhip</span>
+    </div>
+  </div>
+</section>
+
+<!-- Network visual -->
+<section class="network-section">
+  <div class="container">
+    <div class="flex-between mb-24" style="flex-wrap:wrap;gap:16px;">
+      <div>
+        <div class="label" style="color:rgba(255,255,255,0.4);margin-bottom:8px;">NovaDrive Motors - supplier network</div>
+        <h2 class="title" style="color:var(--white);">This is what a real supply chain looks like.<br>Nobody can manage this without a system.</h2>
+      </div>
+      <a href="methodology.html" class="btn btn-outline btn-sm">See how we tackle it</a>
+    </div>
+
+    <!-- SVG Tree Diagram -->
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <svg id="networkTree" viewBox="0 0 1100 480" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:700px;display:block;">
+      <defs>
+        <marker id="arr-red" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="rgba(163,45,45,0.7)"/>
+        </marker>
+        <marker id="arr-amber" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="rgba(239,159,39,0.6)"/>
+        </marker>
+        <marker id="arr-green" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="rgba(29,158,117,0.5)"/>
+        </marker>
+        <marker id="arr-purple" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="rgba(83,74,183,0.8)"/>
+        </marker>
+        <filter id="glow-red">
+          <feGaussianBlur stdDeviation="3" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="glow-purple">
+          <feGaussianBlur stdDeviation="4" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <!-- TIER LABELS -->
+      <text x="60" y="30" fill="rgba(255,255,255,0.25)" font-size="10" font-family="Inter,sans-serif" font-weight="600" letter-spacing="2" text-anchor="middle">OEM</text>
+      <text x="320" y="30" fill="rgba(255,255,255,0.25)" font-size="10" font-family="Inter,sans-serif" font-weight="600" letter-spacing="2" text-anchor="middle">TIER 1</text>
+      <text x="700" y="30" fill="rgba(255,255,255,0.25)" font-size="10" font-family="Inter,sans-serif" font-weight="600" letter-spacing="2" text-anchor="middle">TIER 2</text>
+      <text x="980" y="30" fill="rgba(255,255,255,0.25)" font-size="10" font-family="Inter,sans-serif" font-weight="600" letter-spacing="2" text-anchor="middle">TIER 3</text>
+
+      <!-- TIER DIVIDER LINES -->
+      <line x1="185" y1="20" x2="185" y2="470" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="4,6"/>
+      <line x1="510" y1="20" x2="510" y2="470" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="4,6"/>
+      <line x1="850" y1="20" x2="850" y2="470" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="4,6"/>
+
+      <!-- ══ CONNECTIONS FROM OEM TO TIER 1 ══ -->
+      <!-- P1 connections - red -->
+      <line x1="88" y1="145" x2="282" y2="80" stroke="rgba(163,45,45,0.5)" stroke-width="1.5" marker-end="url(#arr-red)"/>
+      <line x1="88" y1="165" x2="282" y2="145" stroke="rgba(163,45,45,0.5)" stroke-width="1.5" marker-end="url(#arr-red)"/>
+      <line x1="88" y1="185" x2="282" y2="210" stroke="rgba(163,45,45,0.5)" stroke-width="1.5" marker-end="url(#arr-red)"/>
+      <!-- P2 connections - amber -->
+      <line x1="88" y1="200" x2="282" y2="295" stroke="rgba(239,159,39,0.4)" stroke-width="1" marker-end="url(#arr-amber)"/>
+      <line x1="88" y1="210" x2="282" y2="365" stroke="rgba(239,159,39,0.4)" stroke-width="1" marker-end="url(#arr-amber)"/>
+      <!-- P3 connections - green -->
+      <line x1="88" y1="215" x2="282" y2="425" stroke="rgba(29,158,117,0.3)" stroke-width="0.8" marker-end="url(#arr-green)"/>
+      <line x1="88" y1="220" x2="282" y2="455" stroke="rgba(29,158,117,0.3)" stroke-width="0.8" marker-end="url(#arr-green)"/>
+
+      <!-- ══ CONNECTIONS TIER 1 TO TIER 2 ══ -->
+      <!-- Taiwan ECU -> Nagoya Resin (diamond) -->
+      <line x1="358" y1="80" x2="642" y2="160" stroke="rgba(83,74,183,0.6)" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr-purple)"/>
+      <!-- ADAS ECU -> Taiwan Chip (single source) -->
+      <line x1="358" y1="145" x2="642" y2="90" stroke="rgba(163,45,45,0.5)" stroke-width="1.5" marker-end="url(#arr-red)"/>
+      <!-- Stuttgart -> Nagoya Resin (diamond node hits here too) -->
+      <line x1="358" y1="210" x2="642" y2="160" stroke="rgba(83,74,183,0.6)" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr-purple)"/>
+      <!-- Stuttgart -> EU Foam -->
+      <line x1="358" y1="210" x2="642" y2="250" stroke="rgba(239,159,39,0.4)" stroke-width="1" marker-end="url(#arr-amber)"/>
+      <!-- Logistics -> Port node -->
+      <line x1="358" y1="295" x2="642" y2="340" stroke="rgba(239,159,39,0.4)" stroke-width="1" marker-end="url(#arr-amber)"/>
+      <!-- Commodity -> raw material -->
+      <line x1="358" y1="425" x2="642" y2="410" stroke="rgba(29,158,117,0.3)" stroke-width="0.8" marker-end="url(#arr-green)"/>
+      <line x1="358" y1="455" x2="642" y2="450" stroke="rgba(29,158,117,0.3)" stroke-width="0.8" marker-end="url(#arr-green)"/>
+
+      <!-- ══ CONNECTIONS TIER 2 TO TIER 3 ══ -->
+      <!-- Nagoya Resin -> Japanese chemical -->
+      <line x1="758" y1="160" x2="932" y2="120" stroke="rgba(83,74,183,0.5)" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arr-purple)"/>
+      <!-- Taiwan Chip -> wafer fab -->
+      <line x1="758" y1="90" x2="932" y2="60" stroke="rgba(163,45,45,0.4)" stroke-width="1" marker-end="url(#arr-red)"/>
+      <!-- EU Foam -> chemical raw -->
+      <line x1="758" y1="250" x2="932" y2="200" stroke="rgba(239,159,39,0.3)" stroke-width="0.8" marker-end="url(#arr-amber)"/>
+
+      <!-- ══ DIAMOND CONVERGENCE LINES (Nagoya feeds 3 Tier1s) ══ -->
+      <!-- Extra convergence line from 3rd Tier1 to Nagoya -->
+      <path d="M358,365 C480,365 560,160 642,160" stroke="rgba(83,74,183,0.4)" stroke-width="1.2" stroke-dasharray="5,3" fill="none" marker-end="url(#arr-purple)"/>
+
+      <!-- ══ OEM NODE ══ -->
+      <circle cx="60" cy="180" r="32" fill="#3C3489" filter="url(#glow-purple)"/>
+      <circle cx="60" cy="180" r="30" fill="url(#oemGrad)"/>
+      <text x="60" y="176" text-anchor="middle" fill="white" font-size="9" font-weight="700" font-family="Inter,sans-serif">Nova</text>
+      <text x="60" y="188" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="8" font-family="Inter,sans-serif">Drive</text>
+      <defs>
+        <radialGradient id="oemGrad" cx="35%" cy="35%">
+          <stop offset="0%" stop-color="#6B62D4"/>
+          <stop offset="100%" stop-color="#3C3489"/>
+        </radialGradient>
+      </defs>
+
+      <!-- ══ TIER 1 NODES ══ -->
+      <!-- P1: Taiwan ECU Corp -->
+      <circle cx="320" cy="80" r="22" fill="rgba(163,45,45,0.15)" stroke="#A32D2D" stroke-width="2" filter="url(#glow-red)"/>
+      <circle cx="320" cy="80" r="18" fill="#A32D2D"/>
+      <text x="320" y="76" text-anchor="middle" fill="white" font-size="7" font-weight="700" font-family="Inter,sans-serif">Taiwan</text>
+      <text x="320" y="86" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="6.5" font-family="Inter,sans-serif">ECU Corp</text>
+      <!-- P1 badge -->
+      <rect x="344" y="60" width="22" height="12" rx="6" fill="#A32D2D"/>
+      <text x="355" y="69" text-anchor="middle" fill="white" font-size="7" font-weight="700" font-family="Inter,sans-serif">P1</text>
+      <!-- Single source warning -->
+      <text x="320" y="108" text-anchor="middle" fill="#A32D2D" font-size="7" font-family="Inter,sans-serif" font-weight="600">SINGLE SOURCE</text>
+      <text x="320" y="117" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="6.5" font-family="Inter,sans-serif">TTR 180d / TTS 14d</text>
+      <text x="320" y="126" text-anchor="middle" fill="#A32D2D" font-size="6.5" font-family="Inter,sans-serif" font-weight="700">GAP 166 DAYS</text>
+
+      <!-- P1: ADAS ECU Single Source -->
+      <circle cx="320" cy="200" r="18" fill="rgba(163,45,45,0.15)" stroke="#A32D2D" stroke-width="1.5"/>
+      <circle cx="320" cy="200" r="14" fill="#A32D2D"/>
+      <text x="320" y="196" text-anchor="middle" fill="white" font-size="7" font-weight="700" font-family="Inter,sans-serif">ADAS</text>
+      <text x="320" y="206" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="6.5" font-family="Inter,sans-serif">ECU</text>
+      <rect x="338" y="192" width="22" height="12" rx="6" fill="#A32D2D"/>
+      <text x="349" y="201" text-anchor="middle" fill="white" font-size="7" font-weight="700" font-family="Inter,sans-serif">P1</text>
+
+      <!-- P1: Stuttgart Seating (financial distress) -->
+      <circle cx="320" cy="270" r="18" fill="rgba(163,45,45,0.15)" stroke="#A32D2D" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <circle cx="320" cy="270" r="14" fill="#8B2020"/>
+      <text x="320" y="266" text-anchor="middle" fill="white" font-size="7" font-weight="700" font-family="Inter,sans-serif">Stuttgart</text>
+      <text x="320" y="276" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="6.5" font-family="Inter,sans-serif">Seating</text>
+      <rect x="338" y="262" width="22" height="12" rx="6" fill="#8B2020"/>
+      <text x="349" y="271" text-anchor="middle" fill="white" font-size="7" font-weight="700" font-family="Inter,sans-serif">P2</text>
+      <text x="320" y="294" text-anchor="middle" fill="rgba(239,159,39,0.8)" font-size="6.5" font-family="Inter,sans-serif">Z-score 1.95 declining</text>
+
+      <!-- P2: Logistics node -->
+      <circle cx="320" cy="355" r="14" fill="#B8760A"/>
+      <text x="320" y="351" text-anchor="middle" fill="white" font-size="7" font-weight="700" font-family="Inter,sans-serif">Kaohsiung</text>
+      <text x="320" y="361" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="6.5" font-family="Inter,sans-serif">Port</text>
+      <rect x="338" y="347" width="22" height="12" rx="6" fill="#B8760A"/>
+      <text x="349" y="356" text-anchor="middle" fill="white" font-size="7" font-weight="700" font-family="Inter,sans-serif">P2</text>
+
+      <!-- P3 nodes -->
+      <circle cx="320" cy="415" r="11" fill="#1D9E75"/>
+      <text x="320" y="419" text-anchor="middle" fill="white" font-size="6.5" font-weight="600" font-family="Inter,sans-serif">Steel Co</text>
+      <circle cx="320" cy="445" r="11" fill="#1D9E75"/>
+      <text x="320" y="449" text-anchor="middle" fill="white" font-size="6.5" font-weight="600" font-family="Inter,sans-serif">Glass Co</text>
+
+      <!-- ══ TIER 2 NODES ══ -->
+      <!-- DIAMOND NODE: Nagoya Resin KK -->
+      <circle cx="700" cy="160" r="26" fill="rgba(83,74,183,0.2)" stroke="#534AB7" stroke-width="2.5" filter="url(#glow-purple)"/>
+      <circle cx="700" cy="160" r="20" fill="#534AB7"/>
+      <text x="700" y="155" text-anchor="middle" fill="white" font-size="7" font-weight="700" font-family="Inter,sans-serif">Nagoya</text>
+      <text x="700" y="165" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="6.5" font-family="Inter,sans-serif">Resin KK</text>
+      <!-- Diamond icon -->
+      <polygon points="700,125 712,137 700,149 688,137" fill="none" stroke="#534AB7" stroke-width="1.5" opacity="0.6"/>
+      <text x="700" y="192" text-anchor="middle" fill="#8B82F0" font-size="7" font-weight="700" font-family="Inter,sans-serif">DIAMOND NODE</text>
+      <text x="700" y="202" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="6.5" font-family="Inter,sans-serif">Feeds 6 Tier 1 suppliers</text>
+      <text x="700" y="212" text-anchor="middle" fill="#8B82F0" font-size="6.5" font-family="Inter,sans-serif">TTR 112d / TTS 21d</text>
+
+      <!-- Taiwan Chip Fab (single source at Tier 2) -->
+      <circle cx="700" cy="90" r="16" fill="rgba(163,45,45,0.15)" stroke="#A32D2D" stroke-width="1.5"/>
+      <circle cx="700" cy="90" r="12" fill="#A32D2D"/>
+      <text x="700" y="86" text-anchor="middle" fill="white" font-size="6.5" font-weight="700" font-family="Inter,sans-serif">Taiwan</text>
+      <text x="700" y="96" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="6" font-family="Inter,sans-serif">Chip Fab</text>
+      <text x="700" y="115" text-anchor="middle" fill="#A32D2D" font-size="6.5" font-family="Inter,sans-serif" font-weight="700">SINGLE SOURCE</text>
+
+      <!-- EU Foam (P2) -->
+      <circle cx="700" cy="250" r="13" fill="#B8760A"/>
+      <text x="700" y="246" text-anchor="middle" fill="white" font-size="6.5" font-weight="700" font-family="Inter,sans-serif">EU Foam</text>
+      <text x="700" y="256" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="6" font-family="Inter,sans-serif">Supplier</text>
+
+      <!-- Port logistics -->
+      <circle cx="700" cy="340" r="13" fill="#B8760A"/>
+      <text x="700" y="344" text-anchor="middle" fill="white" font-size="6.5" font-weight="600" font-family="Inter,sans-serif">Port Node</text>
+
+      <!-- P3 raw materials -->
+      <circle cx="700" cy="410" r="10" fill="#1D9E75"/>
+      <text x="700" y="414" text-anchor="middle" fill="white" font-size="6" font-family="Inter,sans-serif">Raw Mat</text>
+      <circle cx="700" cy="450" r="10" fill="#1D9E75"/>
+      <text x="700" y="454" text-anchor="middle" fill="white" font-size="6" font-family="Inter,sans-serif">Raw Mat</text>
+
+      <!-- ══ TIER 3 NODES ══ -->
+      <!-- Japanese Chemical (feeds Nagoya - critical) -->
+      <circle cx="968" cy="120" r="18" fill="rgba(83,74,183,0.15)" stroke="#534AB7" stroke-width="1.5"/>
+      <circle cx="968" cy="120" r="14" fill="#534AB7"/>
+      <text x="968" y="115" text-anchor="middle" fill="white" font-size="6.5" font-weight="700" font-family="Inter,sans-serif">Japanese</text>
+      <text x="968" y="125" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="6" font-family="Inter,sans-serif">Chemical</text>
+      <text x="968" y="145" text-anchor="middle" fill="#8B82F0" font-size="6.5" font-family="Inter,sans-serif">Sub-tier opacity</text>
+
+      <!-- Wafer Fab (feeds Taiwan Chip) -->
+      <circle cx="968" cy="60" r="14" fill="rgba(163,45,45,0.15)" stroke="#A32D2D" stroke-width="1.5"/>
+      <circle cx="968" cy="60" r="10" fill="#A32D2D"/>
+      <text x="968" y="64" text-anchor="middle" fill="white" font-size="6" font-weight="600" font-family="Inter,sans-serif">Wafer Fab</text>
+
+      <!-- EU Chemical -->
+      <circle cx="968" cy="200" r="11" fill="#B8760A"/>
+      <text x="968" y="204" text-anchor="middle" fill="white" font-size="6" font-family="Inter,sans-serif">Chem Raw</text>
+
+      <!-- ══ RISK CALLOUT BOXES ══ -->
+      <!-- RPN 504 callout -->
+      <rect x="130" y="42" width="130" height="26" rx="5" fill="rgba(163,45,45,0.15)" stroke="rgba(163,45,45,0.4)" stroke-width="1"/>
+      <text x="145" y="57" fill="#FF6B6B" font-size="7.5" font-weight="700" font-family="Inter,sans-serif">RPN 504 - HIGHEST RISK</text>
+      <line x1="185" y1="68" x2="298" y2="80" stroke="rgba(163,45,45,0.3)" stroke-width="0.8" stroke-dasharray="3,3"/>
+
+      <!-- $180M callout -->
+      <rect x="130" y="155" width="110" height="26" rx="5" fill="rgba(163,45,45,0.1)" stroke="rgba(163,45,45,0.3)" stroke-width="1"/>
+      <text x="145" y="170" fill="rgba(255,255,255,0.6)" font-size="7" font-family="Inter,sans-serif">$180M lost - 11 days offline</text>
+    </svg>
+    </div>
+
+    <!-- Legend -->
+    <div class="network-legend" style="margin-top:24px;">
+      <div class="network-leg"><div class="network-leg-dot" style="background:#534AB7;width:14px;height:14px;"></div>NovaDrive OEM</div>
+      <div class="network-leg"><div class="network-leg-dot" style="background:#A32D2D;"></div>P1 Critical - single source</div>
+      <div class="network-leg"><div class="network-leg-dot" style="background:#EF9F27;"></div>P2 Elevated</div>
+      <div class="network-leg"><div class="network-leg-dot" style="background:#1D9E75;"></div>P3 Managed</div>
+      <div class="network-leg">
+        <div style="width:10px;height:10px;border-radius:50%;background:#534AB7;border:2px solid #8B82F0;flex-shrink:0;"></div>
+        Diamond convergence node
+      </div>
+      <div class="network-leg">
+        <div style="width:24px;height:1px;background:rgba(83,74,183,0.7);border-top:1px dashed #534AB7;flex-shrink:0;margin-top:5px;"></div>
+        Sub-tier dependency
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Chapter overview -->
+<section class="section section-gray" id="chapters">
+  <div class="container">
+    <div class="section-header">
+      <div class="label section-eyebrow fade-up">The complete methodology</div>
+      <h2 class="headline fade-up" data-delay="100">Six chapters. One complete system.</h2>
+      <p class="body-lg section-subtitle fade-up" data-delay="200">From understanding what risk is to watching a live dashboard every morning - this is the end-to-end journey.</p>
+    </div>
+
+    <div class="grid-3" style="gap:20px;">
+      <a href="what-is-risk.html" class="chapter-card fade-up" data-delay="100" style="text-decoration:none;color:inherit;">
+        <div class="chapter-num">Chapter 1</div>
+        <div class="chapter-title">What is risk</div>
+        <div class="chapter-desc">The conceptual foundation. A precise definition, the probability spectrum, P×I×V scoring, Knightian uncertainty, and black swans - explained so clearly that anyone in the organisation can use the same language.</div>
+        <div class="chapter-steps">
+          <span class="chapter-step-pill">7 guided steps</span>
+          <span class="chapter-step-pill">NovaDrive examples</span>
+          <span class="chapter-step-pill">DFMEA connection</span>
+        </div>
+      </a>
+
+      <a href="risk-taxonomy.html" class="chapter-card fade-up" data-delay="200" style="text-decoration:none;color:inherit;">
+        <div class="chapter-num">Chapter 2</div>
+        <div class="chapter-title">The complete risk taxonomy</div>
+        <div class="chapter-desc">Every type of risk a manufacturing organisation faces - supply-side, demand-side, environmental, infrastructure, and two emerging risks that most frameworks do not yet address.</div>
+        <div class="chapter-steps">
+          <span class="chapter-step-pill">17 risk types</span>
+          <span class="chapter-step-pill">5 categories</span>
+          <span class="chapter-step-pill">Sheffi 2024</span>
+        </div>
+      </a>
+
+      <a href="methodology.html" class="chapter-card fade-up" data-delay="300" style="text-decoration:none;color:inherit;">
+        <div class="chapter-num">Chapter 3</div>
+        <div class="chapter-title">How to build the system</div>
+        <div class="chapter-desc">The step-by-step methodology. From maturity assessment to governance, BOM explosion, TTR/TTS testing, risk scoring, mitigation planning, and monitoring - everything shown with the actual work, not just the output.</div>
+        <div class="chapter-steps">
+          <span class="chapter-step-pill">11 steps</span>
+          <span class="chapter-step-pill">Problem → Result</span>
+          <span class="chapter-step-pill">Human reality</span>
+        </div>
+      </a>
+
+      <a href="resilience.html" class="chapter-card fade-up" data-delay="100" style="text-decoration:none;color:inherit;">
+        <div class="chapter-num">Chapter 4</div>
+        <div class="chapter-title">Black swan resilience</div>
+        <div class="chapter-desc">When scoring tools break down. The eight-phase Sheffi resilience curve, the survival window concept, and five event-type playbooks for the disruptions that cannot be predicted - only survived.</div>
+        <div class="chapter-steps">
+          <span class="chapter-step-pill">8-phase curve</span>
+          <span class="chapter-step-pill">5 playbooks</span>
+          <span class="chapter-step-pill">Survival window</span>
+        </div>
+      </a>
+
+      <a href="dashboard.html" class="chapter-card fade-up" data-delay="200" style="text-decoration:none;color:inherit;">
+        <div class="chapter-num">Chapter 5</div>
+        <div class="chapter-title">The live dashboard</div>
+        <div class="chapter-desc">What a risk manager sees every morning. KRIs, trigger alerts, Time-to-Survive by program, resilience decay, and ROI reporting - actionable every single day, not informational once a quarter.</div>
+        <div class="chapter-steps">
+          <span class="chapter-step-pill">6 KRI categories</span>
+          <span class="chapter-step-pill">Live alerts</span>
+          <span class="chapter-step-pill">Board reporting</span>
+        </div>
+      </a>
+
+      <a href="case-studies.html" class="chapter-card fade-up" data-delay="300" style="text-decoration:none;color:inherit;">
+        <div class="chapter-num">Chapter 6</div>
+        <div class="chapter-title">Case studies</div>
+        <div class="chapter-desc">Real disruptions. Real outcomes. COVID 2020, Suez Canal 2021, Japan earthquake 2011, Taiwan semiconductor crisis, Strait of Hormuz. With AGNA versus without - the gap between those two lines is the value of everything built.</div>
+        <div class="chapter-steps">
+          <span class="chapter-step-pill">5 real events</span>
+          <span class="chapter-step-pill">Two-line timeline</span>
+          <span class="chapter-step-pill">Revenue protected</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<section id="stats">
+  <div class="stats-grid">
+    <div class="stat-block fade-in">
+      <div class="stat-number text-purple" data-target="180" data-prefix="$" data-suffix="M">$0M</div>
+      <div class="stat-label">Lost by NovaDrive from a disruption that was entirely preventable - the cost of no system</div>
+    </div>
+    <div class="stat-block fade-in" data-delay="100">
+      <div class="stat-number text-teal" data-target="166" data-suffix=" days">0</div>
+      <div class="stat-label">Gap between TTR and TTS for NovaDrive's most critical supplier - 166 days without a production line</div>
+    </div>
+    <div class="stat-block fade-in" data-delay="200">
+      <div class="stat-number text-amber" data-target="67" data-suffix=" → 41">0</div>
+      <div class="stat-label">Concern items reduced to real risks after applying the two-condition rule - 26 items removed</div>
+    </div>
+    <div class="stat-block fade-in" data-delay="300">
+      <div class="stat-number text-coral" data-target="12.35" data-prefix="$" data-suffix="B">$0</div>
+      <div class="stat-label">Total remaining program revenue at risk across NovaDrive's five programs - the number that changes every conversation</div>
+    </div>
+  </div>
+</section>
+
+<!-- Quote -->
+<section class="quote-section">
+  <div class="hero-bg-grid" aria-hidden="true" style="opacity:0.3;"></div>
+  <div class="container" style="position:relative;z-index:2;">
+    <div class="quote-text fade-up">"The hardest part of building a risk management system is not the methodology. It is the first conversation with leadership where you explain why the organisation needs one."</div>
+    <div class="quote-author fade-up" data-delay="200">- Tejaswi Sreerama · from the Nexteer REI engagement</div>
+    <div class="mt-48 fade-up" data-delay="300">
+      <a href="what-is-risk.html" class="btn btn-primary btn-lg">Begin the methodology</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer style="background:var(--black);padding:48px 0;border-top:1px solid rgba(255,255,255,0.06);">
+  <div class="container">
+    <div class="flex-between" style="flex-wrap:wrap;gap:24px;">
+      <div>
+        <div style="font-size:1.25rem;font-weight:800;color:var(--white);margin-bottom:6px;">AGNA</div>
+        <div style="font-size:0.875rem;color:rgba(255,255,255,0.35);">Supply Chain Risk & Resilience Methodology</div>
+      </div>
+      <div style="display:flex;gap:24px;flex-wrap:wrap;">
+        <a href="what-is-risk.html" style="font-size:0.875rem;color:rgba(255,255,255,0.4);">What is risk</a>
+        <a href="risk-taxonomy.html" style="font-size:0.875rem;color:rgba(255,255,255,0.4);">Risk taxonomy</a>
+        <a href="methodology.html" style="font-size:0.875rem;color:rgba(255,255,255,0.4);">Methodology</a>
+        <a href="about.html" style="font-size:0.875rem;color:rgba(255,255,255,0.4);">About Tejaswi</a>
+      </div>
+      <div style="font-size:0.75rem;color:rgba(255,255,255,0.2);text-align:right;">
+        © 2026 Tejaswi Sreerama<br>
+        tejaswismandadi.github.io
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+// Network diagram is now SVG - no canvas needed
+
+// ─── Animate answers ──────────────────────────
+setTimeout(() => {
+  const answers = document.querySelectorAll('.q-answer');
+  answers.forEach((a, i) => {
+    setTimeout(() => a.style.opacity = '1', i * 300);
+  });
+}, 1000);
+</script>
+</body>
+</html>
